@@ -1,7 +1,7 @@
 import styled, { css, DefaultTheme } from 'styled-components'
 import { ButtonProps } from '.'
 
-type WrapperProps = Pick<ButtonProps, 'size'>
+type WrapperProps = Pick<ButtonProps, 'size' | 'fullWidht'>
 
 const wepperModifiers = {
   large: (theme: DefaultTheme) => css`
@@ -18,11 +18,15 @@ const wepperModifiers = {
     height: 3rem;
     font-size: ${theme.font.sizes.xsmall};
     padding: ${theme.spacings.xxsmall} ${theme.spacings.small};
+  `,
+
+  fullWidht: () => css`
+    width: 100%;
   `
 }
 
 export const Wrapper = styled.button<WrapperProps>`
-  ${({ theme, size }) => css`
+  ${({ theme, size, fullWidht }) => css`
     background: linear-gradient(
       180deg,
       #ff5f5f -14.51%,
@@ -35,5 +39,6 @@ export const Wrapper = styled.button<WrapperProps>`
     padding: ${theme.spacings.xxsmall};
 
     ${!!size && wepperModifiers[size](theme)}
+    ${fullWidht && wepperModifiers.fullWidht()}
   `}
 `

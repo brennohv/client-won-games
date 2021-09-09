@@ -1,9 +1,11 @@
 import styled, { css, DefaultTheme } from 'styled-components'
 import { ButtonProps } from '.'
 
-type WrapperProps = Pick<ButtonProps, 'size' | 'fullWidht'>
+type WrapperProps = {
+  hasIcon: boolean
+} & Pick<ButtonProps, 'size' | 'fullWidht'>
 
-const wepperModifiers = {
+const wapperModifiers = {
   large: (theme: DefaultTheme) => css`
     height: 5rem;
     font-size: ${theme.font.sizes.medium};
@@ -19,14 +21,26 @@ const wepperModifiers = {
     font-size: ${theme.font.sizes.xsmall};
     padding: ${theme.spacings.xxsmall} ${theme.spacings.small};
   `,
-
   fullWidht: () => css`
     width: 100%;
+  `,
+  withIcon: (theme: DefaultTheme) => css`
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      width: 1.5rem;
+
+      & + span {
+        margin-left: ${theme.spacings.xxsmall};
+      }
+    }
   `
 }
 
 export const Wrapper = styled.button<WrapperProps>`
-  ${({ theme, size, fullWidht }) => css`
+  ${({ theme, size, fullWidht, hasIcon }) => css`
     background: linear-gradient(
       180deg,
       #ff5f5f -14.51%,
@@ -37,8 +51,10 @@ export const Wrapper = styled.button<WrapperProps>`
     border: 0;
     border-radius: ${theme.border.radius};
     padding: ${theme.spacings.xxsmall};
+    cursor: pointer;
 
-    ${!!size && wepperModifiers[size](theme)}
-    ${fullWidht && wepperModifiers.fullWidht()}
+    ${!!size && wapperModifiers[size](theme)}
+    ${fullWidht && wapperModifiers.fullWidht()}
+    ${!!hasIcon && wapperModifiers.withIcon(theme)}
   `}
 `

@@ -11,10 +11,11 @@ const modifierWrapper = {
     position: relative;
     margin-bottom: ${theme.spacings.medium};
 
-    ::after {
+    &::after {
       position: absolute;
-      left: 0;
-      bottom: -1rem;
+      /* left: 0;
+      bottom: -1rem; */
+      display: block;
       content: '';
       width: 5rem;
       border-bottom: 0.5rem solid ${theme.colors.primary};

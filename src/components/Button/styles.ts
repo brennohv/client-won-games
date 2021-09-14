@@ -54,7 +54,7 @@ export const Wrapper = styled.button<WrapperProps>`
     cursor: pointer;
 
     ${!!size && wapperModifiers[size](theme)}
-    ${fullWidht && wapperModifiers.fullWidht()}
+    ${!!fullWidht && wapperModifiers.fullWidht()}
     ${!!hasIcon && wapperModifiers.withIcon(theme)}
   `}
 `

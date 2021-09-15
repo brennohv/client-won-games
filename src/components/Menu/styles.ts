@@ -63,17 +63,17 @@ export const MenuLink = styled.a`
         display: block;
         height: 0.3rem;
         background-color: ${theme.colors.primary};
-        animation: hoverAnimation 0.3s forwards;
+        animation: hoverAnimation 5s forwards;
       }
 
       @keyframes hoverAnimation {
         from {
-          width: 0;
+          width: 0%;
           left: 50%;
         }
         to {
-          width: 100%;
-          left: 0;
+          width: 80%;
+          left: 20%;
         }
       }
     }

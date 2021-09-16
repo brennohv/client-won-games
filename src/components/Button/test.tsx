@@ -44,6 +44,7 @@ describe('<Button />', () => {
       width: '100%'
     })
   })
+
   it('should render an icon version', () => {
     renderWithTheme(
       <Button icon={<AddShoppingCart data-testid="icon" />}>Buy now</Button>
@@ -51,5 +52,20 @@ describe('<Button />', () => {
 
     expect(screen.getByText(/Buy now/i)).toBeInTheDocument()
     expect(screen.getByTestId('icon')).toBeInTheDocument()
+  })
+
+  it('should render Button as a Link ', () => {
+    const { debug, container } = renderWithTheme(
+      <Button as="a" href="/link">
+        Buy now
+      </Button>
+    )
+
+    debug(container)
+
+    expect(screen.getByRole('link', { name: /Buy now/i })).toHaveAttribute(
+      'href',
+      '/link'
+    )
   })
 })

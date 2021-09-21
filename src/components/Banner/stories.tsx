@@ -18,7 +18,3 @@ export const Default: Story<BannerProps> = (args) => (
     <Banner {...args} />
   </div>
 )
-
-Default.parameters = {
-  layout: 'fullscreen'
-}

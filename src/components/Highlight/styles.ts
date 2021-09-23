@@ -59,6 +59,11 @@ export const Content = styled.div`
     padding: ${theme.spacings.xsmall};
     text-align: right;
     grid-area: content;
+
+    ${media.greaterThan('medium')`
+      align-self: end;
+      padding: ${theme.spacings.xlarge};
+    `}
   `}
 `
 export const FloatImage = styled.img`

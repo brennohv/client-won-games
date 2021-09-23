@@ -36,12 +36,12 @@ const Banner = ({
       <S.Title>{title}</S.Title>
       <S.SubTitle dangerouslySetInnerHTML={{ __html: subtitle! }} />
       <MediaMatch lessThan="medium">
-        <Button size={'medium'} as="a" href={buttonLink}>
+        <Button size="medium" as="a" href={buttonLink}>
           {buttonLabel}
         </Button>
       </MediaMatch>
       <MediaMatch greaterThan="medium">
-        <Button size={'large'} as="a" href={buttonLink}>
+        <Button size="large" as="a" href={buttonLink}>
           {buttonLabel}
         </Button>
       </MediaMatch>

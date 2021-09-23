@@ -2,15 +2,37 @@ import styled, { css } from 'styled-components'
 import media from 'styled-media-query'
 import { HighlightProps } from '.'
 
-type WrapperProps = Pick<HighlightProps, 'backgroundImage'>
+type WrapperProps = Pick<HighlightProps, 'backgroundImage' | 'alignment'>
+
+const wrapperModifier = {
+  right: () => css`
+    grid-template-areas: 'floatimage content';
+    grid-template-columns: 1.3fr 2fr;
+
+    ${Content} {
+      text-align: right;
+    }
+  `,
+  left: () => css`
+    grid-template-areas: 'content floatimage ';
+    grid-template-columns: 2fr 1.3fr;
+
+    ${Content} {
+      text-align: left;
+    }
+
+    ${FloatImage} {
+      justify-self: end;
+    }
+  `
+}
 
 export const Wrapper = styled.section<WrapperProps>`
-  ${({ backgroundImage }) => css`
+  ${({ backgroundImage, alignment }) => css`
     position: relative;
     height: 23rem;
     display: grid;
-    grid-template-areas: 'floatimage content';
-    grid-template-columns: 1.3fr 2fr;
+    ${!!alignment && wrapperModifier[alignment]}
     background-image: url(${backgroundImage});
     background-size: cover;
     background-position: center center;
@@ -57,7 +79,7 @@ export const Content = styled.div`
   ${({ theme }) => css`
     z-index: ${theme.layers.base};
     padding: ${theme.spacings.xsmall};
-    text-align: right;
+
     grid-area: content;
 
     ${media.greaterThan('medium')`

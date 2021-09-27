@@ -22,7 +22,7 @@ describe('<Button />', () => {
 
     expect(screen.getByRole('button', { name: /Buy now/i })).toHaveStyle({
       height: '3rem',
-      padding: '0.8rem 2.4rem',
+      padding: '0.8rem 0.8rem',
       'font-size': '1.2rem'
     })
   })

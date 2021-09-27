@@ -19,7 +19,7 @@ const wapperModifiers = {
   small: (theme: DefaultTheme) => css`
     height: 3rem;
     font-size: ${theme.font.sizes.xsmall};
-    padding: ${theme.spacings.xxsmall} ${theme.spacings.small};
+    padding: ${theme.spacings.xxsmall} ${theme.spacings.xxsmall};
   `,
   fullWidht: () => css`
     width: 100%;

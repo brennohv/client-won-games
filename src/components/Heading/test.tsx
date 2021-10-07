@@ -4,17 +4,17 @@ import { screen } from '@testing-library/dom'
 import Heading from '.'
 
 describe('<Heading />', () => {
-  it('should render a black Heading by default', () => {
+  it('should render a white Heading by default', () => {
     renderWithTheme(<Heading>Won Games</Heading>)
     expect(screen.getByRole('heading', { name: /Won Games/i })).toHaveStyle({
-      color: '#030517'
+      color: '#FAFAFA'
     })
   })
 
   it('should render a white Heading', () => {
-    renderWithTheme(<Heading color="white">Won Games</Heading>)
+    renderWithTheme(<Heading color="black">Won Games</Heading>)
     expect(screen.getByRole('heading', { name: /Won Games/i })).toHaveStyle({
-      color: '#FAFAFA'
+      color: '#030517'
     })
   })
 

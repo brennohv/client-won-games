@@ -1,8 +1,13 @@
-import Home from 'templates/Home'
+import Home, { HomeTemplateProps } from 'templates/Home'
+import bannersMock from 'components/BannerSlider/mock'
+import gameCardMock from 'components/GameCardSlider/mock'
+import highlightMock from 'components/Highlight/mock'
 
-export default function Index() {
-  return <Home />
+export default function Index(props: HomeTemplateProps) {
+  return <Home {...props} />
 }
+//ATENÇÃO:
+// Os METODOS GetStaticProps e GetServerSideProps SÓ FUNCIONAM EM PAGES
 
 // getStaticProps => gera o estatico em build time
 // getServerSideProps => gera via ssr a cada request
@@ -16,10 +21,15 @@ export function getStaticProps() {
   // retorno dos dados
   return {
     props: {
-      heading: 'Olha eu aqui!!!'
+      banners: bannersMock,
+      newGames: gameCardMock,
+      mostPopularHighlight: highlightMock,
+      mostPopularGames: gameCardMock,
+      upComingGames: gameCardMock,
+      upComingHighlight: highlightMock,
+      upComingMoreGames: gameCardMock,
+      freeGames: gameCardMock,
+      freeGamesHighlight: highlightMock
     }
   }
 }
-
-//ATENÇÃO:
-// Os METODOS GetStaticProps e GetServerSideProps SÓ FUNCIONAM EM PAGES

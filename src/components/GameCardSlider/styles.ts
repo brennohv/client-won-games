@@ -9,10 +9,13 @@ export const Wrapper = styled.section<WrapperProps>`
     ${media.lessThan('huge')`
       overflow-x: hidden;
     `}
-
     .slick-track,
     .slick-list {
       display: flex;
+    }
+
+    .slick-slide img {
+      display: inline;
     }
 
     .slick-slide > div {
@@ -20,11 +23,9 @@ export const Wrapper = styled.section<WrapperProps>`
       flex: 1 0 auto;
       height: 100%;
     }
-
     .slick-list {
       margin: 0 -${theme.spacings.xxsmall};
     }
-
     ${media.greaterThan('large')`
       .slick-slide > div {
         margin: 0 ${theme.spacings.xsmall};
@@ -43,7 +44,7 @@ export const Wrapper = styled.section<WrapperProps>`
       width: 2.5rem;
       height: 2.5rem;
       padding: 0;
-      transform: translateY(-50%);
+      transform: translate(0, -50%);
     }
     .slick-prev {
       left: -${theme.spacings.xxlarge};

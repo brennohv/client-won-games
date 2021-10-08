@@ -1,9 +1,10 @@
 import styled, { css, DefaultTheme } from 'styled-components'
 import { ButtonProps } from '.'
+import { darken } from 'polished'
 
 type WrapperProps = {
   hasIcon: boolean
-} & Pick<ButtonProps, 'size' | 'fullWidht'>
+} & Pick<ButtonProps, 'size' | 'fullWidht' | 'minimal'>
 
 const wapperModifiers = {
   large: (theme: DefaultTheme) => css`
@@ -24,6 +25,14 @@ const wapperModifiers = {
   fullWidht: () => css`
     width: 100%;
   `,
+  minimal: (theme: DefaultTheme) => css`
+    background: none;
+    color: ${theme.colors.primary};
+
+    &:hover {
+      color: ${darken(0.1, theme.colors.primary)};
+    }
+  `,
   withIcon: (theme: DefaultTheme) => css`
     svg {
       width: 1.5rem;
@@ -36,7 +45,7 @@ const wapperModifiers = {
 }
 
 export const Wrapper = styled.button<WrapperProps>`
-  ${({ theme, size, fullWidht, hasIcon }) => css`
+  ${({ theme, size, fullWidht, hasIcon, minimal }) => css`
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -48,6 +57,7 @@ export const Wrapper = styled.button<WrapperProps>`
       #f23131 102.86%
     );
     color: ${theme.colors.white};
+    font-family: ${theme.font.family};
     border: 0;
     border-radius: ${theme.border.radius};
     padding: ${theme.spacings.xxsmall};
@@ -55,17 +65,14 @@ export const Wrapper = styled.button<WrapperProps>`
     text-decoration: none;
 
     &:hover {
-      background: linear-gradient(180deg, #e35565 0%, #d958a6 100%),
-        linear-gradient(
-          178.59deg,
-          #ff5f5f -14.51%,
-          #f062c0 102.86%,
-          #f23131 102.86%
-        );
+      background: ${minimal
+        ? 'none'
+        : `linear-gradient(180deg, #e35565 0%, #d958a6 50%)`};
     }
 
     ${!!size && wapperModifiers[size](theme)}
     ${!!fullWidht && wapperModifiers.fullWidht()}
     ${!!hasIcon && wapperModifiers.withIcon(theme)}
+    ${!!minimal && wapperModifiers.minimal(theme)}
   `}
 `

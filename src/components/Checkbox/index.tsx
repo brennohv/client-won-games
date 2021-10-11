@@ -1,10 +1,11 @@
+import { InputHTMLAttributes } from 'hoist-non-react-statics/node_modules/@types/react'
 import * as S from './styles'
 
 export type CheckboxProps = {
   label?: string
   labelFor?: string
   labelColor?: 'white' | 'black'
-}
+} & InputHTMLAttributes<HTMLInputElement>
 
 const Checkbox = ({
   label,
@@ -12,7 +13,7 @@ const Checkbox = ({
   labelColor = 'white'
 }: CheckboxProps) => (
   <S.Wrapper>
-    <input id={labelFor} type="checkbox" />
+    <S.Input id={labelFor} type="checkbox" />
     {!!label && (
       <S.Label htmlFor={labelFor} labelColor={labelColor}>
         {label}

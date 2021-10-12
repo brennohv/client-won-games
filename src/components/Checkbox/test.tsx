@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react'
+import { fireEvent, screen } from '@testing-library/react'
 import { renderWithTheme } from 'utils/tests/helpers'
 
 import Checkbox from '.'
@@ -29,6 +29,7 @@ describe('<Checkbox />', () => {
       color: '#030517'
     })
   })
+
   it('should render with white label', () => {
     renderWithTheme(
       <Checkbox label="checkbox label" labelFor="check" labelColor="white" />
@@ -36,5 +37,26 @@ describe('<Checkbox />', () => {
     expect(screen.getByText(/checkbox label/i)).toHaveStyle({
       color: '#FAFAFA'
     })
+  })
+
+  it('should dispatch onCheck when status changes ', () => {
+    const onCheck = jest.fn()
+    renderWithTheme(<Checkbox label="checkbox label" onCheck={onCheck} />)
+
+    fireEvent.click(screen.getByRole('checkbox'))
+
+    expect(onCheck).toBeCalledTimes(1)
+    expect(onCheck).toHaveBeenCalledWith(true)
+  })
+
+  it('should ', () => {
+    const onCheck = jest.fn()
+    renderWithTheme(
+      <Checkbox label="checkbox label" onCheck={onCheck} isChecked />
+    )
+    fireEvent.click(screen.getByRole('checkbox'))
+
+    expect(onCheck).toBeCalledTimes(1)
+    expect(onCheck).toHaveBeenCalledWith(false)
   })
 })

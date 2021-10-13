@@ -47,5 +47,8 @@ export default {
     overlay: 30,
     modal: 40,
     alwaysOnTop: 50
+  },
+  transition: {
+    fast: '0.2s ease-in-out'
   }
 } as const

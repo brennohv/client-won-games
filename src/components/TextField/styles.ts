@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled, { css, DefaultTheme } from 'styled-components'
 import { TextFieldProps } from '.'
 
 export const Icon = styled.div`
@@ -21,6 +21,18 @@ const wrapperModifiers = {
   left: () => css`
     grid-template-areas: 'icon input';
     grid-template-columns: 0.3fr 4fr;
+  `,
+  disabled: (theme: DefaultTheme) => css`
+    ${Input},
+    ${Label},
+    ${Icon} {
+      cursor: not-allowed;
+      color: ${theme.colors.gray};
+
+      &::placeholder {
+        color: currentColor;
+      }
+    }
   `
 }
 
@@ -65,4 +77,8 @@ export const Label = styled.label`
   `}
 `
 
-export const Wrapper = styled.div``
+export const Wrapper = styled.div<Pick<TextFieldProps, 'disabled'>>`
+  ${({ theme, disabled }) => css`
+    ${disabled && wrapperModifiers.disabled(theme)}
+  `}
+`

@@ -1,18 +1,6 @@
 import styled, { css, DefaultTheme } from 'styled-components'
 import { TextFieldProps } from '.'
 
-export const Icon = styled.div`
-  ${({ theme }) => css`
-    display: flex;
-    width: 2.2rem;
-    color: ${theme.colors.gray};
-    grid-area: icon;
-    & > svg {
-      width: 100%;
-    }
-  `}
-`
-
 const wrapperModifiers = {
   right: () => css`
     grid-template-areas: 'input icon';
@@ -33,10 +21,23 @@ const wrapperModifiers = {
         color: currentColor;
       }
     }
+  `,
+  error: (theme: DefaultTheme) => css`
+    ${Label},
+    ${Icon} {
+      color: ${theme.colors.red};
+    }
+    ${InputWrapper} {
+      border-color: ${theme.colors.red};
+    }
   `
 }
 
 type IconWrapperProps = Pick<TextFieldProps, 'iconPosition'>
+type WrapperProps = {
+  error?: boolean
+  disabled?: boolean
+}
 
 export const InputWrapper = styled.div<IconWrapperProps>`
   ${({ theme, iconPosition }) => css`
@@ -50,6 +51,17 @@ export const InputWrapper = styled.div<IconWrapperProps>`
 
     &:focus-within {
       box-shadow: 0 0 0.5rem ${theme.colors.primary};
+    }
+  `}
+`
+export const Icon = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    width: 2.2rem;
+    color: ${theme.colors.gray};
+    grid-area: icon;
+    & > svg {
+      width: 100%;
     }
   `}
 `
@@ -76,9 +88,16 @@ export const Label = styled.label`
     cursor: pointer;
   `}
 `
+export const Error = styled.span`
+  ${({ theme }) => css`
+    color: ${theme.colors.red};
+    font-size: ${theme.font.sizes.xsmall};
+  `}
+`
 
-export const Wrapper = styled.div<Pick<TextFieldProps, 'disabled'>>`
-  ${({ theme, disabled }) => css`
-    ${disabled && wrapperModifiers.disabled(theme)}
+export const Wrapper = styled.div<WrapperProps>`
+  ${({ theme, disabled, error }) => css`
+    ${!!disabled && wrapperModifiers.disabled(theme)}
+    ${!!error && wrapperModifiers.error(theme)}
   `}
 `

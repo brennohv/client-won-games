@@ -4,8 +4,8 @@ import { renderWithTheme } from 'utils/tests/helpers'
 import FormSignIn from '.'
 
 describe('<FormSignIn />', () => {
-  it('should render the heading', () => {
-    renderWithTheme(<FormSignIn />)
+  it('should render the form', () => {
+    const { container } = renderWithTheme(<FormSignIn />)
     // verfique o email
     expect(screen.getByPlaceholderText('Email')).toBeInTheDocument()
     //verique o password
@@ -14,6 +14,8 @@ describe('<FormSignIn />', () => {
     expect(
       screen.getByRole('button', { name: /Sing in now/i })
     ).toBeInTheDocument()
+
+    expect(container.parentElement).toMatchSnapshot()
   })
 
   it('should render the forget password link', () => {

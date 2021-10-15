@@ -2,11 +2,16 @@ import styled, { css } from 'styled-components'
 
 import * as LogoProps from 'components/Logo/styles'
 import * as HeadingProps from 'components/Heading/styles'
+import media from 'styled-media-query'
 
 export const Wrapper = styled.main`
   display: grid;
   grid-template-columns: 1fr 1fr;
   height: 100vh;
+
+  ${media.lessThan('medium')`
+      grid-template-columns: 1fr
+    `}
 `
 
 export const BannerBlock = styled.div`
@@ -17,6 +22,10 @@ export const BannerBlock = styled.div`
     background-position: center center;
     padding: ${theme.spacings.xxlarge} ${theme.spacings.xxlarge}
       ${theme.spacings.large};
+
+    ${media.lessThan('medium')`
+      display: none;
+    `}
 
     &::after {
       content: '';
@@ -73,6 +82,10 @@ export const Content = styled.div`
 export const ContentWrapper = styled.div`
   ${({ theme }) => css`
     width: 30rem;
+
+    ${media.greaterThan('medium')`
+      width: 36rem;
+    `}
 
     ${LogoProps.Wrapper} {
       margin: 0 auto ${theme.spacings.xxlarge};

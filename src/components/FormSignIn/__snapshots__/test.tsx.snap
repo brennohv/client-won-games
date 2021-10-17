@@ -81,14 +81,6 @@ exports[`<FormSignIn /> should render the form 1`] = `
   grid-area: input;
 }
 
-.c0 .c1 {
-  margin: 0.8rem 0;
-}
-
-.c0 .c7 {
-  margin: 2.7rem auto 2.4rem;
-}
-
 .c6 {
   color: #030517;
   font-size: 1.4rem;
@@ -98,20 +90,24 @@ exports[`<FormSignIn /> should render the form 1`] = `
   display: block;
 }
 
+.c0 .c1 {
+  margin: 0.8rem 0;
+}
+
+.c0 .c7 {
+  margin: 3.2rem auto 2.4rem;
+}
+
 .c9 {
-  color: #030517;
   font-size: 1.4rem;
-  margin-top: 1.6rem;
+  text-align: center;
 }
 
 .c9 a {
-  font-size: 1.4rem;
-  color: #3CD3C1;
   -webkit-text-decoration: none;
   text-decoration: none;
+  color: #3CD3C1;
   border-bottom: 0.1rem solid #3CD3C1;
-  -webkit-transition: color,border,0.2s ease-in-out;
-  transition: color,border,0.2s ease-in-out;
 }
 
 .c9 a:hover {

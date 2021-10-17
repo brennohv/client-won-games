@@ -59,6 +59,11 @@ export const BannerContent = styled.div`
     justify-content: space-between;
     position: relative;
     z-index: ${theme.layers.base};
+
+    a {
+      height: fit-content;
+      width: fit-content;
+    }
   `}
 `
 

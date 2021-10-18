@@ -90,6 +90,10 @@ exports[`<FormSignIn /> should render the form 1`] = `
   display: block;
 }
 
+.c6:hover {
+  color: #0f1971;
+}
+
 .c0 .c1 {
   margin: 0.8rem 0;
 }

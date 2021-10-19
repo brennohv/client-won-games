@@ -20,38 +20,47 @@ const props = {
   freeGamesHighlight: highLightMock
 }
 
+jest.mock('components/Menu', () => {
+  return {
+    __esModule: true,
+    default: function Mock() {
+      return <div data-testid="Mock Menu"></div>
+    }
+  }
+})
+
+jest.mock('components/Footer', () => {
+  return {
+    __esModule: true,
+    default: function Mock() {
+      return <div data-testid="Mock Footer"></div>
+    }
+  }
+})
+jest.mock('components/BannerSlider', () => {
+  return {
+    __esModule: true,
+    default: function Mock() {
+      return <div data-testid="Mock Banner slider"></div>
+    }
+  }
+})
+jest.mock('components/Showcase', () => {
+  return {
+    __esModule: true,
+    default: function Mock() {
+      return <div data-testid="Mock Showcase"></div>
+    }
+  }
+})
+
 describe('<Home />', () => {
   it('should render Menu and Footer', () => {
     renderWithTheme(<Home {...props} />)
 
-    expect(screen.getByLabelText(/open menu/i)).toBeInTheDocument()
-
-    expect(
-      screen.getByRole('heading', { name: /Contact Us/i })
-    ).toBeInTheDocument()
-  })
-
-  it('should render sections', () => {
-    renderWithTheme(<Home {...props} />)
-
-    expect(screen.getByRole('heading', { name: /News/i })).toBeInTheDocument()
-    expect(
-      screen.getByRole('heading', { name: /Most popular/i })
-    ).toBeInTheDocument()
-    expect(
-      screen.getByRole('heading', { name: /Upcomming/i })
-    ).toBeInTheDocument()
-    expect(
-      screen.getByRole('heading', { name: /Free games/i })
-    ).toBeInTheDocument()
-  })
-
-  it('should render section elements', () => {
-    renderWithTheme(<Home {...props} />)
-    expect(screen.getAllByText(/defy death 1/i)).toHaveLength(1)
-
-    expect(screen.getAllByText(/population zero/i)).toHaveLength(5)
-
-    expect(screen.getAllByText(/read dead it’s back/i)).toHaveLength(3)
+    expect(screen.getByTestId('Mock Menu')).toBeInTheDocument()
+    expect(screen.getByTestId('Mock Footer')).toBeInTheDocument()
+    expect(screen.getAllByTestId('Mock Showcase')).toHaveLength(5)
+    expect(screen.getByTestId('Mock Banner slider')).toBeInTheDocument()
   })
 })

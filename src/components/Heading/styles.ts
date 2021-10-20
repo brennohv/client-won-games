@@ -12,7 +12,7 @@ const modifierWrapper = {
     }
   `,
   medium: (theme: DefaultTheme) => css`
-    font-size: 2.4rem;
+    font-size: ${theme.font.sizes.xlarge};
 
     ${media.greaterThan('medium')`
       font-size: ${theme.font.sizes.xxlarge}

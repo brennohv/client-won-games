@@ -53,11 +53,11 @@ export const Description = styled.p`
 
 export const WrapperButton = styled.div`
   ${({ theme }) => css`
-    align-self: flex-end;
     ${ButtonStyles.Wrapper} {
       margin-bottom: ${theme.spacings.xsmall};
     }
     ${media.greaterThan('medium')`
+      align-self: flex-end;
       display: flex;
       flex-direction: row-reverse;
     `}

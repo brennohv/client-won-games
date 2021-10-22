@@ -10,14 +10,14 @@ export type GameDetailsProps = {
   platforms: Platform[]
   releaseDate: string
   rating: Rating
-  genre: string[]
+  genres: string[]
 }
 
 const GameDetails = ({
   platforms,
   releaseDate,
   rating,
-  genre
+  genres
 }: GameDetailsProps) => {
   const platformIcons = {
     windows: <Windows aria-label="Windows" />,
@@ -73,7 +73,7 @@ const GameDetails = ({
 
         <S.Block>
           <S.Title>Genre</S.Title>
-          <S.Description>{genre.join(' / ')}</S.Description>
+          <S.Description>{genres.join(' / ')}</S.Description>
         </S.Block>
       </S.Content>
     </S.Wrapper>

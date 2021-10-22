@@ -1,17 +1,25 @@
 import { Story, Meta } from '@storybook/react'
 import GameDetails, { GameDetailsProps } from '.'
+import GameMock from './mock'
 
 export default {
   title: 'game/GameDetails',
   component: GameDetails,
-  args: {
-    platforms: ['linux', 'mac', 'windows']
-  },
+  args: GameMock,
   argTypes: {
+    releaseDate: {
+      control: 'date'
+    },
     platforms: {
       control: {
         type: 'inline-check',
         options: ['linux', 'mac', 'windows']
+      }
+    },
+    genres: {
+      control: {
+        type: 'inline-check',
+        options: ['Role-playing', 'Narrative']
       }
     }
   },

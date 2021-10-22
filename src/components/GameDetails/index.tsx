@@ -4,13 +4,21 @@ import Heading from 'components/Heading'
 import { Linux, Apple, Windows } from '@styled-icons/fa-brands'
 
 type Platform = 'windows' | 'linux' | 'mac'
+type Rating = 'FREE' | 'pegi3' | 'pegi7' | 'pegi12' | 'pegi16' | 'pegi18'
 
 export type GameDetailsProps = {
   platforms: Platform[]
   releaseDate: string
+  rating: Rating
+  genre: string[]
 }
 
-const GameDetails = ({ platforms, releaseDate }: GameDetailsProps) => {
+const GameDetails = ({
+  platforms,
+  releaseDate,
+  rating,
+  genre
+}: GameDetailsProps) => {
   const platformIcons = {
     windows: <Windows aria-label="Windows" />,
     linux: <Linux aria-label="Linux" />,
@@ -58,12 +66,14 @@ const GameDetails = ({ platforms, releaseDate }: GameDetailsProps) => {
 
         <S.Block>
           <S.Title>Rating</S.Title>
-          <S.Description>18+</S.Description>
+          <S.Description>
+            {rating !== 'FREE' ? `${rating.replace('pegi', '')}+` : rating}
+          </S.Description>
         </S.Block>
 
         <S.Block>
           <S.Title>Genre</S.Title>
-          <S.Description>Action/Adventure</S.Description>
+          <S.Description>{genre.join(' / ')}</S.Description>
         </S.Block>
       </S.Content>
     </S.Wrapper>

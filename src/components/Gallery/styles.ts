@@ -3,6 +3,27 @@ import media from 'styled-media-query'
 
 export const Image = styled.img``
 
+type ModalProps = {
+  isOpen: boolean
+}
+
+const ModifierModal = {
+  open: () => css`
+    opacity: 1;
+  `,
+  close: () => css`
+    opacity: 0;
+    pointer-events: none;
+  `
+}
+
+export const Modal = styled.div<ModalProps>`
+  ${({ isOpen }) => css`
+    ${isOpen && ModifierModal.open()}
+    ${!isOpen && ModifierModal.close()}
+  `}
+`
+
 export const Wrapper = styled.div`
   ${({ theme }) => css`
     .slick-prev,

@@ -2,6 +2,7 @@ import { ArrowBackIos as ArrowLeft } from '@styled-icons/material-outlined/Arrow
 import { ArrowForwardIos as ArrowRight } from '@styled-icons/material-outlined/ArrowForwardIos'
 
 import Slider, { SliderSettings } from 'components/Slider'
+import { useState } from 'react'
 import * as S from './styles'
 
 const settings: SliderSettings = {
@@ -48,19 +49,30 @@ export type GalleryProps = {
   images: Images[]
 }
 
-const Gallery = ({ images }: GalleryProps) => (
-  <S.Wrapper>
-    <Slider settings={settings}>
-      {images.map((image, index) => (
-        <S.Image
-          role={'button'}
-          key={`thumb-${index}`}
-          src={image.src}
-          alt={image.label}
-        ></S.Image>
-      ))}
-    </Slider>
-  </S.Wrapper>
-)
+const Gallery = ({ images }: GalleryProps) => {
+  const [isOpen, setIsOpen] = useState(false)
+
+  return (
+    <S.Wrapper>
+      <Slider settings={settings}>
+        {images.map((image, index) => (
+          <S.Image
+            onClick={() => setIsOpen(true)}
+            role={'button'}
+            key={`thumb-${index}`}
+            src={image.src}
+            alt={image.label}
+          ></S.Image>
+        ))}
+      </Slider>
+
+      <S.Modal
+        aria-label="modal"
+        aria-hiden={!isOpen}
+        isOpen={isOpen}
+      ></S.Modal>
+    </S.Wrapper>
+  )
+}
 
 export default Gallery

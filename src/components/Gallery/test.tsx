@@ -14,15 +14,30 @@ describe('<Gallery />', () => {
   it('should handle open modal', () => {
     renderWithTheme(<Gallery images={images} />)
 
-    const modal = screen.getByLabelText(/modal/i)
+    const modal = screen.getByLabelText('modal')
 
     //verificar se o modal esta escondido
     expect(modal).toHaveAttribute('aria-hiden', 'true')
-    expect(modal).toHaveStyle({ opacity: 0 })
+    expect(modal).toHaveStyle({ opacity: 0, pointerEvents: 'none' })
 
     //quando clicar no button eu abra o modal
     fireEvent.click(screen.getByRole('button', { name: /Gallery Image 1/i }))
     expect(modal).toHaveAttribute('aria-hiden', 'false')
     expect(modal).toHaveStyle({ opacity: 1 })
+  })
+
+  it('should handle close modal', () => {
+    renderWithTheme(<Gallery images={images} />)
+
+    const modal = screen.getByLabelText('modal')
+
+    //quando clicar no button eu abra o modal
+    fireEvent.click(screen.getByRole('button', { name: /Gallery Image 1/i }))
+    expect(modal).toHaveAttribute('aria-hiden', 'false')
+
+    //quando clicar no button close eu feche o modal
+    fireEvent.click(screen.getByRole('button', { name: /Close modal/i }))
+    expect(modal).toHaveAttribute('aria-hiden', 'true')
+    expect(modal).toHaveStyle({ opacity: 0 })
   })
 })

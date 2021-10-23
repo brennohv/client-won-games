@@ -17,8 +17,31 @@ const ModifierModal = {
   `
 }
 
+export const Close = styled.div`
+  color: white;
+  text-align: right;
+  cursor: pointer;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+`
+
 export const Modal = styled.div<ModalProps>`
-  ${({ isOpen }) => css`
+  ${({ theme, isOpen }) => css`
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: ${theme.layers.modal};
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* top: 0;
+    left: 0; */
+    width: 100%;
+    height: 100%;
+    transition: opacity ${theme.transition.default};
+
     ${isOpen && ModifierModal.open()}
     ${!isOpen && ModifierModal.close()}
   `}

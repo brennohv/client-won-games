@@ -1,3 +1,4 @@
+import { Close } from '@styled-icons/material-outlined'
 import { ArrowBackIos as ArrowLeft } from '@styled-icons/material-outlined/ArrowBackIos'
 import { ArrowForwardIos as ArrowRight } from '@styled-icons/material-outlined/ArrowForwardIos'
 
@@ -66,11 +67,15 @@ const Gallery = ({ images }: GalleryProps) => {
         ))}
       </Slider>
 
-      <S.Modal
-        aria-label="modal"
-        aria-hiden={!isOpen}
-        isOpen={isOpen}
-      ></S.Modal>
+      <S.Modal aria-label="modal" aria-hiden={!isOpen} isOpen={isOpen}>
+        <S.Close
+          role="button"
+          aria-label="Close modal"
+          onClick={() => setIsOpen(false)}
+        >
+          <Close size={40} />
+        </S.Close>
+      </S.Modal>
     </S.Wrapper>
   )
 }

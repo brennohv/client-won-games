@@ -6,9 +6,16 @@ import Gallery from '.'
 import images from './mock'
 
 describe('<Gallery />', () => {
-  it('should render with 4 active items', () => {
-    const { container } = renderWithTheme(<Gallery images={images} />)
-    expect(container.querySelectorAll('.slick-active')).toHaveLength(4)
+  it('should render thumbnails as buttons', () => {
+    renderWithTheme(<Gallery images={images.slice(0, 2)} />)
+
+    expect(
+      screen.getByRole('button', { name: /Gallery Image 1/i })
+    ).toHaveAttribute('src', images[0].src)
+
+    expect(
+      screen.getByRole('button', { name: /Gallery Image 2/i })
+    ).toHaveAttribute('src', images[1].src)
   })
 
   it('should handle open modal', () => {
@@ -53,5 +60,18 @@ describe('<Gallery />', () => {
     fireEvent.keyUp(container, { key: 'Escape' })
     expect(modal).toHaveAttribute('aria-hiden', 'true')
     expect(modal).toHaveStyle({ opacity: 0 })
+  })
+
+  it('should open modal with selected image', async () => {
+    renderWithTheme(<Gallery images={images} />)
+
+    //quando clicar no button eu abra o modal
+    fireEvent.click(screen.getByRole('button', { name: /Gallery Image 1/i }))
+
+    //quando clicar no button close eu feche o modal
+    const img = await screen.getByRole('img', {
+      name: /Gallery-Gallery Image 1/i
+    })
+    expect(img.parentElement?.parentElement).toHaveClass('slick-active')
   })
 })

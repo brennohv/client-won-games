@@ -24,8 +24,8 @@ export const Close = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-  left: 0;
-  top: 0;
+  /* left: 0;
+  top: 0; */
 `
 
 export const Modal = styled.div<ModalProps>`
@@ -36,8 +36,8 @@ export const Modal = styled.div<ModalProps>`
     display: flex;
     justify-content: center;
     align-items: center;
-    /* top: 0;
-    left: 0; */
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     transition: opacity ${theme.transition.default};

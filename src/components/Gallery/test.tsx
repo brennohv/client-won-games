@@ -26,7 +26,7 @@ describe('<Gallery />', () => {
     expect(modal).toHaveStyle({ opacity: 1 })
   })
 
-  it('should handle close modal', () => {
+  it('should handle with close modal when overlay or button clicked', () => {
     renderWithTheme(<Gallery images={images} />)
 
     const modal = screen.getByLabelText('modal')
@@ -37,6 +37,20 @@ describe('<Gallery />', () => {
 
     //quando clicar no button close eu feche o modal
     fireEvent.click(screen.getByRole('button', { name: /Close modal/i }))
+    expect(modal).toHaveAttribute('aria-hiden', 'true')
+    expect(modal).toHaveStyle({ opacity: 0 })
+  })
+
+  it('should handle with close modal when ESC pressed', () => {
+    const { container } = renderWithTheme(<Gallery images={images} />)
+
+    const modal = screen.getByLabelText('modal')
+
+    //quando clicar no button eu abra o modal
+    fireEvent.click(screen.getByRole('button', { name: /Gallery Image 1/i }))
+
+    //quando clicar no button close eu feche o modal
+    fireEvent.keyUp(container, { key: 'Escape' })
     expect(modal).toHaveAttribute('aria-hiden', 'true')
     expect(modal).toHaveStyle({ opacity: 0 })
   })

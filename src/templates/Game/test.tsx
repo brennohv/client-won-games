@@ -7,6 +7,6 @@ describe('<Game />', () => {
   it('should render the heading', () => {
     renderWithTheme(<Game />)
 
-    expect(screen.getByRole('heading', { name: /Game/i })).toBeInTheDocument()
+    expect(screen.getByLabelText(/cover/i)).toBeInTheDocument()
   })
 })

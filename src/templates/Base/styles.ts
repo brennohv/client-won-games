@@ -22,3 +22,7 @@ export const Wrapper = styled.div`
   height: 100vh;
   justify-content: space-between;
 `
+
+export const Content = styled.div`
+  flex: 1 0 auto;
+`

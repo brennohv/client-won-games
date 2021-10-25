@@ -15,3 +15,10 @@ export const SectionFooter = styled.section`
     `}
   `}
 `
+
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: space-between;
+`

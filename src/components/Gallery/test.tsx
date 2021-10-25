@@ -69,7 +69,7 @@ describe('<Gallery />', () => {
     fireEvent.click(screen.getByRole('button', { name: /Gallery Image 1/i }))
 
     //quando clicar no button close eu feche o modal
-    const img = await screen.getByRole('img', {
+    const img = await screen.findByRole('img', {
       name: /Gallery-Gallery Image 1/i
     })
     expect(img.parentElement?.parentElement).toHaveClass('slick-active')

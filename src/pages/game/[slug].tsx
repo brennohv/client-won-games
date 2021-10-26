@@ -1,5 +1,7 @@
 import Game, { GameTemplateProps } from 'templates/Game'
 import GalleryMock from 'components/Gallery/mock'
+import HighlightMock from 'components/Highlight/mock'
+import GameCardMock from 'components/GameCardSlider/mock'
 
 export default function Index(props: GameTemplateProps) {
   return <Game {...props} />
@@ -45,7 +47,18 @@ respective owners.
         price: '215,00'
       },
       gallery: GalleryMock,
-      description: descriptionHTML
+      description: descriptionHTML,
+      gameDetails: {
+        developer: 'CD PROJEKT RED',
+        releaseDate: '2020-12-10T23:00:00',
+        platforms: ['windows'],
+        publisher: 'CD PROJEKT RED',
+        rating: 'pegi18',
+        genres: ['Action', 'Role-playing']
+      },
+      upComingHighligth: HighlightMock,
+      upComingGames: GameCardMock,
+      gameSuggestion: GameCardMock
     }
   }
 }

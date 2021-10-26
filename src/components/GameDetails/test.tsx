@@ -4,7 +4,9 @@ import { renderWithTheme } from 'utils/tests/helpers'
 import GameDetails, { GameDetailsProps } from '.'
 
 const props: GameDetailsProps = {
+  developer: 'CD PROJEKT RED',
   platforms: ['linux', 'mac', 'windows'],
+  publisher: 'Walktrough',
   releaseDate: '2020-11-21T23:00:00',
   rating: 'FREE',
   genres: ['Action', 'Adventure']
@@ -15,7 +17,7 @@ describe('<GameDetails />', () => {
     renderWithTheme(<GameDetails {...props} />)
 
     expect(
-      screen.getByRole('heading', { name: /Company/i })
+      screen.getByRole('heading', { name: /Developer/i })
     ).toBeInTheDocument()
 
     expect(screen.getByLabelText(/linux/i)).toBeInTheDocument()
@@ -30,9 +32,15 @@ describe('<GameDetails />', () => {
   })
 
   it('should render format rating', () => {
-    renderWithTheme(<GameDetails {...props} rating="FREE" />)
+    renderWithTheme(<GameDetails {...props} />)
 
     expect(screen.getByText(/free/i)).toBeInTheDocument()
+  })
+
+  it('should render the publisher', () => {
+    renderWithTheme(<GameDetails {...props} />)
+
+    expect(screen.getByText(/Walktrough/i)).toBeInTheDocument()
   })
 
   it('should render format genre ', () => {

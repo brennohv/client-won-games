@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 import media from 'styled-media-query'
-
+import * as ShowCaseStyles from 'components/Showcase/styles'
 type CoverProps = {
   src: string
 }
@@ -19,13 +19,14 @@ export const Cover = styled.div<CoverProps>`
 
     ${media.greaterThan('medium')`
       height: 70.9rem;
-      clip-path: polygon(100% 0%, 100% 100%, 0% 85%, 0% 0%);
+      clip-path: polygon(100% 0%,100% 100%,0% 85%,0% 0%);
 
     `}
   `}
 `
 export const Container = styled.main`
   ${({ theme }) => css`
+    max-width: none;
     margin-left: auto;
     margin-right: auto;
     padding-right: calc(${theme.grid.gutter} / 2);
@@ -34,7 +35,12 @@ export const Container = styled.main`
     ${media.greaterThan('medium')`
       padding-right: calc(${theme.spacings.large} * 2);
       padding-left: calc(${theme.spacings.large} * 2);
+      padding-bottom: ${theme.spacings.xxlarge} ;
     `}
+
+    ${ShowCaseStyles.Wrapper} {
+      max-width: none;
+    }
   `}
 `
 
@@ -42,7 +48,7 @@ export const SectionGameInfo = styled.div`
   margin-top: 19rem;
 
   ${media.greaterThan('medium')`
-      margin-top: 26rem;
+      margin-top: 45rem;
   `}
 `
 export const SectionGallery = styled.div`
@@ -66,5 +72,16 @@ export const SectionTextContent = styled.div`
       color: ${theme.colors.gray};
       margin-top: ${theme.spacings.xsmall};
     }
+  `}
+`
+export const SectionGameDetails = styled.div`
+  margin-top: 5.3rem;
+  border-bottom: 0.1rem solid rgba(181, 181, 181, 0.3);
+  padding-bottom: 4.7rem;
+
+  ${media.greaterThan('medium')`
+    margin-top: 9rem;
+    padding-bottom: 8.5rem;
+    margin-bottom: 9.1rem;
   `}
 `

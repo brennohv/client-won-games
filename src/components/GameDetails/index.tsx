@@ -7,14 +7,18 @@ type Platform = 'windows' | 'linux' | 'mac'
 type Rating = 'FREE' | 'pegi3' | 'pegi7' | 'pegi12' | 'pegi16' | 'pegi18'
 
 export type GameDetailsProps = {
+  developer: string
   platforms: Platform[]
+  publisher: string
   releaseDate: string
   rating: Rating
   genres: string[]
 }
 
 const GameDetails = ({
+  developer,
   platforms,
+  publisher,
   releaseDate,
   rating,
   genres
@@ -35,8 +39,8 @@ const GameDetails = ({
 
       <S.Content>
         <S.Block>
-          <S.Title>Company</S.Title>
-          <S.Description>Gearbox Software</S.Description>
+          <S.Title>Developer</S.Title>
+          <S.Description>{developer}</S.Description>
         </S.Block>
 
         <S.Block>
@@ -61,7 +65,7 @@ const GameDetails = ({
 
         <S.Block>
           <S.Title>Editor</S.Title>
-          <S.Description>2K</S.Description>
+          <S.Description>{publisher}</S.Description>
         </S.Block>
 
         <S.Block>

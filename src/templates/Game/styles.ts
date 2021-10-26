@@ -24,3 +24,47 @@ export const Cover = styled.div<CoverProps>`
     `}
   `}
 `
+export const Container = styled.main`
+  ${({ theme }) => css`
+    margin-left: auto;
+    margin-right: auto;
+    padding-right: calc(${theme.grid.gutter} / 2);
+    padding-left: calc(${theme.grid.gutter} / 2);
+
+    ${media.greaterThan('medium')`
+      padding-right: calc(${theme.spacings.large} * 2);
+      padding-left: calc(${theme.spacings.large} * 2);
+    `}
+  `}
+`
+
+export const SectionGameInfo = styled.div`
+  margin-top: 19rem;
+
+  ${media.greaterThan('medium')`
+      margin-top: 26rem;
+  `}
+`
+export const SectionGallery = styled.div`
+  display: none;
+  margin-top: 10.2rem;
+
+  ${media.greaterThan('medium')`
+    display: block;
+  `}
+`
+export const SectionTextContent = styled.div`
+  ${({ theme }) => css`
+    margin-top: 4.1rem;
+
+    ${media.greaterThan('medium')`
+    margin-top: 8.6rem;
+  `}
+
+    .description__copyrights {
+      font-size: ${theme.font.sizes.xsmall};
+      color: ${theme.colors.gray};
+      margin-top: ${theme.spacings.xsmall};
+    }
+  `}
+`

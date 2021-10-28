@@ -6,6 +6,7 @@ import { HighlightProps } from 'components/Highlight'
 import Heading from 'components/Heading'
 import { Container } from 'components/Container'
 import { Grid } from 'components/Grid'
+import { Divider } from 'components/Divider'
 
 export type WishlistProps = {
   recomendedGames: GameCardProps[]
@@ -30,6 +31,7 @@ const Wishlist = ({
           ))}
         </Grid>
       </S.Wrapper>
+      <Divider />
     </Container>
 
     <Showcase

@@ -31,4 +31,18 @@ describe('<Wishlist />', () => {
 
     expect(screen.getAllByText(/Population Zero/i)).toHaveLength(6)
   })
+
+  it('should render when there are not games', () => {
+    renderWithTheme(
+      <Wishlist
+        recomendedGames={gameCardMock}
+        recomendedHighlight={highlightMock}
+      />
+    )
+
+    expect(screen.queryByText(/Population Zero/)).not.toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', { name: /Nenhum resultado encontrado/i })
+    ).toBeInTheDocument()
+  })
 })

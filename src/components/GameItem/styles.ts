@@ -68,3 +68,10 @@ export const Price = styled.div`
     border-radius: ${theme.border.radius};
   `}
 `
+
+export const Download = styled.a`
+  ${({ theme }) => css`
+    color: ${theme.colors.primary};
+    margin-left: ${theme.spacings.xxsmall};
+  `}
+`

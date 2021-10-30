@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 import media from 'styled-media-query'
-import * as ShowCaseStyles from 'components/Showcase/styles'
+import { Container } from 'components/Container'
+
 type CoverProps = {
   src: string
 }
@@ -24,34 +25,23 @@ export const Cover = styled.div<CoverProps>`
     `}
   `}
 `
-export const Container = styled.main`
+export const Section = styled(Container).attrs({ as: 'section' })`
   ${({ theme }) => css`
-    max-width: none;
-    margin-left: auto;
-    margin-right: auto;
-    padding-right: calc(${theme.grid.gutter} / 2);
-    padding-left: calc(${theme.grid.gutter} / 2);
-
+    margin-bottom: ${theme.spacings.xlarge};
     ${media.greaterThan('medium')`
-      padding-right: calc(${theme.spacings.large} * 2);
-      padding-left: calc(${theme.spacings.large} * 2);
-      padding-bottom: ${theme.spacings.xxlarge} ;
+      margin-bottom: calc(${theme.spacings.xlarge} * 2);
     `}
-
-    ${ShowCaseStyles.Wrapper} {
-      max-width: none;
-    }
   `}
 `
 
-export const SectionGameInfo = styled.div`
+export const SectionGameInfo = styled(Section)`
   margin-top: 19rem;
 
   ${media.greaterThan('medium')`
       margin-top: 45rem;
   `}
 `
-export const SectionGallery = styled.div`
+export const SectionGallery = styled(Section)`
   display: none;
   margin-top: 10.2rem;
 
@@ -59,7 +49,7 @@ export const SectionGallery = styled.div`
     display: block;
   `}
 `
-export const SectionTextContent = styled.div`
+export const SectionTextContent = styled(Section)`
   ${({ theme }) => css`
     margin-top: 4.1rem;
 
@@ -74,7 +64,7 @@ export const SectionTextContent = styled.div`
     }
   `}
 `
-export const SectionGameDetails = styled.div`
+export const SectionGameDetails = styled(Section)`
   margin-top: 5.3rem;
   border-bottom: 0.1rem solid rgba(181, 181, 181, 0.3);
   padding-bottom: 4.7rem;

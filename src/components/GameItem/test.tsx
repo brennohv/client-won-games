@@ -23,4 +23,13 @@ describe('<GameItem />', () => {
       screen.getByRole('img', { name: /Red Dead Redemption/i })
     ).toHaveAttribute('src', props.img)
   })
+
+  it('should render the item Download', () => {
+    const download = 'http:teste'
+    renderWithTheme(<GameItem {...props} linkDownload={download} />)
+
+    expect(
+      screen.getByRole('link', { name: /Download Red Dead Redemption here/i })
+    ).toHaveAttribute('href', download)
+  })
 })

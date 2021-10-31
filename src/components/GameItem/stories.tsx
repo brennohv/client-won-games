@@ -18,5 +18,11 @@ export const WithDownload: Story<GameItemProps> = (args) => (
 )
 
 WithDownload.args = {
-  linkDownload: 'http:teste'
+  linkDownload: 'http:teste',
+  paymentInfo: {
+    flag: 'mastercard',
+    img: '/img/master-card.png',
+    number: '**** **** **** 4326',
+    purchaseDate: 'Purchase made on 07/20/2020 at 20:32'
+  }
 }

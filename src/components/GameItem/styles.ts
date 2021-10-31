@@ -69,9 +69,50 @@ export const Price = styled.div`
   `}
 `
 
-export const Download = styled.a`
+export const DownloadLink = styled.a`
   ${({ theme }) => css`
     color: ${theme.colors.primary};
+    margin-left: ${theme.spacings.xxsmall};
+  `}
+`
+
+export const SectionPayment = styled.div`
+  ${({ theme }) => css`
+    font-size: ${theme.font.sizes.small};
+    color: ${theme.colors.gray};
+    margin-top: ${theme.spacings.xsmall};
+    display: flex;
+    flex-direction: column;
+    min-width: 28rem;
+
+    ${media.greaterThan('medium')`
+      margin-top: 0;
+      flex: 1;
+      flex-direction: column-reverse;
+      justify-content: space-between;
+      align-items: flex-end;
+    `}
+  `}
+`
+
+export const CardInfo = styled.div`
+  ${({ theme }) => css`
+    font-size: ${theme.font.sizes.small};
+    color: ${theme.colors.gray};
+    display: flex;
+    align-items: center;
+    margin-top: ${theme.spacings.xsmall};
+
+    ${media.greaterThan('medium')`
+      margin-top: 0;
+    `}
+  `}
+`
+
+export const PurchaseDate = styled.p``
+
+export const CardImage = styled.img`
+  ${({ theme }) => css`
     margin-left: ${theme.spacings.xxsmall};
   `}
 `

@@ -67,11 +67,10 @@ export const SectionTextContent = styled(Section)`
 export const SectionGameDetails = styled(Section)`
   margin-top: 5.3rem;
   border-bottom: 0.1rem solid rgba(181, 181, 181, 0.3);
-  padding-bottom: 4.7rem;
+  padding-bottom: 4rem;
 
   ${media.greaterThan('medium')`
     margin-top: 9rem;
-    padding-bottom: 8.5rem;
     margin-bottom: 9.1rem;
   `}
 `

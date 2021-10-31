@@ -32,4 +32,23 @@ describe('<GameItem />', () => {
       screen.getByRole('link', { name: /Download Red Dead Redemption here/i })
     ).toHaveAttribute('href', download)
   })
+
+  it('should render the Payment info', () => {
+    const paymentInfo = {
+      flag: 'mastercard',
+      img: '/img/master-card.png',
+      number: '**** **** **** 4326',
+      purchaseDate: 'Purchase made on 07/20/2020 at 20:32'
+    }
+
+    renderWithTheme(<GameItem {...props} paymentInfo={paymentInfo} />)
+
+    expect(screen.getByRole('img', { name: paymentInfo.flag })).toHaveAttribute(
+      'src',
+      paymentInfo.img
+    )
+
+    expect(screen.getByText(paymentInfo.purchaseDate)).toBeInTheDocument()
+    expect(screen.getByText(paymentInfo.number)).toBeInTheDocument()
+  })
 })

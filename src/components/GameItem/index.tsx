@@ -46,16 +46,18 @@ const GameItem = ({
       </S.Content>
     </S.SectionGame>
 
-    <S.SectionPayment>
-      {!!paymentInfo && <p>{paymentInfo?.purchaseDate}</p>}
-      <S.CardInfo>
-        <S.PurchaseDate>{paymentInfo?.number}</S.PurchaseDate>
-        <S.CardImage
-          src={paymentInfo?.img}
-          alt={paymentInfo?.flag}
-        ></S.CardImage>
-      </S.CardInfo>
-    </S.SectionPayment>
+    {!!paymentInfo && (
+      <S.SectionPayment>
+        <p>{paymentInfo?.purchaseDate}</p>
+        <S.CardInfo>
+          <S.PurchaseDate>{paymentInfo?.number}</S.PurchaseDate>
+          <S.CardImage
+            src={paymentInfo?.img}
+            alt={paymentInfo?.flag}
+          ></S.CardImage>
+        </S.CardInfo>
+      </S.SectionPayment>
+    )}
   </S.Wrapper>
 )
 

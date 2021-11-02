@@ -39,7 +39,11 @@ const Home = ({
     </Container>
 
     <S.SectionNews>
-      <Showcase heading="News" gameCardSlider={newGames} />
+      <Showcase
+        heading="News"
+        gameCardSlider={newGames}
+        gameCardColor="black"
+      />
     </S.SectionNews>
 
     <Showcase

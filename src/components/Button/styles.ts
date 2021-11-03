@@ -41,11 +41,17 @@ const wapperModifiers = {
         margin-left: ${theme.spacings.xxsmall};
       }
     }
+  `,
+  disabled: () => css`
+    &:disabled {
+      cursor: not-allowed;
+      filter: saturate(30%);
+    }
   `
 }
 
 export const Wrapper = styled.button<WrapperProps>`
-  ${({ theme, size, fullWidht, hasIcon, minimal }) => css`
+  ${({ theme, size, fullWidht, hasIcon, minimal, disabled }) => css`
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -74,5 +80,6 @@ export const Wrapper = styled.button<WrapperProps>`
     ${!!fullWidht && wapperModifiers.fullWidht()}
     ${!!hasIcon && wapperModifiers.withIcon(theme)}
     ${!!minimal && wapperModifiers.minimal(theme)}
+    ${disabled && wapperModifiers.disabled()}
   `}
 `

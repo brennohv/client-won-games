@@ -24,14 +24,17 @@ export const Footer = styled.div`
   `}
 `
 
-export const CardInfo = styled.div`
+export const CardInfo = styled.label`
   ${({ theme }) => css`
     background-color: ${theme.colors.lightGray};
     margin: ${theme.spacings.xsmall} 0;
+    height: 5rem;
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    padding: ${theme.spacings.xxsmall};
+    padding: 0 ${theme.spacings.xxsmall};
     color: ${theme.colors.black};
+    cursor: pointer;
 
     ${RadioStyles.Input} {
       border: 0.2rem solid ${theme.colors.black};
@@ -47,8 +50,12 @@ export const CardImage = styled.img`
 
 export const NewCreditCard = styled.div`
   ${({ theme }) => css`
+    display: flex;
+    align-items: center;
     background-color: ${theme.colors.lightGray};
-    padding: ${theme.spacings.xxsmall};
+    padding: 0 ${theme.spacings.xxsmall};
+    height: 5rem;
+    cursor: pointer;
   `}
 `
 
@@ -57,6 +64,8 @@ export const CartList = styled.div`
   flex-direction: column;
 `
 
-export const Card = styled.div``
+export const Card = styled.span`
+  display: flex;
+`
 
 export const CardList = styled.div``

@@ -12,6 +12,11 @@ export default {
   },
   args: {
     cards: mockCard
+  },
+  argTypes: {
+    handlePayment: {
+      action: 'clicked'
+    }
   }
 } as Meta
 

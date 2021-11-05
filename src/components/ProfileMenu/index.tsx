@@ -7,29 +7,33 @@ import {
   FormatListBulleted
 } from '@styled-icons/material-outlined'
 
-const ProfileMenu = () => (
+export type ProfileMenuProps = {
+  activeLink?: '/profile/me' | '/profile/cards' | '/profile/orders'
+}
+
+const ProfileMenu = ({ activeLink }: ProfileMenuProps) => (
   <S.Nav>
     <Link href="/profile/me" passHref>
-      <S.Link>
-        <AccountCircle size={24} aria-label="My profile" />
+      <S.Link isActive={activeLink === '/profile/me'} title="My profile">
+        <AccountCircle size={24} />
         <span>My profile</span>
       </S.Link>
     </Link>
     <Link href="/profile/cards" passHref>
-      <S.Link>
-        <CreditCard size={24} aria-label="My cards" />
+      <S.Link isActive={activeLink === '/profile/cards'} title="My cards">
+        <CreditCard size={24} />
         <span>My cards</span>
       </S.Link>
     </Link>
     <Link href="/profile/orders" passHref>
-      <S.Link>
-        <FormatListBulleted size={24} aria-label="My orders" />
+      <S.Link isActive={activeLink === '/profile/orders'} title="My orders">
+        <FormatListBulleted size={24} />
         <span>My orders</span>
       </S.Link>
     </Link>
-    <Link href="/profile/logout" passHref>
-      <S.Link>
-        <ExitToApp size={24} aria-label="Sign out" />
+    <Link href="/logout" passHref>
+      <S.Link title="Sign out">
+        <ExitToApp size={24} />
         <span>Sign out</span>
       </S.Link>
     </Link>

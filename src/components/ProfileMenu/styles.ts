@@ -1,10 +1,9 @@
-import styled, { css } from 'styled-components'
+import styled, { css, DefaultTheme } from 'styled-components'
 import media from 'styled-media-query'
 
 export const Nav = styled.nav`
   ${({ theme }) => css`
     display: flex;
-    background-color: ${theme.colors.white};
     border-bottom: 0.1rem solid ${theme.colors.lightGray};
 
     ${media.greaterThan('medium')`
@@ -17,14 +16,30 @@ export const Nav = styled.nav`
     `}
   `}
 `
+type LinkProps = {
+  isActive?: boolean
+}
 
-export const Link = styled.a`
-  ${({ theme }) => css`
-    text-decoration: none;
+const linkModifiers = {
+  default: (theme: DefaultTheme) => css`
     color: ${theme.colors.black};
+    background-color: ${theme.colors.white};
+  `,
+  active: (theme: DefaultTheme) => css`
+    color: ${theme.colors.white};
+    background-color: ${theme.colors.primary};
+  `
+}
+
+export const Link = styled.a<LinkProps>`
+  ${({ theme, isActive }) => css`
+    text-decoration: none;
     display: flex;
     align-items: center;
     padding: ${theme.spacings.small} ${theme.spacings.xsmall};
+
+    ${!isActive && linkModifiers.default(theme)};
+    ${isActive && linkModifiers.active(theme)};
 
     span {
       margin-left: ${theme.spacings.xxsmall};
@@ -33,11 +48,6 @@ export const Link = styled.a`
     &:hover {
       color: ${theme.colors.white};
       background-color: ${theme.colors.primary};
-    }
-
-    &:focus {
-      background-color: ${theme.colors.primary};
-      color: ${theme.colors.white};
     }
 
     ${media.lessThan('medium')`

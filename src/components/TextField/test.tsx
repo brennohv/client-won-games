@@ -65,22 +65,20 @@ describe('<TextField />', () => {
     expect(onInput).toHaveBeenCalledWith(text)
   })
 
-  it('should render align left by default', () => {
-    const { container } = renderWithTheme(<TextField />)
-
-    expect(container.firstChild?.firstChild).toHaveStyleRule(
-      'grid-template-areas',
-      "'icon input'"
+  it('Renders with Icon on the left by default', () => {
+    renderWithTheme(
+      <TextField icon={<EmailIcon data-testid="icon" />} iconPosition="left" />
     )
+
+    expect(screen.getByTestId('icon').parentElement).toHaveStyle({ order: 0 })
   })
 
-  it('should render align righ by passed', () => {
-    const { container } = renderWithTheme(<TextField iconPosition="right" />)
-
-    expect(container.firstChild?.firstChild).toHaveStyleRule(
-      'grid-template-areas',
-      "'input icon'"
+  it('Renders with Icon on the right side', () => {
+    renderWithTheme(
+      <TextField icon={<EmailIcon data-testid="icon" />} iconPosition="right" />
     )
+
+    expect(screen.getByTestId('icon').parentElement).toHaveStyle({ order: 1 })
   })
 
   it('Does not changes its value when disabled', async () => {

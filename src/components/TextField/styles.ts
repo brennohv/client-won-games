@@ -2,14 +2,6 @@ import styled, { css, DefaultTheme } from 'styled-components'
 import { TextFieldProps } from '.'
 
 const wrapperModifiers = {
-  right: () => css`
-    grid-template-areas: 'input icon';
-    grid-template-columns: 4fr 0.3fr;
-  `,
-  left: () => css`
-    grid-template-areas: 'icon input';
-    grid-template-columns: 0.3fr 4fr;
-  `,
   disabled: (theme: DefaultTheme) => css`
     ${Input},
     ${Label},
@@ -34,34 +26,35 @@ const wrapperModifiers = {
 }
 
 type IconWrapperProps = Pick<TextFieldProps, 'iconPosition'>
+
 type WrapperProps = {
   error?: boolean
   disabled?: boolean
 }
 
-export const InputWrapper = styled.div<IconWrapperProps>`
-  ${({ theme, iconPosition }) => css`
-    display: grid;
+export const InputWrapper = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    align-items: center;
     background: ${theme.colors.lightGray};
     border-radius: 0.2rem;
     padding: 0 ${theme.spacings.xsmall};
     border: 0.2rem solid;
     border-color: ${theme.colors.lightGray};
-    ${!!iconPosition && wrapperModifiers[iconPosition]}
 
     &:focus-within {
       box-shadow: 0 0 0.5rem ${theme.colors.primary};
     }
   `}
 `
-export const Icon = styled.div`
-  ${({ theme }) => css`
+export const Icon = styled.div<IconWrapperProps>`
+  ${({ theme, iconPosition }) => css`
     display: flex;
-    width: 2.2rem;
     color: ${theme.colors.gray};
-    grid-area: icon;
+    order: ${iconPosition === 'right' ? 1 : 0};
+
     & > svg {
-      width: 100%;
+      width: 2.2rem;
     }
   `}
 `
@@ -76,8 +69,8 @@ export const Input = styled.input<IconWrapperProps>`
     background: transparent;
     border: 0;
     outline: none;
-    width: 100%;
-    grid-area: input;
+    width: ${iconPosition === 'right' ? `calc(100% - 2.2rem)` : `100%`};
+
   `}
 `
 

@@ -2,14 +2,19 @@
 
 exports[`<TextField /> Renders with error 1`] = `
 .c4 {
-  display: grid;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   background: #EAEAEA;
   border-radius: 0.2rem;
   padding: 0 1.6rem;
   border: 0.2rem solid;
   border-color: #EAEAEA;
-  grid-template-areas: 'icon input';
-  grid-template-columns: 0.3fr 4fr;
 }
 
 .c4:focus-within {
@@ -21,13 +26,14 @@ exports[`<TextField /> Renders with error 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  width: 2.2rem;
   color: #8F8F8F;
-  grid-area: icon;
+  -webkit-order: 0;
+  -ms-flex-order: 0;
+  order: 0;
 }
 
 .c6 > svg {
-  width: 100%;
+  width: 2.2rem;
 }
 
 .c8 {
@@ -40,7 +46,6 @@ exports[`<TextField /> Renders with error 1`] = `
   border: 0;
   outline: none;
   width: 100%;
-  grid-area: input;
 }
 
 .c2 {

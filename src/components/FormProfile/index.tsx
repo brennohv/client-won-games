@@ -4,7 +4,7 @@ import * as S from './styles'
 import Button from 'components/Button'
 
 const FormProfile = () => (
-  <S.Wrapper>
+  <>
     <Heading size="small" lineBottom lineColor="primary" color="black">
       My profile
     </Heading>
@@ -41,7 +41,7 @@ const FormProfile = () => (
 
       <Button size="large">Save</Button>
     </S.Form>
-  </S.Wrapper>
+  </>
 )
 
 export default FormProfile

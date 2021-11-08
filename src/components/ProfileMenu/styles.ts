@@ -36,7 +36,7 @@ export const Link = styled.a<LinkProps>`
     text-decoration: none;
     display: flex;
     align-items: center;
-    padding: ${theme.spacings.small} ${theme.spacings.xsmall};
+    padding: ${theme.spacings.xsmall} ${theme.spacings.small};
 
     ${!isActive && linkModifiers.default(theme)};
     ${isActive && linkModifiers.active(theme)};

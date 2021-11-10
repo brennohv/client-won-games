@@ -18,3 +18,14 @@ export default {
 export const Default: Story<ExploreSidebarProps> = (args) => (
   <ExploreSidebar {...args} />
 )
+
+export const WithInitialValue: Story<ExploreSidebarProps> = (args) => (
+  <ExploreSidebar
+    {...args}
+    initialValues={{
+      'under-$100': true,
+      windows: true,
+      'high-to-low': true
+    }}
+  />
+)

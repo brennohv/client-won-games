@@ -1,5 +1,6 @@
 import { Story, Meta } from '@storybook/react'
 import ExploreSidebar, { ExploreSidebarProps } from '.'
+
 import items from './mock'
 
 export default {
@@ -7,6 +8,9 @@ export default {
   component: ExploreSidebar,
   args: {
     items
+  },
+  argTypes: {
+    onFilter: { action: 'checked' }
   },
   parameters: {
     backgrounds: {
@@ -19,13 +23,13 @@ export const Default: Story<ExploreSidebarProps> = (args) => (
   <ExploreSidebar {...args} />
 )
 
-export const WithInitialValue: Story<ExploreSidebarProps> = (args) => (
-  <ExploreSidebar
-    {...args}
-    initialValues={{
-      'under-$100': true,
-      windows: true,
-      'high-to-low': true
-    }}
-  />
+export const WithInitialValues: Story<ExploreSidebarProps> = (args) => (
+  <ExploreSidebar {...args} />
 )
+
+WithInitialValues.args = {
+  initialValues: {
+    windows: true,
+    'sort-by': 'high-to-low'
+  }
+}

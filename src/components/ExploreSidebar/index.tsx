@@ -5,63 +5,79 @@ import Button from 'components/Button'
 import * as S from './styles'
 import { useState } from 'react'
 
-export type ExploreSidebarProps = {
-  items: Items[]
-  initialValues?: Value
-}
-
-type Value = {
-  [field: string]: boolean
-}
-
-export type Items = {
-  title: string
-  name: string
-  type: string
-  fields: Field[]
-}
-
-type Field = {
+export type Field = {
   label: string
   name: string
 }
 
-const ExploreSidebar = ({ items, initialValues = {} }: ExploreSidebarProps) => {
-  const [value] = useState(initialValues)
+type Values = {
+  [field: string]: boolean | string
+}
+
+export type ExploreSidebarProps = {
+  items: ItemProps[]
+  initialValues?: Values
+  onFilter: (value: Values) => void
+}
+
+export type ItemProps = {
+  title: string
+  name: string
+  type: string
+  field: Field[]
+}
+
+const ExploreSidebar = ({
+  items,
+  initialValues = {},
+  onFilter
+}: ExploreSidebarProps) => {
+  const [values, setValues] = useState(initialValues)
+
+  const handleFilter = () => {
+    onFilter(values)
+  }
+
+  const handleChange = (name: string, value: string | boolean) => {
+    setValues((v) => ({ ...v, [name]: value }))
+  }
 
   return (
     <S.Wrapper>
       {items.map((item) => (
-        <div key={item.title}>
-          <Heading lineBottom lineColor="secondary" size="small">
+        <div key={item.name}>
+          <Heading size="small" lineBottom lineColor="secondary">
             {item.title}
           </Heading>
+
           {item.type === 'checkbox' &&
-            item.fields.map((field) => (
+            item.field.map((field) => (
               <Checkbox
-                key={field.name}
-                name={field.name}
                 label={field.label}
+                name={field.name}
+                key={field.name}
                 labelFor={field.name}
-                isChecked={!!value[field.name]}
+                isChecked={!!values[field.name]}
+                onCheck={(v) => handleChange(field.name, v)}
               />
             ))}
+
           {item.type === 'radio' &&
-            item.fields.map((field) => (
+            item.field.map((field) => (
               <Radio
-                key={field.name}
+                label={field.label}
                 value={field.name}
                 name={item.name}
-                label={field.label}
+                key={field.name}
                 labelFor={field.name}
-                defaultChecked={!!value[field.name]}
+                defaultChecked={field.name === values[item.name]}
+                onCheck={() => handleChange(item.name, field.name)}
               />
             ))}
         </div>
       ))}
-
-      <Button fullWidht size="medium">
-        Filtrar
+      <Button fullWidht onClick={handleFilter}>
+        Filter
       </Button>
     </S.Wrapper>
   )

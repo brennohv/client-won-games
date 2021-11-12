@@ -3,30 +3,30 @@ export default [
     title: 'Price',
     name: 'price',
     type: 'checkbox',
-    fields: [
+    field: [
       {
-        label: 'Under $50',
-        name: 'under-$50'
+        name: 'under-$50',
+        label: 'Under $50'
       },
       {
-        label: 'Under $100',
-        name: 'under-$100'
+        name: 'under-$100',
+        label: 'Under $100'
       },
       {
-        label: 'Under $150',
-        name: 'under-$150'
+        name: 'under-$150',
+        label: 'Under $150'
       },
       {
-        label: 'Under $200',
-        name: 'under-$200'
+        name: 'under-$200',
+        label: 'Under $200'
       },
       {
-        label: 'Free',
-        name: 'free'
+        name: 'free',
+        label: 'Free'
       },
       {
-        label: 'Discounted',
-        name: 'discounted'
+        name: 'discounted',
+        label: 'Dicounted'
       }
     ]
   },
@@ -34,14 +34,14 @@ export default [
     title: 'Sort by',
     name: 'sort-by',
     type: 'radio',
-    fields: [
+    field: [
       {
-        label: 'High to low',
-        name: 'high-to-low'
+        name: 'high-to-low',
+        label: 'High to low'
       },
       {
-        label: 'Low to high',
-        name: 'low-to-high'
+        name: 'low-to-high',
+        label: 'Low to high'
       }
     ]
   },
@@ -49,18 +49,18 @@ export default [
     title: 'System',
     name: 'system',
     type: 'checkbox',
-    fields: [
+    field: [
       {
-        label: 'Windows',
-        name: 'windows'
+        name: 'windows',
+        label: 'Windows'
       },
       {
-        label: 'Linux',
-        name: 'linux'
+        name: 'linux',
+        label: 'Linux'
       },
       {
-        label: 'MAC',
-        name: 'mac'
+        name: 'mac',
+        label: 'MAC'
       }
     ]
   },
@@ -68,38 +68,34 @@ export default [
     title: 'Genre',
     name: 'genre',
     type: 'checkbox',
-    fields: [
+    field: [
       {
-        label: 'Action',
-        name: 'action'
+        name: 'action',
+        label: 'Action'
       },
       {
-        label: 'FPS',
-        name: 'fps'
+        name: 'adventure',
+        label: 'Adventure'
       },
       {
-        label: 'Adventure',
-        name: 'adventure'
+        name: 'fps',
+        label: 'FPS'
       },
       {
-        label: 'MMORPG',
-        name: 'mmorpg'
+        name: 'mmorpg',
+        label: 'MMORPG'
       },
       {
-        label: 'RPG',
-        name: 'rpg'
+        name: 'rpg',
+        label: 'RPG'
       },
       {
-        label: 'Indie',
-        name: 'indie'
+        name: 'shooters',
+        label: 'Shooters'
       },
       {
-        label: 'Shooters',
-        name: 'shooters'
-      },
-      {
-        label: 'Simulation',
-        name: 'simulation'
+        name: 'simulation',
+        label: 'Simulation'
       }
     ]
   }

@@ -8,8 +8,8 @@ export const Wrapper = styled.div`
 
 export const Input = styled.input`
   ${({ theme }) => css`
+    position: relative;
     display: flex;
-    /* position: relative; */
     align-items: center;
     justify-content: center;
     appearance: none;

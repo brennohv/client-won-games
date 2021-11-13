@@ -15,16 +15,21 @@ export default {
   parameters: {
     backgrounds: {
       default: 'won-dark'
-    }
+    },
+    layout: 'fullscreen'
   }
 } as Meta
 
 export const Default: Story<ExploreSidebarProps> = (args) => (
-  <ExploreSidebar {...args} />
+  <div style={{ padding: 16, maxWidth: 320 }}>
+    <ExploreSidebar {...args} />
+  </div>
 )
 
 export const WithInitialValues: Story<ExploreSidebarProps> = (args) => (
-  <ExploreSidebar {...args} />
+  <div style={{ padding: 16, maxWidth: 320 }}>
+    <ExploreSidebar {...args} />
+  </div>
 )
 
 WithInitialValues.args = {

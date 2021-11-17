@@ -1,7 +1,14 @@
 import styled, { css } from 'styled-components'
 import media from 'styled-media-query'
 
-export const Wrapper = styled.main``
+export const Wrapper = styled.main`
+  ${({ theme }) => css`
+    background: ${theme.colors.white};
+    display: flex;
+    flex-direction: column;
+    align-self: start;
+  `}
+`
 
 export const Footer = styled.div`
   ${({ theme }) => css`

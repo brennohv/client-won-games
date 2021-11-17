@@ -18,6 +18,7 @@ export const Content = styled.div`
     background-color: ${theme.colors.white};
     position: absolute;
     margin-top: ${theme.spacings.small};
+    right: 0;
 
     &::after {
       content: '';

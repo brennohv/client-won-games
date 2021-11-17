@@ -7,6 +7,7 @@ export const Footer = styled.div`
   ${({ theme }) => css`
     display: flex;
     justify-content: space-between;
+    align-items: center;
     background-color: #f3f3f3;
     padding: ${theme.spacings.xsmall};
     font-weight: ${theme.font.bold};

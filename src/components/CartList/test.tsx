@@ -2,27 +2,15 @@ import { screen } from '@testing-library/react'
 import theme from 'styles/theme'
 import { renderWithTheme } from 'utils/tests/helpers'
 
+import props from './mock'
+
 import CartList from '.'
 
-const props = {
-  gamesCart: [
-    {
-      img: 'https://source.unsplash.com/user/willianjusten/151x70',
-      title: 'Red Dead Redemption 2',
-      price: 'R$ 215,00'
-    },
-    {
-      img: 'https://source.unsplash.com/user/willianjusten/151x70',
-      title: 'Borderlands 3',
-      price: 'R$ 215,00'
-    }
-  ],
-  total: 'R$ 330,00'
-}
-
 describe('<CartList />', () => {
-  it('should render the correctly', () => {
-    const { container } = renderWithTheme(<CartList {...props} />)
+  it('should render correctly', () => {
+    const { container } = renderWithTheme(
+      <CartList gamesCart={props} total="R$ 330,00" />
+    )
 
     expect(screen.getAllByRole('heading')).toHaveLength(2)
     expect(screen.getByText('R$ 330,00')).toHaveStyle({
@@ -31,5 +19,12 @@ describe('<CartList />', () => {
     expect(screen.getByText('Total:')).toBeInTheDocument()
 
     expect(container.firstChild).toMatchSnapshot()
+  })
+
+  it('should render button and not render Total', () => {
+    renderWithTheme(<CartList gamesCart={props} total="R$ 330,00" hasButton />)
+
+    expect(screen.getByRole('link', { name: 'Buy it now' })).toBeInTheDocument()
+    expect(screen.queryByText('Total:')).not.toBeInTheDocument()
   })
 })

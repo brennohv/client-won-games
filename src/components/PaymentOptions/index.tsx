@@ -1,9 +1,11 @@
-import { Add, AddShoppingCart } from '@styled-icons/material-outlined'
 import Heading from 'components/Heading'
 import Radio from 'components/Radio'
 import Button from 'components/Button'
 import * as S from './styles'
+
+import { Add, AddShoppingCart } from '@styled-icons/material-outlined'
 import { useState } from 'react'
+import Link from 'next/link'
 
 export type CardProps = {
   flag: string
@@ -49,9 +51,12 @@ const PaymentOptions = ({ cards, handlePayment }: PaymentOptionsProps) => {
       </S.Body>
 
       <S.Footer>
-        <Button as="a" minimal>
-          Continue shopping
-        </Button>
+        <Link href="/games" passHref>
+          <Button as="a" minimal>
+            Continue shopping
+          </Button>
+        </Link>
+
         <Button
           icon={<AddShoppingCart />}
           onClick={handlePayment}

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<CartList /> should render the correctly 1`] = `
+exports[`<CartList /> should render correctly 1`] = `
 .c0 {
   background-color: #FAFAFA;
   padding: 2.4rem;
@@ -68,6 +68,10 @@ exports[`<CartList /> should render the correctly 1`] = `
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
   justify-content: space-between;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   background-color: #f3f3f3;
   padding: 1.6rem;
   font-weight: 600;
@@ -179,7 +183,9 @@ exports[`<CartList /> should render the correctly 1`] = `
   <div
     class="c7"
   >
-    Total:
+    <span>
+      Total:
+    </span>
     <span
       class="c8"
     >

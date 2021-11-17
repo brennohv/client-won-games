@@ -27,4 +27,13 @@ describe('<CartList />', () => {
     expect(screen.getByRole('link', { name: 'Buy it now' })).toBeInTheDocument()
     expect(screen.queryByText('Total:')).not.toBeInTheDocument()
   })
+
+  it('should render the Empty', () => {
+    renderWithTheme(<CartList />)
+
+    expect(
+      screen.getByText(/You do not have games on cart/i)
+    ).toBeInTheDocument()
+    expect(screen.queryByText('Total:')).not.toBeInTheDocument()
+  })
 })

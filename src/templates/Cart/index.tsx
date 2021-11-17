@@ -20,7 +20,7 @@ export type CartProps = {
 const Cart = ({
   recommendedHighlight,
   recommendedGames,
-  gamesCart,
+  gamesCart = [],
   total,
   cards
 }: CartProps) => {

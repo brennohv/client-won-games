@@ -20,3 +20,4 @@ export const Default: Story<CartListProps> = (args) => <CartList {...args} />
 export const WithButton: Story<CartListProps> = (args) => (
   <CartList {...args} hasButton />
 )
+export const Empty: Story<CartListProps> = () => <CartList />

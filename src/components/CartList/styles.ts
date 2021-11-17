@@ -1,12 +1,34 @@
 import styled, { css } from 'styled-components'
 import media from 'styled-media-query'
+import * as EmptyStyles from 'components/Empty/styles'
 
-export const Wrapper = styled.main`
-  ${({ theme }) => css`
+type WrapperProps = {
+  isEmpty: boolean
+}
+
+export const Wrapper = styled.main<WrapperProps>`
+  ${({ theme, isEmpty }) => css`
     background: ${theme.colors.white};
     display: flex;
     flex-direction: column;
     align-self: start;
+
+    ${isEmpty &&
+    css`
+      ${EmptyStyles.Wrapper} {
+        padding-bottom: ${theme.spacings.medium};
+      }
+      ${EmptyStyles.Image} {
+        max-width: 20rem;
+      }
+      ${EmptyStyles.Ttile} {
+        font-size: ${theme.font.sizes.large};
+      }
+      ${EmptyStyles.Description} {
+        color: ${theme.colors.black};
+        font-size: ${theme.font.sizes.medium};
+      }
+    `}
   `}
 `
 

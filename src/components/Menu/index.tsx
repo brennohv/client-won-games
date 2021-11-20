@@ -6,10 +6,12 @@ import Logo from 'components/Logo'
 
 import { Search as SearchIcon } from '@styled-icons/material-outlined/Search'
 import { Menu2 as MenuIcon } from '@styled-icons/remix-fill/Menu2'
-import { ShoppingCart as ShoppinCartIcon } from '@styled-icons/material-outlined/ShoppingCart'
 import { Close as CloseIcon } from '@styled-icons/material-outlined/Close'
 import Button from 'components/Button'
 import MediaMatch from 'components/MediaMatch'
+import CartDropdown from 'components/CartDropdown'
+import CartIcon from 'components/CartIcon'
+import UserDropdown from 'components/UserDropdown'
 
 export type MenuProps = {
   userName?: string
@@ -49,18 +51,30 @@ const Menu = ({ userName }: MenuProps) => {
         <S.IconWrapper>
           <SearchIcon aria-label="Search" />
         </S.IconWrapper>
-        <S.IconWrapper>
-          <ShoppinCartIcon aria-label="Shopping Cart" />
-        </S.IconWrapper>
-        {!userName && (
-          <MediaMatch greaterThan="medium">
+
+        <MediaMatch greaterThan="medium">
+          <CartDropdown />
+        </MediaMatch>
+
+        <MediaMatch lessThan="medium">
+          <Link href="/cart">
+            <a>
+              <CartIcon />
+            </a>
+          </Link>
+        </MediaMatch>
+
+        <MediaMatch greaterThan="medium">
+          {!userName ? (
             <Link href="/sign-in" passHref>
               <Button as="a" size="medium">
                 Sign in
               </Button>
             </Link>
-          </MediaMatch>
-        )}
+          ) : (
+            <UserDropdown userName={userName} />
+          )}
+        </MediaMatch>
       </S.MenuGroup>
 
       <S.MenuFull aria-hidden={!isOpen} isOpen={isOpen}>

@@ -57,7 +57,7 @@ describe('<Cart />', () => {
 
     expect(screen.getByTestId('Mock Showcase')).toBeInTheDocument()
     expect(screen.getByTestId('Mock PaymentOptions')).toBeInTheDocument()
-    expect(screen.getByTestId('Mock CartList')).toBeInTheDocument()
+    expect(screen.getAllByTestId('Mock CartList')).toHaveLength(2)
     expect(
       screen.getByRole('heading', { name: /My cart/i })
     ).toBeInTheDocument()

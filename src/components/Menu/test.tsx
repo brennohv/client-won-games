@@ -9,7 +9,7 @@ describe('<Menu />', () => {
 
     expect(screen.getByLabelText(/open menu/i)).toBeInTheDocument()
     expect(screen.getByLabelText(/search/i)).toBeInTheDocument()
-    expect(screen.getByLabelText(/Shopping Cart/i)).toBeInTheDocument()
+    expect(screen.getAllByLabelText(/Shopping Cart/i)).toHaveLength(2)
     expect(screen.getByLabelText(/Won games/i)).toBeInTheDocument()
   })
 
@@ -49,6 +49,6 @@ describe('<Menu />', () => {
     expect(screen.queryByText(/Sign in/i)).not.toBeInTheDocument()
     expect(screen.queryByText(/Sign Up/i)).not.toBeInTheDocument()
     expect(screen.getByText(/My account/i)).toBeInTheDocument()
-    expect(screen.getByText(/Wishlist/i)).toBeInTheDocument()
+    expect(screen.getAllByText(/Wishlist/i)).toHaveLength(2)
   })
 })

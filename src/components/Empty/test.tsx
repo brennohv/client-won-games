@@ -27,7 +27,7 @@ describe('<Empty />', () => {
     ).toBeInTheDocument
 
     expect(
-      screen.getByRole('link', { name: /Go to your store/i })
+      screen.getByRole('link', { name: /Go back to store/i })
     ).toHaveAttribute('href', '/')
   })
 })

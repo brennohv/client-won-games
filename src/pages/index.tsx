@@ -23,9 +23,9 @@ export default function Index(props: HomeTemplateProps) {
 //ATENÇÃO:
 // Os METODOS GetStaticProps e GetServerSideProps SÓ FUNCIONAM EM PAGES
 
-// getStaticProps => gera o estatico em build time
-// getServerSideProps => gera via ssr a cada request
-// getInitialProps => gera via ssr a cada request
+// getStaticProps => gerar estático em build time (gatsby)
+// getServerSideProps => gerar via ssr a cada request (nunca vai para o bundle do client)
+// getInitialProps => gerar via ssr a cada request (vai para o client, faz hydrate do lado do client depois do 1 req)
 
 export function getStaticProps() {
   // Faz a logica

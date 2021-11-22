@@ -20,6 +20,7 @@ export async function getServerSideProps() {
     props: {
       revalidate: 60,
       games: data.games.map((game) => ({
+        slug: game.slug,
         title: game.name,
         developers: game.developers[0].name,
         img: `http://localhost:1337${game.cover!.url}`,

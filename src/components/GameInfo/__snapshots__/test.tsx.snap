@@ -197,7 +197,7 @@ exports[`<GameInfo /> should render the game informations 1`] = `
   }
 }
 
-@media (max-width:1170px) {
+@media (max-width:768px) {
   .c0 .c6 {
     width: 100%;
   }
@@ -237,7 +237,7 @@ exports[`<GameInfo /> should render the game informations 1`] = `
     class="c2 c3"
     color="secondary"
   >
-    $200,00
+    €200.00
   </div>
   <p
     class="c4"

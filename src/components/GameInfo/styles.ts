@@ -31,7 +31,7 @@ export const Wrapper = styled.div`
       `}
     }
 
-    ${media.lessThan('large')`
+    ${media.lessThan('medium')`
       ${ButtonStyles.Wrapper} {
         width: 100%
       }

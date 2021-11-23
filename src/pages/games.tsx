@@ -24,10 +24,7 @@ export async function getServerSideProps() {
         title: game.name,
         developers: game.developers[0].name,
         img: `http://localhost:1337${game.cover!.url}`,
-        price: new Intl.NumberFormat('en', {
-          style: 'currency',
-          currency: 'EUR'
-        }).format(game.price)
+        price: game.price
       })),
       filterItems: ExploreMock
     }

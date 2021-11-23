@@ -33,4 +33,9 @@ describe('<GameInfo />', () => {
     // renderizar button wishlist
     expect(screen.getByText(/Wishlist/i)).toBeInTheDocument()
   })
+
+  it('should render FREE when 0', () => {
+    renderWithTheme(<GameInfo {...props} price={0} />)
+    expect(screen.getByText(/FREE/)).toBeInTheDocument()
+  })
 })

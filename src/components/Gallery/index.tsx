@@ -93,7 +93,7 @@ const Gallery = ({ images }: GalleryProps) => {
         ))}
       </Slider>
 
-      <S.Modal aria-label="modal" aria-hiden={!isOpen} isOpen={isOpen}>
+      <S.Modal aria-label="modal" aria-hidden={!isOpen} isOpen={isOpen}>
         <S.Close
           role="button"
           aria-label="Close modal"

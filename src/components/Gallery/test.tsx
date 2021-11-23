@@ -24,12 +24,12 @@ describe('<Gallery />', () => {
     const modal = screen.getByLabelText('modal')
 
     //verificar se o modal esta escondido
-    expect(modal).toHaveAttribute('aria-hiden', 'true')
+    expect(modal).toHaveAttribute('aria-hidden', 'true')
     expect(modal).toHaveStyle({ opacity: 0, pointerEvents: 'none' })
 
     //quando clicar no button eu abra o modal
     fireEvent.click(screen.getByRole('button', { name: /Gallery Image 1/i }))
-    expect(modal).toHaveAttribute('aria-hiden', 'false')
+    expect(modal).toHaveAttribute('aria-hidden', 'false')
     expect(modal).toHaveStyle({ opacity: 1 })
   })
 
@@ -40,11 +40,11 @@ describe('<Gallery />', () => {
 
     //quando clicar no button eu abra o modal
     fireEvent.click(screen.getByRole('button', { name: /Gallery Image 1/i }))
-    expect(modal).toHaveAttribute('aria-hiden', 'false')
+    expect(modal).toHaveAttribute('aria-hidden', 'false')
 
     //quando clicar no button close eu feche o modal
     fireEvent.click(screen.getByRole('button', { name: /Close modal/i }))
-    expect(modal).toHaveAttribute('aria-hiden', 'true')
+    expect(modal).toHaveAttribute('aria-hidden', 'true')
     expect(modal).toHaveStyle({ opacity: 0 })
   })
 
@@ -58,7 +58,7 @@ describe('<Gallery />', () => {
 
     //quando clicar no button close eu feche o modal
     fireEvent.keyUp(container, { key: 'Escape' })
-    expect(modal).toHaveAttribute('aria-hiden', 'true')
+    expect(modal).toHaveAttribute('aria-hidden', 'true')
     expect(modal).toHaveStyle({ opacity: 0 })
   })
 

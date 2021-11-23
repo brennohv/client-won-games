@@ -48,6 +48,12 @@ describe('<GameCard />', () => {
     })
   })
 
+  it('should render FREE when 0', () => {
+    renderWithTheme(<GameCard {...props} price={0} />)
+
+    expect(screen.queryByText(/FREE/i)).toBeInTheDocument()
+  })
+
   it('should render a line-through in price when promotional', () => {
     // renderiza o componente (COM promotionalPrice) // 200 reais // 15 reais
     renderWithTheme(<GameCard {...props} promotionalPrice={15} />)

@@ -4,11 +4,11 @@ import Ribbon, { RibbonColors, RibbonSizes } from 'components/Ribbon'
 import * as S from './styles'
 
 export type BannerProps = {
-  img?: string
-  title?: string
-  subtitle?: string
-  buttonLabel?: string
-  buttonLink?: string
+  img: string
+  title: string
+  subtitle: string
+  buttonLabel: string
+  buttonLink: string
   ribbon?: React.ReactNode
   ribbonSize?: RibbonSizes
   ribbonColor?: RibbonColors

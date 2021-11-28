@@ -1,5 +1,4 @@
 import Home, { HomeTemplateProps } from 'templates/Home'
-import gameCardMock from 'components/GameCardSlider/mock'
 import highlightMock from 'components/Highlight/mock'
 
 import { QueryHome } from 'graphql/generated/QueryHome'
@@ -20,10 +19,12 @@ export async function getStaticProps() {
   const apolloClient = initializeApollo()
 
   const {
-    data: { banners, newGames }
+    data: { banners, newGames, upcomingGames, freeGames, sections }
   } = await apolloClient.query<QueryHome>({
     query: QUERY_HOME
   })
+
+  console.log(sections?.popularGames?.highlight)
 
   return {
     props: {
@@ -40,20 +41,45 @@ export async function getStaticProps() {
           ribbonColor: banner.ribbon.color
         })
       })),
-      newGames: newGames.map((game) => ({
-        title: game.name,
-        slug: game.slug,
-        developer: game.developers[0].name,
-        img: `http://localhost:1337${game.cover?.url}`,
-        price: game.price
+      newGames: newGames.map((newgame) => ({
+        title: newgame.name,
+        slug: newgame.slug,
+        developer: newgame.developers[0].name,
+        img: `http://localhost:1337${newgame.cover?.url}`,
+        price: newgame.price
       })),
       mostPopularHighlight: highlightMock,
-      mostPopularGames: gameCardMock,
-      upComingGames: gameCardMock,
+      mostPopularGames: sections?.popularGames?.games.map((popularGames) => ({
+        title: popularGames.name,
+        slug: popularGames.slug,
+        developer: popularGames.developers[0].name,
+        img: `http://localhost:1337${popularGames.cover?.url}`,
+        price: popularGames.price
+      })),
+      upComingGames: upcomingGames.map((upComingGame) => ({
+        title: upComingGame.name,
+        slug: upComingGame.slug,
+        developer: upComingGame.developers[0].name,
+        img: `http://localhost:1337${upComingGame.cover?.url}`,
+        price: upComingGame.price
+      })),
       upComingHighlight: highlightMock,
-      upComingMoreGames: gameCardMock,
-      freeGames: gameCardMock,
+      freeGames: freeGames.map((freeGame) => ({
+        title: freeGame.name,
+        slug: freeGame.slug,
+        developer: freeGame.developers[0].name,
+        img: `http://localhost:1337${freeGame.cover?.url}`,
+        price: freeGame.price
+      })),
       freeGamesHighlight: highlightMock
     }
   }
 }
+
+// export default {
+//   title: 'Read Dead it’s back',
+//   subtitle: 'Come see John’s new adventures',
+//   backgroundImage: '/img/background.png',
+//   buttonLabel: 'Buy now',
+//   buttonLink: '/rdr2'
+// }

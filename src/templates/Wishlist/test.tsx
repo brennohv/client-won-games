@@ -8,7 +8,8 @@ import Wishlist from '.'
 const props = {
   recomendedGames: gameCardMock,
   recomendedHighlight: highlightMock,
-  games: gameCardMock
+  games: gameCardMock,
+  title: 'You may like these games'
 }
 
 jest.mock('components/Showcase', () => {
@@ -37,6 +38,7 @@ describe('<Wishlist />', () => {
       <Wishlist
         recomendedGames={gameCardMock}
         recomendedHighlight={highlightMock}
+        title="You may like these games"
       />
     )
 

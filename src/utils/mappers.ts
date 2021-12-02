@@ -1,4 +1,4 @@
-import { Highlight } from 'graphql/generated/Highlight'
+import { HighlightFragment } from 'graphql/generated/HighlightFragment'
 import { QueryGames_games } from 'graphql/generated/QueryGames'
 import { QueryHome_banners } from 'graphql/generated/QueryHome'
 
@@ -30,7 +30,9 @@ export const gamesMapper = (games: QueryGames_games[] | undefined | null) => {
   )
 }
 
-export const highlightMapper = (highlight: Highlight | null | undefined) => {
+export const highlightMapper = (
+  highlight: HighlightFragment | null | undefined
+) => {
   return (
     highlight && {
       title: highlight.title,

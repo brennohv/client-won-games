@@ -22,7 +22,8 @@ const props: GameTemplateProps = {
   upComingHighligth: HighlightMock,
   upComingGames: GameCardSliderMock,
   gameSuggestion: GameCardSliderMock,
-  titleRecommended: 'You may like these games'
+  titleRecommended: 'You may like these games',
+  titleUpcoming: 'Upcoming'
 }
 
 jest.mock('components/GameInfo', () => {

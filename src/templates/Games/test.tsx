@@ -3,9 +3,11 @@ import { MockedProvider } from '@apollo/client/testing'
 
 import { renderWithTheme } from 'utils/tests/helpers'
 import filterItemsMock from 'components/ExploreSidebar/mock'
+import { fetchMoreMock, gamesMock } from './mocks'
 
 import Games from '.'
-import { QUERY_GAMES } from 'graphql/queries/games'
+import userEvent from '@testing-library/user-event'
+import apolloCache from 'utils/apolloCache'
 
 jest.mock('templates/Base', () => ({
   __esModule: true,
@@ -34,33 +36,7 @@ describe('<Games />', () => {
 
   it('should render sections', async () => {
     renderWithTheme(
-      <MockedProvider
-        mocks={[
-          {
-            request: {
-              query: QUERY_GAMES,
-              variables: { limit: 15 }
-            },
-            result: {
-              data: {
-                games: [
-                  {
-                    name: 'Messiah',
-                    slug: 'messiah',
-                    price: 8.89,
-                    cover: {
-                      url: '/uploads/messiah_e161e802b0.jpg'
-                    },
-                    developers: [{ name: 'Shiny Entertainment' }],
-                    __typename: 'Game'
-                  }
-                ]
-              }
-            }
-          }
-        ]}
-        addTypename={false}
-      >
+      <MockedProvider mocks={[gamesMock]}>
         <Games filterItems={filterItemsMock} />
       </MockedProvider>
     )
@@ -78,6 +54,22 @@ describe('<Games />', () => {
 
     expect(
       await screen.findByRole('button', { name: /show more/i })
+    ).toBeInTheDocument()
+  })
+
+  it('should render more games when show more is clicked', async () => {
+    renderWithTheme(
+      <MockedProvider mocks={[gamesMock, fetchMoreMock]} cache={apolloCache}>
+        <Games filterItems={filterItemsMock} />
+      </MockedProvider>
+    )
+
+    expect(await screen.findByText(/Messiah/i)).toBeInTheDocument()
+
+    userEvent.click(await screen.findByRole('button', { name: /show more/i }))
+
+    expect(
+      await screen.findByText('Outward: The Soroboreans')
     ).toBeInTheDocument()
   })
 })

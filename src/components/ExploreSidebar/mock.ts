@@ -32,7 +32,7 @@ export default [
   },
   {
     title: 'Sort by',
-    name: 'sort-by',
+    name: 'sort_by',
     type: 'radio',
     field: [
       {
@@ -46,8 +46,8 @@ export default [
     ]
   },
   {
-    title: 'System',
-    name: 'system',
+    title: 'Platforms',
+    name: 'platforms',
     type: 'checkbox',
     field: [
       {

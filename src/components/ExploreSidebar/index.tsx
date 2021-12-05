@@ -5,7 +5,7 @@ import Button from 'components/Button'
 
 import { FilterList } from '@styled-icons/material-outlined/FilterList'
 import { Close } from '@styled-icons/material-outlined/Close'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import * as S from './styles'
 import { ParsedUrlQueryInput } from 'querystring'
@@ -39,8 +39,7 @@ const ExploreSidebar = ({
   const [values, setValues] = useState(initialValues)
   const [isOpen, setIsOpen] = useState(false)
 
-  const handleFilter = () => {
-    onFilter(values)
+  const handleFilterMenu = () => {
     setIsOpen(false)
   }
 
@@ -65,8 +64,13 @@ const ExploreSidebar = ({
 
   // antes tinha windows, entao ele esta no currentList
   // agora cliquei no Checkbox e chamou o handlecheckbox,
-  // passando name platform e value windows
+  // passando name: platform e value: windows
   // set value = platforms: [] pois o xor retorna a diferença simetrica
+
+  useEffect(() => {
+    onFilter(values)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [values])
 
   return (
     <S.Wrapper isOpen={isOpen}>
@@ -115,7 +119,7 @@ const ExploreSidebar = ({
       </S.Content>
 
       <S.Footer>
-        <Button fullWidht onClick={handleFilter}>
+        <Button fullWidht onClick={handleFilterMenu}>
           Filter
         </Button>
       </S.Footer>

@@ -47,7 +47,7 @@ describe('<ExploreSidebar />', () => {
     expect(screen.getByLabelText(/High to low/i)).toBeChecked()
   })
 
-  it('should return the initialValues ​​when clicking the button', () => {
+  it('should return the initialValues ​​when clicking the Chekcbox or Radio', () => {
     const handleFilter = jest.fn()
 
     renderWithTheme(
@@ -60,7 +60,6 @@ describe('<ExploreSidebar />', () => {
         }}
       />
     )
-    userEvent.click(screen.getByRole('button', { name: /filter/i }))
 
     expect(handleFilter).toBeCalledWith({
       platforms: ['windows'],
@@ -77,12 +76,13 @@ describe('<ExploreSidebar />', () => {
     userEvent.click(screen.getByLabelText(/linux/i))
     userEvent.click(screen.getByLabelText(/High to low/i))
     userEvent.click(screen.getByLabelText(/Low to high/i))
-    userEvent.click(screen.getByRole('button', { name: /filter/i }))
 
     expect(handleFilter).toBeCalledWith({
       platforms: ['windows', 'linux'],
       sort_by: 'low-to-high'
     })
+
+    expect(handleFilter).toBeCalledTimes(5)
   })
 
   it('should open/close sidebar when filtering on mobile ', () => {
@@ -106,6 +106,12 @@ describe('<ExploreSidebar />', () => {
     expect(Element).toHaveStyleRule('opacity', '1', variant)
 
     userEvent.click(screen.getByLabelText(/close filters/))
+
+    expect(Element).not.toHaveStyleRule('opacity', '1', variant)
+
+    userEvent.click(screen.getByLabelText(/open filters/))
+
+    userEvent.click(screen.getByRole('button', { name: /filter/i }))
 
     expect(Element).not.toHaveStyleRule('opacity', '1', variant)
   })

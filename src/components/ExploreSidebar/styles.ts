@@ -45,6 +45,10 @@ export const Footer = styled.div`
   ${({ theme }) => css`
     padding: ${theme.spacings.small};
     box-shadow: 0px -2px 4px rgba(3, 5, 23, 0.1);
+
+    ${media.greaterThan('medium')`
+      display: none
+    `}
   `}
 `
 

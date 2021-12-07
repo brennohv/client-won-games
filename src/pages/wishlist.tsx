@@ -18,8 +18,6 @@ export async function getStaticProps() {
     query: QUERY_RECOMMENDED
   })
 
-  console.log(recommended)
-
   return {
     props: {
       recomendedGames: gamesMapper(recommended?.section?.games),

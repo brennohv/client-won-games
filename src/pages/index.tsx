@@ -25,8 +25,6 @@ export async function getStaticProps() {
     variables: { date: TODAY }
   })
 
-  console.log(banners)
-
   return {
     props: {
       revalidate: 10,

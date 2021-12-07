@@ -28,7 +28,7 @@ export type ItemProps = {
   title: string
   name: string
   type: string
-  field: Field[]
+  fields: Field[]
 }
 
 const ExploreSidebar = ({
@@ -68,7 +68,10 @@ const ExploreSidebar = ({
   // set value = platforms: [] pois o xor retorna a diferença simetrica
 
   useEffect(() => {
+    //toda vez que values mudar vai chamar o onFilter passando so values
+    //
     onFilter(values)
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [values])
 
@@ -87,7 +90,7 @@ const ExploreSidebar = ({
             </Heading>
 
             {item.type === 'checkbox' &&
-              item.field.map((field) => (
+              item.fields.map((field) => (
                 <Checkbox
                   label={field.label}
                   name={field.name}
@@ -101,7 +104,7 @@ const ExploreSidebar = ({
               ))}
 
             {item.type === 'radio' &&
-              item.field.map((field) => (
+              item.fields.map((field) => (
                 <Radio
                   label={field.label}
                   value={field.name}

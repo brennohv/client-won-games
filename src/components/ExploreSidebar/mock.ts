@@ -3,7 +3,7 @@ export default [
     title: 'Price',
     name: 'price',
     type: 'checkbox',
-    field: [
+    fields: [
       {
         name: 'under-$50',
         label: 'Under $50'
@@ -34,7 +34,7 @@ export default [
     title: 'Sort by',
     name: 'sort_by',
     type: 'radio',
-    field: [
+    fields: [
       {
         name: 'high-to-low',
         label: 'High to low'
@@ -49,7 +49,7 @@ export default [
     title: 'Platforms',
     name: 'platforms',
     type: 'checkbox',
-    field: [
+    fields: [
       {
         name: 'windows',
         label: 'Windows'
@@ -68,7 +68,7 @@ export default [
     title: 'Genre',
     name: 'genre',
     type: 'checkbox',
-    field: [
+    fields: [
       {
         name: 'action',
         label: 'Action'

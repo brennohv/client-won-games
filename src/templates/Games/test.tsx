@@ -45,6 +45,18 @@ describe('<Games />', () => {
     expect(screen.getByText(/loading.../i)).toBeInTheDocument()
   })
 
+  it('should render Empty when there are no games', async () => {
+    renderWithTheme(
+      <MockedProvider mocks={[]} addTypename={false}>
+        <Games filterItems={filterItemsMock} />
+      </MockedProvider>
+    )
+
+    expect(
+      await screen.findByText(/we didn't find any game/i)
+    ).toBeInTheDocument()
+  })
+
   it('should render sections', async () => {
     renderWithTheme(
       <MockedProvider mocks={[gamesMock]}>
@@ -52,13 +64,8 @@ describe('<Games />', () => {
       </MockedProvider>
     )
 
-    // it starts without data
-    // shows loading
     expect(screen.getByText(/loading.../i)).toBeInTheDocument()
 
-    // we wait until we have data to get the elements
-    // get => tem certeza do elemento
-    // query => Não tem o elemento
     // find => processos assincronos
     expect(await screen.findByText(/price/i)).toBeInTheDocument()
     expect(await screen.findByText(/Messiah/i)).toBeInTheDocument()

@@ -35,16 +35,6 @@ useRouter.mockImplementation(() => ({
 }))
 
 describe('<Games />', () => {
-  it('should render loading when starting the template', () => {
-    renderWithTheme(
-      <MockedProvider mocks={[]} addTypename={false}>
-        <Games filterItems={filterItemsMock} />
-      </MockedProvider>
-    )
-
-    expect(screen.getByText(/loading.../i)).toBeInTheDocument()
-  })
-
   it('should render Empty when there are no games', async () => {
     renderWithTheme(
       <MockedProvider mocks={[]} addTypename={false}>
@@ -63,8 +53,6 @@ describe('<Games />', () => {
         <Games filterItems={filterItemsMock} />
       </MockedProvider>
     )
-
-    expect(screen.getByText(/loading.../i)).toBeInTheDocument()
 
     // find => processos assincronos
     expect(await screen.findByText(/price/i)).toBeInTheDocument()

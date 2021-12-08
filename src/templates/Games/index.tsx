@@ -23,6 +23,7 @@ const GamesTemplate = ({ filterItems }: GamesTemplateProps) => {
   const { push, query } = useRouter()
 
   const { data, loading, fetchMore } = useQueryGames({
+    notifyOnNetworkStatusChange: true, // toda vez que o chamar o fetchMore vai avisar o loading
     variables: {
       limit: 15,
       where: parseQueryStringToWhere({ queryString: query, filterItems }),
@@ -56,35 +57,36 @@ const GamesTemplate = ({ filterItems }: GamesTemplateProps) => {
           />
         </S.WrapperExplore>
 
-        {loading ? (
-          <p>Loading...</p>
-        ) : (
-          <section>
-            {data?.games.length ? (
-              <>
-                <Grid>
-                  {data?.games.map((game) => (
-                    <GameCard
-                      key={game.slug}
-                      slug={game.slug}
-                      title={game.name}
-                      developer={game.developers[0].name}
-                      img={`http://localhost:1337${game.cover!.url}`}
-                      price={game.price}
-                    />
-                  ))}
-                </Grid>
-
-                <S.ShowMore role="button" onClick={handleShowMore}>
-                  <p>Show more</p>
-                  <KeyboardArrowDown size={40} aria-label="See more" />
-                </S.ShowMore>
-              </>
-            ) : (
-              <Empty title="=)" description="we didn't find any game" />
-            )}
-          </section>
-        )}
+        <section>
+          {data?.games.length ? (
+            <>
+              <Grid>
+                {data?.games.map((game) => (
+                  <GameCard
+                    key={game.slug}
+                    slug={game.slug}
+                    title={game.name}
+                    developer={game.developers[0].name}
+                    img={`http://localhost:1337${game.cover!.url}`}
+                    price={game.price}
+                  />
+                ))}
+              </Grid>
+              <S.ShowMore>
+                {loading ? (
+                  <S.ShowMoreLoading src="/img/dots.svg" alt="Loading" />
+                ) : (
+                  <S.ShorMoreButton role="button" onClick={handleShowMore}>
+                    <p>Show more</p>
+                    <KeyboardArrowDown size={40} aria-label="See more" />
+                  </S.ShorMoreButton>
+                )}
+              </S.ShowMore>
+            </>
+          ) : (
+            <Empty title="=)" description="we didn't find any game" />
+          )}
+        </section>
       </S.Main>
     </Base>
   )

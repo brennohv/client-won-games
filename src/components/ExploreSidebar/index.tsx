@@ -69,7 +69,7 @@ const ExploreSidebar = ({
 
   useEffect(() => {
     //toda vez que values mudar vai chamar o onFilter passando so values
-    //
+    //no caso nao preciso de um button para acionar a chamada
     onFilter(values)
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

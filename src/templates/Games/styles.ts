@@ -23,6 +23,13 @@ export const WrapperExplore = styled.div`
 `
 
 export const ShowMore = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 10rem;
+`
+
+export const ShorMoreButton = styled.div`
   ${({ theme }) => css`
     text-align: center;
     text-transform: uppercase;
@@ -35,4 +42,8 @@ export const ShowMore = styled.div`
       color: ${theme.colors.primary};
     }
   `}
+`
+
+export const ShowMoreLoading = styled.img`
+  width: 4rem;
 `

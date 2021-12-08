@@ -31,6 +31,12 @@ const GamesTemplate = ({ filterItems }: GamesTemplateProps) => {
     }
   })
 
+  if (!data) return <p>Loading...</p>
+
+  const { games, gamesConnection } = data
+
+  const hasMoreGames = games.length < (gamesConnection?.values?.length || 0)
+
   const handleFilter = (items: ParsedUrlQueryInput) => {
     //estou alterando a path e query com items recebidos no parametro
     push({
@@ -72,16 +78,19 @@ const GamesTemplate = ({ filterItems }: GamesTemplateProps) => {
                   />
                 ))}
               </Grid>
-              <S.ShowMore>
-                {loading ? (
-                  <S.ShowMoreLoading src="/img/dots.svg" alt="Loading" />
-                ) : (
-                  <S.ShorMoreButton role="button" onClick={handleShowMore}>
-                    <p>Show more</p>
-                    <KeyboardArrowDown size={40} aria-label="See more" />
-                  </S.ShorMoreButton>
-                )}
-              </S.ShowMore>
+
+              {hasMoreGames && (
+                <S.ShowMore>
+                  {loading ? (
+                    <S.ShowMoreLoading src="/img/dots.svg" alt="Loading" />
+                  ) : (
+                    <S.ShorMoreButton role="button" onClick={handleShowMore}>
+                      <p>Show more</p>
+                      <KeyboardArrowDown size={40} aria-label="See more" />
+                    </S.ShorMoreButton>
+                  )}
+                </S.ShowMore>
+              )}
             </>
           ) : (
             <Empty title="=)" description="we didn't find any game" />

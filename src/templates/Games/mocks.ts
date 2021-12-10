@@ -25,6 +25,7 @@ export const gamesMock = {
     data: {
       games: [
         {
+          id: 1,
           name: 'Messiah',
           slug: 'messiah',
           price: 8.89,
@@ -52,6 +53,7 @@ export const fetchMoreMock = {
     data: {
       games: [
         {
+          id: 2,
           name: 'Outward: The Soroboreans',
           slug: 'outward-the-soroboreans',
           price: 14.99,

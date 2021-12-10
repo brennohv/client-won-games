@@ -19,6 +19,7 @@ export interface GameFragment_developers {
 
 export interface GameFragment {
   __typename: "Game";
+  id: string;
   name: string;
   slug: string;
   price: number;

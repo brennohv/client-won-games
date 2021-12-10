@@ -68,12 +68,11 @@ const ExploreSidebar = ({
   // set value = platforms: [] pois o xor retorna a diferença simetrica
 
   useEffect(() => {
-    //toda vez que values mudar vai chamar o onFilter passando so values
     //no caso nao preciso de um button para acionar a chamada
     onFilter(values)
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [values])
+  }, [values]) //toda vez que values mudar vai chamar o onFilter passando os values
 
   return (
     <S.Wrapper isOpen={isOpen}>

@@ -10,7 +10,7 @@ import {
 } from 'graphql/generated/QueryGameBySlug'
 import { QueryRecommended } from 'graphql/generated/QueryRecommended'
 import { QUERY_RECOMMENDED } from 'graphql/queries/recommended'
-import { gamesMapper, highlightMapper } from 'utils/mappers'
+import { gamesMapper, highlightMapper } from 'utils/mappers/index'
 import {
   QueryUpComingGames,
   QueryUpComingGamesVariables

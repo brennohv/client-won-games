@@ -20,7 +20,7 @@ describe('<Dropdown />', () => {
   })
 
   it('should handle open/close dropdown ', () => {
-    const content = screen.getByText(/content/).parentElement
+    const content = screen.getByText(/content/).parentElement!
 
     expect(content).toHaveStyle({
       opacity: 0
@@ -33,5 +33,22 @@ describe('<Dropdown />', () => {
       opacity: 1
     })
     expect(content).toHaveAttribute('aria-hidden', 'false')
+  })
+
+  it('should render Overlay correctely', () => {
+    const content = screen.getByText(/content/).parentElement!
+    const overlay = content.nextElementSibling
+
+    expect(overlay).toHaveAttribute('aria-hidden', 'true')
+
+    userEvent.click(screen.getByLabelText('toogle dropdown'))
+
+    expect(overlay).toHaveAttribute('aria-hidden', 'false')
+    expect(overlay).toHaveStyle({ opacity: '1' })
+
+    userEvent.click(overlay!)
+
+    expect(overlay).toHaveAttribute('aria-hidden', 'true')
+    expect(overlay).toHaveStyle({ opacity: '0' })
   })
 })

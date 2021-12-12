@@ -8,6 +8,7 @@ export const Title = styled.div`
     display: flex;
     align-items: center;
     position: relative;
+    z-index: ${theme.layers.alwaysOnTop};
   `}
 `
 
@@ -19,18 +20,32 @@ export const Content = styled.div`
     position: absolute;
     margin-top: ${theme.spacings.small};
     right: 0;
+    z-index: ${theme.layers.alwaysOnTop};
 
     &::after {
       content: '';
       position: absolute;
       top: -1.1rem;
-      right: 2.4rem;
+      right: 0.9rem;
       border-right: 1.2rem solid transparent;
       border-left: 1.2rem solid transparent;
       border-bottom: 1.2rem solid ${theme.colors.white};
     }
   `}
 `
+
+export const Overlay = styled.div`
+  ${({ theme }) => css`
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: ${theme.layers.overlay};
+    background: rgba(0, 0, 0, 0.5);
+  `}
+`
+
 type WrapperProps = {
   isOpen: boolean
 }
@@ -53,7 +68,8 @@ export const Wrapper = styled.div<WrapperProps>`
     position: relative;
     width: max-content;
 
-    ${Content} {
+    ${Content},
+    ${Overlay} {
       transition: transform ${theme.transition.fast},
         opacity ${theme.transition.default};
 

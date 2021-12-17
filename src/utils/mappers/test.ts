@@ -1,7 +1,7 @@
 import { HighlightFragment } from 'graphql/generated/HighlightFragment'
 import { QueryGames_games } from 'graphql/generated/QueryGames'
 import { QueryHome_banners } from 'graphql/generated/QueryHome'
-import { bannerMapper, gamesMapper, highlightMapper } from '.'
+import { bannerMapper, gamesMapper, highlightMapper, cartMapper } from '.'
 
 describe('bannerMapper()', () => {
   it('should return the right format when mapped', () => {
@@ -100,5 +100,31 @@ describe('highlightMapper()', () => {
       buttonLink: 'buttonLink',
       alignment: 'left'
     })
+  })
+})
+
+describe('carMapper', () => {
+  it('should return empty array if no games', () => {
+    expect(cartMapper(undefined)).toStrictEqual([])
+  })
+
+  it('should return the right format when mapped', () => {
+    const cart = {
+      id: '16',
+      name: 'Tomb Raider GOTY',
+      price: 3.99,
+      cover: {
+        url: '/uploads/tomb_raider_goty_41d594f5f3.jpg'
+      }
+    } as QueryGames_games
+
+    expect(cartMapper([cart])).toStrictEqual([
+      {
+        id: '16',
+        img: `http://localhost:1337/uploads/tomb_raider_goty_41d594f5f3.jpg`,
+        price: '€3.99',
+        title: 'Tomb Raider GOTY'
+      }
+    ])
   })
 })

@@ -23,7 +23,7 @@ const GamesTemplate = ({ filterItems }: GamesTemplateProps) => {
   const { push, query } = useRouter()
 
   const { data, loading, fetchMore } = useQueryGames({
-    notifyOnNetworkStatusChange: true, // toda vez que o chamar o fetchMore vai avisar o loading
+    notifyOnNetworkStatusChange: true, // toda vez que chamar o fetchMore vai avisar o loading
     variables: {
       limit: 15,
       where: parseQueryStringToWhere({ queryString: query, filterItems }),

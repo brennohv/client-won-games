@@ -16,6 +16,7 @@ export const Content = styled.div`
   ${({ theme }) => css`
     display: flex;
     justify-content: center;
+    flex-direction: column;
     background-color: ${theme.colors.white};
     position: absolute;
     margin-top: ${theme.spacings.small};
@@ -66,7 +67,7 @@ const contentModifiers = {
 export const Wrapper = styled.div<WrapperProps>`
   ${({ theme, isOpen }) => css`
     position: relative;
-    width: max-content;
+    width: max-content; //A sua largura vai ser determianda pela largura do elemento filho
 
     ${Content},
     ${Overlay} {

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<CartList /> should render correctly 1`] = `
+exports[`<CartList /> should render the cart list 1`] = `
 .c1 {
   background-color: #FAFAFA;
   padding: 2.4rem;

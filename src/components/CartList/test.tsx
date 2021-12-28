@@ -1,35 +1,38 @@
-import { screen } from '@testing-library/react'
-import theme from 'styles/theme'
-import { renderWithTheme } from 'utils/tests/helpers'
-
-import props from './mock'
+import { CartContextDefaultValues } from 'hooks/use-cart'
+import { render, screen } from 'utils/test-utils'
 
 import CartList from '.'
+import items from './mock'
 
 describe('<CartList />', () => {
-  it('should render correctly', () => {
-    const { container } = renderWithTheme(
-      <CartList gamesCart={props} total="R$ 330,00" />
-    )
+  it('should render the cart list', () => {
+    const cartProviderProps = {
+      ...CartContextDefaultValues,
+      items,
+      total: 'R$ 330,00'
+    }
+
+    const { container } = render(<CartList />, { cartProviderProps })
 
     expect(screen.getAllByRole('heading')).toHaveLength(2)
-    expect(screen.getByText('R$ 330,00')).toHaveStyle({
-      color: theme.colors.primary
-    })
-    expect(screen.getByText('Total:')).toBeInTheDocument()
+    expect(screen.getByText('R$ 330,00')).toHaveStyle({ color: '#F231A5' })
 
     expect(container.firstChild).toMatchSnapshot()
   })
 
-  it('should render button and not render Total', () => {
-    renderWithTheme(<CartList gamesCart={props} total="R$ 330,00" hasButton />)
+  it('should render the button', () => {
+    const cartProviderProps = {
+      ...CartContextDefaultValues,
+      items
+    }
 
-    expect(screen.getByRole('link', { name: 'Buy it now' })).toBeInTheDocument()
-    expect(screen.queryByText('Total:')).not.toBeInTheDocument()
+    render(<CartList hasButton />, { cartProviderProps })
+
+    expect(screen.getByText(/buy it now/i)).toBeInTheDocument()
   })
 
-  it('should render the Empty', () => {
-    renderWithTheme(<CartList />)
+  it('should render empty if there are no games', () => {
+    render(<CartList />)
 
     expect(
       screen.getByText(/You do not have games on cart/i)

@@ -2,6 +2,7 @@ import { RouterContext } from 'next/dist/next-server/lib/router-context'
 import { ThemeProvider } from 'styled-components'
 import GlobalStyles from 'styles/global'
 import theme from 'styles/theme.ts'
+import { CartContext, CartContextDefaultValues } from 'hooks/use-cart'
 
 export const parameters = {
   nextRouter: {
@@ -23,10 +24,18 @@ export const parameters = {
 }
 
 export const decorators = [
-  (Story) => (
+  (Story, context) => (
     <ThemeProvider theme={theme}>
-      <GlobalStyles />
-      <Story />
+      <CartContext.Provider
+        value={{
+          ...CartContextDefaultValues,
+          ...(context.args?.cartContextValue || {}),
+          ...context.args
+        }}
+      >
+        <GlobalStyles />
+        <Story />
+      </CartContext.Provider>
     </ThemeProvider>
   )
 ]

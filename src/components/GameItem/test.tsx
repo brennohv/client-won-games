@@ -1,9 +1,11 @@
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import userEvent from '@testing-library/user-event'
+import { CartContextDefaultValues } from 'hooks/use-cart'
+import { render, screen } from 'utils/test-utils'
 
 import GameItem from '.'
 
 const props = {
+  id: '1',
   title: 'Red Dead Redemption',
   price: '215',
   img: 'https://source.unsplash.com/user/willianjusten/151x70'
@@ -11,7 +13,7 @@ const props = {
 
 describe('<GameItem />', () => {
   it('should render the heading', () => {
-    renderWithTheme(<GameItem {...props} />)
+    render(<GameItem {...props} />)
 
     expect(
       screen.getByRole('heading', { name: /Red Dead Redemption/i })
@@ -26,11 +28,27 @@ describe('<GameItem />', () => {
 
   it('should render the item Download', () => {
     const download = 'http:teste'
-    renderWithTheme(<GameItem {...props} linkDownload={download} />)
+    render(<GameItem {...props} linkDownload={download} />)
 
     expect(
       screen.getByRole('link', { name: /Download Red Dead Redemption here/i })
     ).toHaveAttribute('href', download)
+  })
+
+  it('should render remove if the item is inside the cart and call remove', () => {
+    const cartProviderProps = {
+      ...CartContextDefaultValues,
+      isInCart: () => true,
+      removeFromCart: jest.fn()
+    }
+    render(<GameItem {...props} />, { cartProviderProps })
+
+    const removeLink = screen.getByText(/remove/i)
+    expect(removeLink).toBeInTheDocument()
+
+    userEvent.click(removeLink)
+
+    expect(cartProviderProps.removeFromCart).toHaveBeenCalledWith('1')
   })
 
   it('should render the Payment info', () => {
@@ -41,7 +59,7 @@ describe('<GameItem />', () => {
       purchaseDate: 'Purchase made on 07/20/2020 at 20:32'
     }
 
-    renderWithTheme(<GameItem {...props} paymentInfo={paymentInfo} />)
+    render(<GameItem {...props} paymentInfo={paymentInfo} />)
 
     expect(screen.getByRole('img', { name: paymentInfo.flag })).toHaveAttribute(
       'src',

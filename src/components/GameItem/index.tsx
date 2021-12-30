@@ -1,5 +1,6 @@
 import * as S from './styles'
 import { Download } from '@styled-icons/boxicons-solid/Download'
+import { useCart } from 'hooks/use-cart'
 
 export type PaymentProps = {
   flag: string
@@ -9,6 +10,7 @@ export type PaymentProps = {
 }
 
 export type GameItemProps = {
+  id: string
   title: string
   price: string
   img: string
@@ -17,48 +19,59 @@ export type GameItemProps = {
 }
 
 const GameItem = ({
+  id,
   title,
   price,
   img,
   linkDownload,
   paymentInfo
-}: GameItemProps) => (
-  <S.Wrapper>
-    <S.SectionGame>
-      <S.ImageBox>
-        <S.Image src={img} alt={title} role="img"></S.Image>
-      </S.ImageBox>
+}: GameItemProps) => {
+  const { isInCart, removeFromCart } = useCart()
+  return (
+    <S.Wrapper>
+      <S.SectionGame>
+        <S.ImageBox>
+          <S.Image src={img} alt={title} role="img"></S.Image>
+        </S.ImageBox>
 
-      <S.Content>
-        <S.Title>
-          {title}
-          {!!linkDownload && (
-            <S.DownloadLink
-              href={linkDownload}
-              target={'_blank'}
-              aria-label={`Download ${title} here`}
-            >
-              <Download size={22} />
-            </S.DownloadLink>
-          )}
-        </S.Title>
-        <S.Price>{price}</S.Price>
-      </S.Content>
-    </S.SectionGame>
+        <S.Content>
+          <S.Title>
+            {title}
+            {!!linkDownload && (
+              <S.DownloadLink
+                href={linkDownload}
+                target={'_blank'}
+                aria-label={`Download ${title} here`}
+              >
+                <Download size={22} />
+              </S.DownloadLink>
+            )}
+          </S.Title>
+          <S.Group>
+            <S.Price>{price}</S.Price>
+            {isInCart(id) && (
+              <S.RemoveFromCart onClick={() => removeFromCart(id)}>
+                Remove
+              </S.RemoveFromCart>
+            )}
+          </S.Group>
+        </S.Content>
+      </S.SectionGame>
 
-    {!!paymentInfo && (
-      <S.SectionPayment>
-        <p>{paymentInfo?.purchaseDate}</p>
-        <S.CardInfo>
-          <S.PurchaseDate>{paymentInfo?.number}</S.PurchaseDate>
-          <S.CardImage
-            src={paymentInfo?.img}
-            alt={paymentInfo?.flag}
-          ></S.CardImage>
-        </S.CardInfo>
-      </S.SectionPayment>
-    )}
-  </S.Wrapper>
-)
+      {!!paymentInfo && (
+        <S.SectionPayment>
+          <p>{paymentInfo?.purchaseDate}</p>
+          <S.CardInfo>
+            <S.PurchaseDate>{paymentInfo?.number}</S.PurchaseDate>
+            <S.CardImage
+              src={paymentInfo?.img}
+              alt={paymentInfo?.flag}
+            ></S.CardImage>
+          </S.CardInfo>
+        </S.SectionPayment>
+      )}
+    </S.Wrapper>
+  )
+}
 
 export default GameItem

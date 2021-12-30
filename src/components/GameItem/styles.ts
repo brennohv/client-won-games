@@ -7,6 +7,7 @@ export const Wrapper = styled.div`
     padding: ${theme.spacings.small}};
     border-bottom: 0.1rem solid ${theme.colors.lightGray};
 
+
     ${media.greaterThan('medium')`
       display: flex;
     `}
@@ -15,6 +16,7 @@ export const Wrapper = styled.div`
 
 export const SectionGame = styled.div`
   display: flex;
+  width: 100%;
 `
 
 export const ImageBox = styled.div`
@@ -23,6 +25,7 @@ export const ImageBox = styled.div`
     margin-right: 1.2rem;
     max-width: 9.4rem;
     max-height: 5.6rem;
+    width: 100%;
 
     ${media.greaterThan('medium')`
     margin-right: ${theme.spacings.small};
@@ -42,6 +45,7 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  width: 100%;
 `
 
 export const Title = styled.h3`
@@ -63,9 +67,23 @@ export const Price = styled.div`
     color: ${theme.colors.white};
     font-size: ${theme.font.sizes.small};
     font-weight: ${theme.font.bold};
-    padding: 0 1.5rem;
+    padding: 0.2rem ${theme.spacings.xxsmall};
     background-color: ${theme.colors.secondary};
     border-radius: ${theme.border.radius};
+  `}
+`
+export const Group = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+
+export const RemoveFromCart = styled.div`
+  ${({ theme }) => css`
+    color: ${theme.colors.primary};
+    cursor: pointer;
+    font-size: ${theme.spacings.xsmall};
   `}
 `
 

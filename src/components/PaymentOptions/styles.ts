@@ -1,11 +1,7 @@
 import styled, { css } from 'styled-components'
 import * as RadioStyles from 'components/Radio/styles'
 
-export const Wrapper = styled.main`
-  ${({ theme }) => css`
-    background-color: ${theme.colors.white};
-  `}
-`
+export const Wrapper = styled.main``
 
 export const Body = styled.div`
   ${({ theme }) => css`

@@ -12,6 +12,7 @@ exports[`<CartList /> should render the cart list 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  width: 100%;
 }
 
 .c3 {
@@ -21,6 +22,7 @@ exports[`<CartList /> should render the cart list 1`] = `
   margin-right: 1.2rem;
   max-width: 9.4rem;
   max-height: 5.6rem;
+  width: 100%;
 }
 
 .c4 {
@@ -41,6 +43,7 @@ exports[`<CartList /> should render the cart list 1`] = `
   -webkit-box-align: flex-start;
   -ms-flex-align: flex-start;
   align-items: flex-start;
+  width: 100%;
 }
 
 .c6 {
@@ -50,13 +53,29 @@ exports[`<CartList /> should render the cart list 1`] = `
   margin-bottom: 0.8rem;
 }
 
-.c7 {
+.c8 {
   color: #FAFAFA;
   font-size: 1.4rem;
   font-weight: 600;
-  padding: 0 1.5rem;
+  padding: 0.2rem 0.8rem;
   background-color: #3CD3C1;
   border-radius: 0.4rem;
+}
+
+.c7 {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .c0 {
@@ -73,7 +92,7 @@ exports[`<CartList /> should render the cart list 1`] = `
   align-self: start;
 }
 
-.c8 {
+.c9 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -92,7 +111,7 @@ exports[`<CartList /> should render the cart list 1`] = `
   font-size: 1.6rem;
 }
 
-.c9 {
+.c10 {
   color: #F231A5;
 }
 
@@ -121,7 +140,7 @@ exports[`<CartList /> should render the cart list 1`] = `
 }
 
 @media (min-width:768px) {
-  .c8 {
+  .c9 {
     font-size: 2.0rem;
     padding: 2.4rem;
   }
@@ -157,7 +176,11 @@ exports[`<CartList /> should render the cart list 1`] = `
         <div
           class="c7"
         >
-          R$ 215,00
+          <div
+            class="c8"
+          >
+            R$ 215,00
+          </div>
         </div>
       </div>
     </div>
@@ -189,19 +212,23 @@ exports[`<CartList /> should render the cart list 1`] = `
         <div
           class="c7"
         >
-          R$ 215,00
+          <div
+            class="c8"
+          >
+            R$ 215,00
+          </div>
         </div>
       </div>
     </div>
   </div>
   <div
-    class="c8"
+    class="c9"
   >
     <span>
       Total:
     </span>
     <span
-      class="c9"
+      class="c10"
     >
       R$ 330,00
     </span>

@@ -11,12 +11,16 @@ import Home from '.'
 const props = {
   banners: bannerSliderMock,
   newGames: [gameCardSliderMock[0]],
+  newGamesTitle: 'New Games',
   mostPopularHighlight: highLightMock,
   mostPopularGames: [gameCardSliderMock[0]],
+  mostPopularGamesTitle: 'Most Popular',
   upComingGames: [gameCardSliderMock[0]],
   upComingHighlight: highLightMock,
+  upcomingTitle: 'Upcomming',
   freeGames: [gameCardSliderMock[0]],
-  freeGamesHighlight: highLightMock
+  freeGamesHighlight: highLightMock,
+  freeGamesTitle: 'Free Games'
 }
 
 jest.mock('components/BannerSlider', () => {

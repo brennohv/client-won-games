@@ -64,10 +64,4 @@ describe('<Cart />', () => {
     ).toBeInTheDocument()
     expect(screen.queryByTestId('Mock Empty')).not.toBeInTheDocument()
   })
-
-  it('should render Empty section if there are no games cart', () => {
-    renderWithTheme(<Cart {...props} gamesCart={[]} />)
-
-    expect(screen.getByTestId('Mock Empty')).toBeInTheDocument()
-  })
 })

@@ -1,7 +1,6 @@
 import CartList, { CartListProps } from 'components/CartList'
 import { Container } from 'components/Container'
 import { Divider } from 'components/Divider'
-import Empty from 'components/Empty'
 import { GameCardProps } from 'components/GameCard'
 
 import Heading from 'components/Heading'
@@ -22,8 +21,6 @@ const Cart = ({
   recommendedHighlight,
   recommendedGames,
   title,
-  gamesCart = [],
-  total,
   cards
 }: CartProps) => {
   const handlePayment = () => ({})
@@ -34,18 +31,11 @@ const Cart = ({
         <Heading lineLeft lineColor="secondary">
           My cart
         </Heading>
-        {gamesCart.length ? (
-          <S.Content>
-            <CartList gamesCart={gamesCart} total={total} />
-            <PaymentOptions cards={cards} handlePayment={handlePayment} />
-          </S.Content>
-        ) : (
-          <Empty
-            title="No games in the cart"
-            description="Add a game to your cart to buy"
-            hasLink
-          />
-        )}
+
+        <S.Content>
+          <CartList />
+          <PaymentOptions cards={cards} handlePayment={handlePayment} />
+        </S.Content>
 
         <Divider />
       </Container>

@@ -6,13 +6,23 @@ import Link from 'next/link'
 import * as S from './styles'
 import Empty from 'components/Empty'
 import { useCart } from 'hooks/use-cart'
+import Loader from 'components/Loader'
 
 export type CartListProps = {
   hasButton?: boolean
 }
 
 const CartList = ({ hasButton = false }: CartListProps) => {
-  const { total, items } = useCart()
+  const { total, items, loading } = useCart()
+
+  if (loading) {
+    return (
+      <S.Loading>
+        <Loader />
+      </S.Loading>
+    )
+  }
+
   return (
     <S.Wrapper isEmpty={!items.length}>
       {items.length ? (

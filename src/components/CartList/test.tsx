@@ -39,4 +39,14 @@ describe('<CartList />', () => {
     ).toBeInTheDocument()
     expect(screen.queryByText('Total:')).not.toBeInTheDocument()
   })
+
+  it('should render Loading', () => {
+    const cartProviderProps = {
+      ...CartContextDefaultValues,
+      loading: true
+    }
+    render(<CartList />, { cartProviderProps })
+
+    expect(screen.getByText(/Loading/i)).toBeInTheDocument()
+  })
 })

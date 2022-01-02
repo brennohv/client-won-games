@@ -2,7 +2,7 @@ import { Story, Meta } from '@storybook/react'
 import CartIcon from '.'
 
 export default {
-  title: 'CartIcon',
+  title: 'Cart/CartIcon',
   component: CartIcon,
   parameters: {
     backgrounds: {

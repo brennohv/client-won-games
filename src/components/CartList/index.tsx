@@ -16,21 +16,23 @@ const CartList = ({ hasButton = false }: CartListProps) => {
   return (
     <S.Wrapper isEmpty={!items.length}>
       {items.length ? (
-        <>
-          {items.map((item) => (
-            <GameItem key={item.title} {...item} />
-          ))}
+        <S.GameList>
+          <>
+            {items.map((item) => (
+              <GameItem key={item.title} {...item} />
+            ))}
 
-          <S.Footer>
-            {!hasButton && <span>Total:</span>}
-            <S.Total>{total}</S.Total>
-            {hasButton && (
-              <Link href="/cart" passHref>
-                <Button as="a">Buy it now</Button>
-              </Link>
-            )}
-          </S.Footer>
-        </>
+            <S.Footer>
+              {!hasButton && <span>Total:</span>}
+              <S.Total>{total}</S.Total>
+              {hasButton && (
+                <Link href="/cart" passHref>
+                  <Button as="a">Buy it now</Button>
+                </Link>
+              )}
+            </S.Footer>
+          </>
+        </S.GameList>
       ) : (
         <Empty
           description="Go back to the store and explore games and offers"

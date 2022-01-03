@@ -1,20 +1,28 @@
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { MockedProvider } from '@apollo/client/testing'
+import { render, screen } from 'utils/test-utils'
 
 import FormSignUp from '.'
 
 describe('<FormSignUp />', () => {
   it('should render the form', () => {
-    renderWithTheme(<FormSignUp />)
+    render(
+      <MockedProvider>
+        <FormSignUp />
+      </MockedProvider>
+    )
 
-    expect(screen.getByPlaceholderText('Name')).toBeInTheDocument()
+    expect(screen.getByPlaceholderText('Username')).toBeInTheDocument()
     expect(screen.getByPlaceholderText('Email')).toBeInTheDocument()
     expect(screen.getByPlaceholderText('Password')).toBeInTheDocument()
     expect(screen.getByPlaceholderText('Confirm password')).toBeInTheDocument()
   })
 
   it('should render the Button', () => {
-    renderWithTheme(<FormSignUp />)
+    render(
+      <MockedProvider>
+        <FormSignUp />
+      </MockedProvider>
+    )
 
     expect(
       screen.getByRole('button', { name: 'Sign up now' })
@@ -22,7 +30,11 @@ describe('<FormSignUp />', () => {
   })
 
   it('should render the text and link to Sign in', () => {
-    renderWithTheme(<FormSignUp />)
+    render(
+      <MockedProvider>
+        <FormSignUp />
+      </MockedProvider>
+    )
 
     expect(screen.getByText(/Already have an account?/i)).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'Sign in' })).toBeInTheDocument()

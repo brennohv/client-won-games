@@ -1,5 +1,5 @@
 import { renderWithTheme } from 'utils/tests/helpers'
-import { screen } from '@testing-library/dom'
+import { screen } from '@testing-library/react'
 
 import Heading from '.'
 

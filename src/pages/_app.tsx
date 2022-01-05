@@ -1,4 +1,5 @@
 import NextNprogress from 'nextjs-progressbar'
+import { Provider as AuthProvider } from 'next-auth/client'
 
 import { ApolloProvider } from '@apollo/client'
 import { AppProps } from 'next/app'
@@ -14,32 +15,34 @@ function App({ Component, pageProps }: AppProps) {
   const client = useApollo(pageProps.initialApolloState)
 
   return (
-    <ApolloProvider client={client}>
-      <ThemeProvider theme={theme}>
-        <CartProvider>
-          <Head>
-            <title>React Avançado - Boilerplate</title>
-            <link rel="shortcut icon" href="/img/icon-512.png" />
-            <link rel="apple-touch-icon" href="/img/icon-512.png" />
-            <link rel="manifest" href="/manifest.json" />
-            <meta name="theme-color" content="#06092B" />
-            <meta
-              name="description"
-              content="A simple project starter to work with TypeScript, React, NextJS and Styled Components"
+    <AuthProvider session={pageProps.session}>
+      <ApolloProvider client={client}>
+        <ThemeProvider theme={theme}>
+          <CartProvider>
+            <Head>
+              <title>React Avançado - Boilerplate</title>
+              <link rel="shortcut icon" href="/img/icon-512.png" />
+              <link rel="apple-touch-icon" href="/img/icon-512.png" />
+              <link rel="manifest" href="/manifest.json" />
+              <meta name="theme-color" content="#06092B" />
+              <meta
+                name="description"
+                content="A simple project starter to work with TypeScript, React, NextJS and Styled Components"
+              />
+            </Head>
+            <GlobalStyles />
+            <NextNprogress
+              color="#F231A5"
+              startPosition={0.3}
+              stopDelayMs={200}
+              height={3}
+              showOnShallow={true}
             />
-          </Head>
-          <GlobalStyles />
-          <NextNprogress
-            color="#F231A5"
-            startPosition={0.3}
-            stopDelayMs={200}
-            height={3}
-            showOnShallow={true}
-          />
-          <Component {...pageProps} />
-        </CartProvider>
-      </ThemeProvider>
-    </ApolloProvider>
+            <Component {...pageProps} />
+          </CartProvider>
+        </ThemeProvider>
+      </ApolloProvider>
+    </AuthProvider>
   )
 }
 

@@ -6,11 +6,12 @@ import { Email, Lock } from '@styled-icons/material-outlined'
 import Button from 'components/Button'
 import TextField from 'components/TextField'
 
-import { FormWrapper, FormLink } from 'components/Form'
+import { FormWrapper, FormLink, FormLoading } from 'components/Form'
 import React, { useState } from 'react'
 import { UsersPermissionsRegisterInput } from 'graphql/generated/globalTypes'
 import { useMutation } from '@apollo/client'
 import { MUTATION_REGISTER } from 'graphql/mutations/register'
+import { signIn } from 'next-auth/client'
 
 const FormSignUp = () => {
   const [values, setValues] = useState<UsersPermissionsRegisterInput>({
@@ -19,7 +20,17 @@ const FormSignUp = () => {
     username: ''
   })
 
-  const [createUser] = useMutation(MUTATION_REGISTER)
+  const [createUser, { error, loading }] = useMutation(MUTATION_REGISTER, {
+    onError: (err) => console.error(err),
+    onCompleted: () => {
+      !error &&
+        signIn('credentials', {
+          email: values.email,
+          password: values.password,
+          callbackUrl: '/'
+        })
+    }
+  })
 
   const handleMutation = (field: string, value: string) => {
     setValues((v) => ({ ...v, [field]: value }))
@@ -27,6 +38,7 @@ const FormSignUp = () => {
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault()
+
     createUser({
       variables: {
         input: {
@@ -37,6 +49,7 @@ const FormSignUp = () => {
       }
     })
   }
+
   return (
     <FormWrapper>
       <form onSubmit={handleSubmit}>
@@ -69,8 +82,8 @@ const FormSignUp = () => {
           icon={<AccountCircle />}
         />
 
-        <Button fullWidht size="large" type="submit">
-          Sign up now
+        <Button fullWidht size="large" type="submit" disabled={loading}>
+          {loading ? <FormLoading /> : <span>Sign up now</span>}
         </Button>
 
         <FormLink>

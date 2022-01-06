@@ -8,11 +8,12 @@ import Button from 'components/Button'
 import TextField from 'components/TextField'
 import * as S from './styles'
 
-import { FormWrapper, FormLink } from 'components/Form'
+import { FormWrapper, FormLink, FormLoading } from 'components/Form'
 import { signIn } from 'next-auth/client'
 
 const FormSignIn = () => {
   const [values, setValues] = useState({})
+  const [loading, setLoading] = useState(false)
 
   const { push } = useRouter()
 
@@ -22,6 +23,7 @@ const FormSignIn = () => {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
+    setLoading(true)
 
     /* sign in
      * @docs https://next-auth.js.org/getting-started/client#signin
@@ -36,6 +38,8 @@ const FormSignIn = () => {
     if (result?.url) {
       return push(result.url)
     }
+
+    setLoading(false)
 
     //jogar o erro
     console.error('usuario ou senha errado')
@@ -60,8 +64,8 @@ const FormSignIn = () => {
         />
         <S.ForgetPassword href="#">Forget your password? </S.ForgetPassword>
 
-        <Button size="large" fullWidht type="submit">
-          Sing in now
+        <Button size="large" fullWidht type="submit" disabled={loading}>
+          {loading ? <FormLoading /> : <span>Sing in now</span>}
         </Button>
 
         <FormLink>

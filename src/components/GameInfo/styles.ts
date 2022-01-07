@@ -15,20 +15,10 @@ export const Wrapper = styled.div`
     ${RibbonStyles.Wrapper} {
       padding: ${theme.spacings.xxsmall} ${theme.spacings.xsmall};
       font-size: ${theme.font.sizes.xlarge};
-      &::before {
-        display: none;
-      }
     }
 
     ${ButtonStyles.Wrapper} {
       font-weight: 500;
-    }
-
-    ${media.greaterThan('medium')`
-      ${RibbonStyles.Wrapper} {
-        right: ${theme.spacings.large};
-        top: ${theme.spacings.large};
-      `}
     }
 
     ${media.lessThan('medium')`
@@ -62,4 +52,7 @@ export const WrapperButton = styled.div`
       flex-direction: row-reverse;
     `}
   `}
+`
+export const WrapperHeading = styled.div`
+  width: calc(100% - 7.5rem);
 `

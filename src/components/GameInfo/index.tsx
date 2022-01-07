@@ -15,9 +15,11 @@ export type GameInfoProps = {
 
 const GameInfo = ({ title, description, price, id }: GameInfoProps) => (
   <S.Wrapper>
-    <Heading color="black" lineBottom>
-      {title}
-    </Heading>
+    <S.WrapperHeading>
+      <Heading color="black" lineBottom>
+        {title}
+      </Heading>
+    </S.WrapperHeading>
 
     <Ribbon color="secondary">
       {price === 0 ? 'FREE' : formatPrice(price)}

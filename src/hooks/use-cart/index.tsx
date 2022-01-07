@@ -46,6 +46,9 @@ export type CartProviderProps = {
 const CartProvider = ({ children }: CartProviderProps) => {
   const [cartItems, setCartItems] = useState<string[]>([])
 
+  // Assim que montar o componente, ele vai pegar no localStorage
+  // e passar o valor para o cartItems
+  // Que é retornado para o provider
   useEffect(() => {
     const data = getStorageItem(CART_KEY)
 
@@ -54,9 +57,9 @@ const CartProvider = ({ children }: CartProviderProps) => {
     }
   }, [])
 
-  // Assim que montar o componente, ele vai pegar no localStorage
-  // e passar o valor para o cartItems
-  // Que é retornado para o provider
+  //Estou fazendo um requisição de jogos aonde o id: seja igual ao id no storaged
+  //com isso retorno os jogos, e monto a estrutura do meu objeto que quero passar
+  //para o provider
 
   const { data, loading } = useQueryGames({
     skip: !cartItems.length, //skip faz com que se nao tiver cartItems eu nao rodo a querie
@@ -68,10 +71,6 @@ const CartProvider = ({ children }: CartProviderProps) => {
       }
     }
   })
-
-  //Estou fazendo um requisição de jogos aonde o id: seja igual ao id no storaged
-  //com isso retorno os jogos, e monto a estrutura do meu objeto que quero passar
-  //para o provider
 
   const total = data?.games.reduce((acc, game) => {
     return acc + game.price

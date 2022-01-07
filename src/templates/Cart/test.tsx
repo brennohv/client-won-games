@@ -16,6 +16,13 @@ const props = {
   cards: cardsMock
 }
 
+jest.mock('templates/Base', () => ({
+  __esModule: true,
+  default: function Mock({ children }: { children: React.ReactNode }) {
+    return <div data-testid="Mock Base">{children}</div>
+  }
+}))
+
 jest.mock('components/Showcase', () => {
   return {
     __esModule: true,
@@ -58,10 +65,10 @@ describe('<Cart />', () => {
 
     expect(screen.getByTestId('Mock Showcase')).toBeInTheDocument()
     expect(screen.getByTestId('Mock PaymentOptions')).toBeInTheDocument()
-    expect(screen.getAllByTestId('Mock CartList')).toHaveLength(2)
     expect(
       screen.getByRole('heading', { name: /My cart/i })
     ).toBeInTheDocument()
+    expect(screen.getByTestId('Mock Showcase')).toBeInTheDocument()
     expect(screen.queryByTestId('Mock Empty')).not.toBeInTheDocument()
   })
 })

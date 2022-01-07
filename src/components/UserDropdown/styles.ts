@@ -19,6 +19,7 @@ export const Link = styled.a`
     display: flex;
     align-items: center;
     transition: background-color ${theme.transition.fast};
+    cursor: pointer;
 
     & > span {
       margin-left: ${theme.spacings.xxsmall};

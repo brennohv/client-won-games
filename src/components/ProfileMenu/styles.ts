@@ -37,6 +37,7 @@ export const Link = styled.a<LinkProps>`
     display: flex;
     align-items: center;
     padding: ${theme.spacings.xsmall} ${theme.spacings.small};
+    cursor: pointer;
 
     ${!isActive && linkModifiers.default(theme)};
     ${isActive && linkModifiers.active(theme)};

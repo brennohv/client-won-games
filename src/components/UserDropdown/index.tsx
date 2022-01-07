@@ -9,6 +9,7 @@ import Link from 'next/link'
 import Dropdown from 'components/Dropdown'
 
 import * as S from './styles'
+import { signOut } from 'next-auth/client'
 
 export type UserDropdownProps = {
   userName?: string
@@ -37,12 +38,11 @@ const UserDropdown = ({ userName }: UserDropdownProps) => (
           <span>Wishlist</span>
         </S.Link>
       </Link>
-      <Link href="/sign-in" passHref>
-        <S.Link>
-          <ExitToApp size={24} />
-          <span>Sign out</span>
-        </S.Link>
-      </Link>
+
+      <S.Link role={'button'} onClick={() => signOut()} title="Sign out">
+        <ExitToApp size={24} />
+        <span>Sign out</span>
+      </S.Link>
     </S.WrapperPopUp>
   </Dropdown>
 )

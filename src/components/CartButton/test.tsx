@@ -3,7 +3,6 @@ import { CartContextDefaultValues } from 'hooks/use-cart'
 import { render, screen } from 'utils/test-utils'
 
 import CartButton from '.'
-
 describe('<CartButton />', () => {
   it('should render button to add and call the method if clicked', () => {
     const cartProviderProps = {

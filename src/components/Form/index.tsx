@@ -16,6 +16,16 @@ export const FormWrapper = styled.div`
     }
   `}
 `
+
+export const Error = styled.span`
+  ${({ theme }) => css`
+    display: flex;
+    align-items: initial;
+    color: ${theme.colors.red};
+    font-size: ${theme.font.sizes.xsmall};
+  `}
+`
+
 export const FormLoading = styled.img.attrs(() => ({
   src: '/img/dots.svg',
   alt: 'Waiting...'

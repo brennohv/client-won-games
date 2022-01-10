@@ -2,17 +2,20 @@ import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import Link from 'next/link'
 
-import { Email, Lock } from '@styled-icons/material-outlined'
+import { Email, Lock, ErrorOutline } from '@styled-icons/material-outlined'
 
 import Button from 'components/Button'
 import TextField from 'components/TextField'
 import * as S from './styles'
 
-import { FormWrapper, FormLink, FormLoading } from 'components/Form'
+import { FormWrapper, FormLink, FormLoading, Error } from 'components/Form'
 import { signIn } from 'next-auth/client'
+import { FieldErrors, signInValidation } from 'utils/validations'
 
 const FormSignIn = () => {
-  const [values, setValues] = useState({})
+  const [formError, setFormError] = useState('')
+  const [fieldError, setfieldError] = useState<FieldErrors>({})
+  const [values, setValues] = useState({ email: '', password: '' })
   const [loading, setLoading] = useState(false)
 
   const { push } = useRouter()
@@ -25,9 +28,18 @@ const FormSignIn = () => {
     event.preventDefault()
     setLoading(true)
 
+    const errors = signInValidation(values)
+
+    if (Object.keys(errors).length) {
+      setfieldError(errors)
+      setLoading(false)
+      return
+    }
     /* sign in
      * @docs https://next-auth.js.org/getting-started/client#signin
      */
+
+    setfieldError({})
 
     const result = await signIn('credentials', {
       ...values,
@@ -42,13 +54,20 @@ const FormSignIn = () => {
     setLoading(false)
 
     //jogar o erro
-    console.error('usuario ou senha errado')
+    setFormError('Usuario ou senha invalidos')
   }
 
   return (
     <FormWrapper>
+      {!!formError && (
+        <Error>
+          <ErrorOutline size={15} />
+          {formError}
+        </Error>
+      )}
       <form onSubmit={handleSubmit}>
         <TextField
+          error={fieldError?.email}
           onInputChange={(v) => handleInput('email', v)}
           name="email"
           placeholder="Email"
@@ -56,6 +75,7 @@ const FormSignIn = () => {
           icon={<Email />}
         />
         <TextField
+          error={fieldError?.password}
           onInputChange={(v) => handleInput('password', v)}
           name="password"
           placeholder="Password"

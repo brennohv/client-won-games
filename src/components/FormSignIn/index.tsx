@@ -33,14 +33,15 @@ const FormSignIn = () => {
     if (Object.keys(errors).length) {
       setfieldError(errors)
       setLoading(false)
+      setFormError('')
       return
     }
-    /* sign in
-     * @docs https://next-auth.js.org/getting-started/client#signin
-     */
 
     setfieldError({})
 
+    /* sign in
+     * @docs https://next-auth.js.org/getting-started/client#signin
+     */
     const result = await signIn('credentials', {
       ...values,
       redirect: false,

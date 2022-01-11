@@ -43,11 +43,19 @@ describe('validations', () => {
       })
     })
 
-    it('should return username error', () => {
-      const values = { username: 'hi', email: '', password: '' }
+    it('should return username min required error', () => {
+      const values = { username: '123', email: '', password: '' }
 
       expect(signUpValidation(values).username).toMatchInlineSnapshot(
         `"\\"username\\" length must be at least 5 characters long"`
+      )
+    })
+
+    it('should return username custom error', () => {
+      const values = { username: '', email: '', password: '' }
+
+      expect(signUpValidation(values).username).toMatchInlineSnapshot(
+        `"\\"username\\" é um campo obrigatorio"`
       )
     })
 

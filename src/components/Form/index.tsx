@@ -23,6 +23,10 @@ export const Error = styled.span`
     align-items: initial;
     color: ${theme.colors.red};
     font-size: ${theme.font.sizes.xsmall};
+
+    & svg {
+      margin-right: ${theme.spacings.xxsmall};
+    }
   `}
 `
 

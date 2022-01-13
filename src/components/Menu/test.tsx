@@ -51,4 +51,11 @@ describe('<Menu />', () => {
     expect(screen.getByText(/My account/i)).toBeInTheDocument()
     expect(screen.getAllByText(/Wishlist/i)).toHaveLength(2)
   })
+
+  it('should do not render MenuGroup and MenuFull when passed loading', () => {
+    renderWithTheme(<Menu userName="Brenno" loading />)
+
+    expect(screen.queryByText(/Sign in/i)).not.toBeInTheDocument()
+    expect(screen.queryByText(/Brenno/i)).not.toBeInTheDocument()
+  })
 })

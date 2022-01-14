@@ -38,7 +38,7 @@ const options = {
   ],
   callbacks: {
     session: async (session: Session, user: User) => {
-      session.jwt = user.JWT
+      session.jwt = user.jwt
       session.id = user.id
 
       return Promise.resolve(session)

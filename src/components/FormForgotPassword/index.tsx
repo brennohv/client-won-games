@@ -1,21 +1,20 @@
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
-import Link from 'next/link'
 
-import { Email, Lock, ErrorOutline } from '@styled-icons/material-outlined'
+import { Email, ErrorOutline } from '@styled-icons/material-outlined'
 
 import Button from 'components/Button'
 import TextField from 'components/TextField'
-import * as S from './styles'
 
-import { FormWrapper, FormLink, FormLoading, Error } from 'components/Form'
-import { signIn } from 'next-auth/client'
-import { FieldErrors, signInValidation } from 'utils/validations'
+import { FormWrapper, FormLoading, Error } from 'components/Form'
 
-const FormSignIn = () => {
+import { FieldErrors } from 'utils/validations'
+import { signin } from 'next-auth/client'
+
+const FormForgotPassword = () => {
   const [formError, setFormError] = useState('')
   const [fieldError, setfieldError] = useState<FieldErrors>({})
-  const [values, setValues] = useState({ email: '', password: '' })
+  const [values, setValues] = useState({ email: '' })
   const [loading, setLoading] = useState(false)
 
   const { push, query } = useRouter()
@@ -28,7 +27,7 @@ const FormSignIn = () => {
     event.preventDefault()
     setLoading(true)
 
-    const errors = signInValidation(values)
+    const errors = {}
 
     if (Object.keys(errors).length) {
       setfieldError(errors)
@@ -39,18 +38,11 @@ const FormSignIn = () => {
 
     setfieldError({})
 
-    /* sign in
-     * @docs https://next-auth.js.org/getting-started/client#signin
-     */
-    const result = await signIn('credentials', {
+    const result = await signin('credentials', {
       ...values,
       redirect: false,
       callbackUrl: `${window.location.origin}${query?.callbackUrl || ''}`
     })
-
-    // Assim que fizer o loguin vai me enviar para a pagina de origem e caso tenha uma query.callbackUrl
-    // serei redirecionado para la, caso nao tenha query sera uma string vazia || ''
-    // tive que fazer essa validação pois poderia vir como undefined
 
     if (result?.url) {
       return push(result.url)
@@ -79,31 +71,13 @@ const FormSignIn = () => {
           type="email"
           icon={<Email />}
         />
-        <TextField
-          error={fieldError?.password}
-          onInputChange={(v) => handleInput('password', v)}
-          name="password"
-          placeholder="Password"
-          type="password"
-          icon={<Lock />}
-        />
-        <Link href="/forgot-password" passHref>
-          <S.ForgetPassword href="#">Forget your password? </S.ForgetPassword>
-        </Link>
 
         <Button size="large" fullWidht type="submit" disabled={loading}>
-          {loading ? <FormLoading /> : <span>Sing in now</span>}
+          {loading ? <FormLoading /> : <span>Send email</span>}
         </Button>
-
-        <FormLink>
-          Don’t have an account?
-          <Link href="/sign-up">
-            <a> Sign up</a>
-          </Link>
-        </FormLink>
       </form>
     </FormWrapper>
   )
 }
 
-export default FormSignIn
+export default FormForgotPassword

@@ -39,7 +39,7 @@ const FormSignUp = () => {
     }
   })
 
-  const handleMutation = (field: string, value: string) => {
+  const handleInput = (field: string, value: string) => {
     setValues((v) => ({ ...v, [field]: value }))
   }
 
@@ -81,7 +81,7 @@ const FormSignUp = () => {
           type="text"
           name="username"
           placeholder="Username"
-          onInputChange={(v) => handleMutation('username', v)}
+          onInputChange={(v) => handleInput('username', v)}
           icon={<AccountCircle />}
         />
         <TextField
@@ -89,7 +89,7 @@ const FormSignUp = () => {
           type="email"
           name="email"
           placeholder="Email"
-          onInputChange={(v) => handleMutation('email', v)}
+          onInputChange={(v) => handleInput('email', v)}
           icon={<Email />}
         />
         <TextField
@@ -97,7 +97,7 @@ const FormSignUp = () => {
           type="password"
           name="password"
           placeholder="Password"
-          onInputChange={(v) => handleMutation('password', v)}
+          onInputChange={(v) => handleInput('password', v)}
           icon={<Lock />}
         />
         <TextField
@@ -105,7 +105,7 @@ const FormSignUp = () => {
           type="password"
           name="confirm_password"
           placeholder="Confirm password"
-          onInputChange={(v) => handleMutation('confirm_password', v)}
+          onInputChange={(v) => handleInput('confirm_password', v)}
           icon={<AccountCircle />}
         />
 

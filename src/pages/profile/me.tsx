@@ -21,7 +21,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { data } = await apolloClient.query<QueryProfile>({
     query: QUERY_PROFILE_ME
   })
-  console.log(data.me?.username)
 
   return {
     props: {

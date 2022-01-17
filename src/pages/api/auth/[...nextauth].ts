@@ -42,6 +42,7 @@ const options = {
       session.id = user.id
 
       return Promise.resolve(session)
+      //salvando a sessao do usuario para navegar entre as paginas logado
     },
     jwt: async (token: JWT, user: User) => {
       if (user) {
@@ -52,6 +53,7 @@ const options = {
       }
 
       return Promise.resolve(token)
+      //jwt me permite fazer chamadas autenticadas
     }
   }
 }

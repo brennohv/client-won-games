@@ -1,4 +1,9 @@
-import { signInValidation, signUpValidation } from '.'
+import {
+  forgotValidation,
+  resetValidation,
+  signInValidation,
+  signUpValidation
+} from '.'
 
 describe('validations', () => {
   describe('signInValidation() ', () => {
@@ -78,6 +83,52 @@ describe('validations', () => {
           "confirm_password": "confirm password does not match with password",
         }
       `)
+    })
+  })
+
+  describe('ForgotValidation', () => {
+    it('should return email error', () => {
+      const values = {
+        email: ''
+      }
+      expect(forgotValidation(values)).toMatchInlineSnapshot(`
+        Object {
+          "email": "\\"email\\" is not allowed to be empty",
+        }
+      `)
+    })
+  })
+
+  describe('ResetValidation', () => {
+    it('should return to be empty values ', () => {
+      const values = {
+        password: '',
+        confirm_password: ''
+      }
+      //Como o confirm_password faz referencia ao password, ele so sera validado quando o password passar
+      expect(resetValidation(values)).toMatchObject({
+        password: expect.any(String)
+      })
+    })
+
+    it('should return to be empty confirm_password', () => {
+      const values = {
+        password: '1234',
+        confirm_password: ''
+      }
+      expect(resetValidation(values).confirm_password).toMatchInlineSnapshot(
+        `"\\"confirm password\\" é um campo obrigatorio"`
+      )
+    })
+
+    it('should return does not match confirm password', () => {
+      const values = {
+        password: '1234',
+        confirm_password: '321'
+      }
+      expect(resetValidation(values).confirm_password).toMatchInlineSnapshot(
+        `"confirm password does not match with password"`
+      )
     })
   })
 })

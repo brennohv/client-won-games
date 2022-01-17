@@ -8,7 +8,7 @@ import TextField from 'components/TextField'
 
 import { FormWrapper, FormLoading, Error } from 'components/Form'
 
-import { FieldErrors } from 'utils/validations'
+import { FieldErrors, forgotValidation } from 'utils/validations'
 import { signin } from 'next-auth/client'
 
 const FormForgotPassword = () => {
@@ -27,7 +27,7 @@ const FormForgotPassword = () => {
     event.preventDefault()
     setLoading(true)
 
-    const errors = {}
+    const errors = forgotValidation(values)
 
     if (Object.keys(errors).length) {
       setfieldError(errors)

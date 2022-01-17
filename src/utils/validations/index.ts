@@ -16,7 +16,8 @@ const fieldValidations = {
     .messages({
       'any.only': 'confirm password does not match with password',
       // any.only funcionou para o .valid
-      'any.required': '"confirm password" é um campo obrigatorio'
+      'any.required': '"confirm password" é um campo obrigatorio',
+      'string.empty': `"confirm password" é um campo obrigatorio`
       //Mais exemplos de personalização de mensagem de erro
       //https://github.com/sideway/joi/blob/v14.3.1/API.md#list-of-errors
       //https://stackoverflow.com/questions/48720942/node-js-joi-how-to-display-a-custom-error-messages
@@ -47,9 +48,28 @@ export function signInValidation(values: SignInValues) {
 
   return getFieldErrors(schema.validate(values, { abortEarly: false }))
 }
-
+// { abortEarly: false } faz com que nao pare no primeiro erro, entao consigo listar todos os erros de uma so vez
 export function signUpValidation(values: UsersPermissionsRegisterInput) {
   const schema = Joi.object(fieldValidations)
   console.log(schema.describe())
+  return getFieldErrors(schema.validate(values, { abortEarly: false }))
+}
+
+type forgotValidationProps = Pick<UsersPermissionsRegisterInput, 'email'>
+
+export function forgotValidation(values: forgotValidationProps) {
+  const { email } = fieldValidations
+  const schema = Joi.object({ email })
+  return getFieldErrors(schema.validate(values, { abortEarly: false }))
+}
+
+type ResetValidationProps = {
+  password: string
+  confirm_password: string
+}
+
+export function resetValidation(values: ResetValidationProps) {
+  const { password, confirm_password } = fieldValidations
+  const schema = Joi.object({ password, confirm_password })
   return getFieldErrors(schema.validate(values, { abortEarly: false }))
 }

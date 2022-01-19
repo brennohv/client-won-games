@@ -16,6 +16,19 @@ export const FormWrapper = styled.div`
     }
   `}
 `
+export const FormSucess = styled.div`
+  ${({ theme }) => css`
+    text-align: center;
+    color: ${theme.colors.black};
+    font-size: ${theme.font.sizes.medium};
+
+    & svg {
+      width: 2.4rem;
+      color: ${theme.colors.secondary};
+      margin-right: 0.4rem;
+    }
+  `}
+`
 
 export const Error = styled.span`
   ${({ theme }) => css`
@@ -29,14 +42,6 @@ export const Error = styled.span`
     }
   `}
 `
-
-export const FormLoading = styled.img.attrs(() => ({
-  src: '/img/dots.svg',
-  alt: 'Waiting...'
-}))`
-  width: 4rem;
-`
-
 export const FormLink = styled.div`
   ${({ theme }) => css`
     font-size: ${theme.font.sizes.small};
@@ -52,4 +57,11 @@ export const FormLink = styled.div`
         border-bottom: 0.1rem solid ${darken(0.1, theme.colors.secondary)};
       }
     `}
+`
+
+export const FormLoading = styled.img.attrs(() => ({
+  src: '/img/dots.svg',
+  alt: 'Waiting...'
+}))`
+  width: 4rem;
 `

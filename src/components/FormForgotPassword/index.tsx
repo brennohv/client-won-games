@@ -1,23 +1,21 @@
-import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 
 import { Email, ErrorOutline } from '@styled-icons/material-outlined'
+import { CheckCircle } from '@styled-icons/material-outlined/CheckCircle'
 
 import Button from 'components/Button'
 import TextField from 'components/TextField'
 
-import { FormWrapper, FormLoading, Error } from 'components/Form'
+import { FormWrapper, FormLoading, Error, FormSucess } from 'components/Form'
 
 import { FieldErrors, forgotValidation } from 'utils/validations'
-import { signin } from 'next-auth/client'
 
 const FormForgotPassword = () => {
+  const [sucess, setSucess] = useState(false)
   const [formError, setFormError] = useState('')
   const [fieldError, setfieldError] = useState<FieldErrors>({})
   const [values, setValues] = useState({ email: '' })
   const [loading, setLoading] = useState(false)
-
-  const { push, query } = useRouter()
 
   const handleInput = (field: string, value: string) => {
     setValues((v) => ({ ...v, [field]: value }))
@@ -32,50 +30,60 @@ const FormForgotPassword = () => {
     if (Object.keys(errors).length) {
       setfieldError(errors)
       setLoading(false)
-      setFormError('')
       return
     }
 
     setfieldError({})
 
-    const result = await signin('credentials', {
-      ...values,
-      redirect: false,
-      callbackUrl: `${window.location.origin}${query?.callbackUrl || ''}`
-    })
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/auth/forgot-password`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(values)
+      }
+    )
 
-    if (result?.url) {
-      return push(result.url)
-    }
-
+    const data = await response.json()
     setLoading(false)
-
-    //jogar o erro
-    setFormError('Usuario ou senha invalidos')
+    if (data.error) {
+      setFormError(data.message[0].messages[0].message)
+      console.log('error', data)
+    } else {
+      setSucess(true)
+    }
   }
 
   return (
     <FormWrapper>
-      {!!formError && (
-        <Error>
-          <ErrorOutline size={15} />
-          {formError}
-        </Error>
-      )}
-      <form onSubmit={handleSubmit}>
-        <TextField
-          error={fieldError?.email}
-          onInputChange={(v) => handleInput('email', v)}
-          name="email"
-          placeholder="Email"
-          type="email"
-          icon={<Email />}
-        />
+      {sucess ? (
+        <FormSucess>
+          <CheckCircle />O email para recuperar sua senha foi enviado
+        </FormSucess>
+      ) : (
+        <>
+          {!!formError && (
+            <Error>
+              <ErrorOutline size={15} />
+              {formError}
+            </Error>
+          )}
+          <form onSubmit={handleSubmit}>
+            <TextField
+              error={fieldError?.email}
+              onInputChange={(v) => handleInput('email', v)}
+              name="email"
+              placeholder="Email"
+              type="text"
+              icon={<Email />}
+            />
 
-        <Button size="large" fullWidht type="submit" disabled={loading}>
-          {loading ? <FormLoading /> : <span>Send email</span>}
-        </Button>
-      </form>
+            <Button size="large" fullWidht type="submit" disabled={loading}>
+              {loading ? <FormLoading /> : <span>Send email</span>}
+            </Button>
+          </form>
+        </>
+      )}
     </FormWrapper>
   )
 }

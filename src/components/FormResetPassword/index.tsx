@@ -21,7 +21,7 @@ const FormResetPassword = () => {
   const [values, setValues] = useState({ password: '', confirm_password: '' })
   const [loading, setLoading] = useState(false)
 
-  const { push, query } = useRouter()
+  const { query } = useRouter()
 
   const handleInput = (field: string, value: string) => {
     setValues((v) => ({ ...v, [field]: value }))
@@ -40,22 +40,37 @@ const FormResetPassword = () => {
       return
     }
 
-    setfieldError({})
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/auth/reset-password`,
+      {
+        method: 'post',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify({
+          code: query.code,
+          password: values.password,
+          passwordConfirmation: values.confirm_password
+        })
+      }
+    )
 
-    const result = await signIn('credentials', {
-      ...values,
-      redirect: false,
-      callbackUrl: `${window.location.origin}${query?.callbackUrl || ''}`
-    })
+    const data = await response.json()
 
-    if (result?.url) {
-      return push(result.url)
+    if (data.error) {
+      setFormError(data.message[0].messages[0].message)
+      setLoading(false)
+      console.log('error', data)
+    } else {
+      signIn('credentials', {
+        email: data.user.email,
+        password: values.password,
+        callbackUrl: '/'
+      })
+      console.log('sucess', data)
     }
 
-    setLoading(false)
-
-    //jogar o erro
-    setFormError('Usuario ou senha invalidos')
+    setfieldError({})
   }
 
   return (

@@ -9,12 +9,14 @@ import TextField from 'components/TextField'
 import { FormWrapper, FormLoading, Error, FormSucess } from 'components/Form'
 
 import { FieldErrors, forgotValidation } from 'utils/validations'
+import { useRouter } from 'next/router'
 
 const FormForgotPassword = () => {
+  const { query } = useRouter()
   const [sucess, setSucess] = useState(false)
   const [formError, setFormError] = useState('')
   const [fieldError, setfieldError] = useState<FieldErrors>({})
-  const [values, setValues] = useState({ email: '' })
+  const [values, setValues] = useState({ email: (query.email as string) || '' })
   const [loading, setLoading] = useState(false)
 
   const handleInput = (field: string, value: string) => {
@@ -72,6 +74,7 @@ const FormForgotPassword = () => {
             <TextField
               error={fieldError?.email}
               onInputChange={(v) => handleInput('email', v)}
+              initialValue={query.email as string}
               name="email"
               placeholder="Email"
               type="text"

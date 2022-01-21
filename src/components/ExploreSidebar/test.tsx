@@ -1,5 +1,4 @@
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { render, screen } from 'utils/test-utils'
 
 import items from './mock'
 import ExploreSidebar from '.'
@@ -9,7 +8,7 @@ import { Overlay } from './styles'
 
 describe('<ExploreSidebar />', () => {
   it('should render headings', () => {
-    renderWithTheme(<ExploreSidebar items={items} onFilter={jest.fn} />)
+    render(<ExploreSidebar items={items} onFilter={jest.fn} />)
 
     expect(screen.getByRole('heading', { name: /Price/i })).toBeInTheDocument()
     expect(
@@ -22,7 +21,7 @@ describe('<ExploreSidebar />', () => {
   })
 
   it('should render Checkbox, Radio, Button', () => {
-    renderWithTheme(<ExploreSidebar items={items} onFilter={jest.fn} />)
+    render(<ExploreSidebar items={items} onFilter={jest.fn} />)
 
     expect(screen.getByLabelText(/Under \$50/i)).toBeInTheDocument()
     expect(screen.getByLabelText(/High to low/i)).toBeInTheDocument()
@@ -32,7 +31,7 @@ describe('<ExploreSidebar />', () => {
   })
 
   it('should handle with initialValues checked', () => {
-    renderWithTheme(
+    render(
       <ExploreSidebar
         onFilter={jest.fn}
         items={items}
@@ -50,7 +49,7 @@ describe('<ExploreSidebar />', () => {
   it('should return the initialValues ​​when clicking the Chekcbox or Radio', () => {
     const handleFilter = jest.fn()
 
-    renderWithTheme(
+    render(
       <ExploreSidebar
         items={items}
         onFilter={handleFilter}
@@ -70,7 +69,7 @@ describe('<ExploreSidebar />', () => {
   it('when clicking on the checkbox and radio must add or remove from values', () => {
     const handleFilter = jest.fn()
 
-    renderWithTheme(<ExploreSidebar items={items} onFilter={handleFilter} />)
+    render(<ExploreSidebar items={items} onFilter={handleFilter} />)
 
     userEvent.click(screen.getByLabelText(/Windows/i))
     userEvent.click(screen.getByLabelText(/linux/i))
@@ -86,7 +85,7 @@ describe('<ExploreSidebar />', () => {
   })
 
   it('should open/close sidebar when filtering on mobile ', () => {
-    const { container } = renderWithTheme(
+    const { container } = render(
       <ExploreSidebar items={items} onFilter={jest.fn} />
     )
 

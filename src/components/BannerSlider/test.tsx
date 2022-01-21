@@ -1,6 +1,6 @@
 import 'match-media-mock'
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+
+import { render, screen } from 'utils/test-utils'
 
 import BannerSlider from '.'
 
@@ -24,13 +24,13 @@ const banners = [
 
 describe('<BannerSlider />', () => {
   it('should render the heading', () => {
-    const { container } = renderWithTheme(<BannerSlider banners={banners} />)
+    const { container } = render(<BannerSlider banners={banners} />)
 
     expect(container.querySelector('.slick-vertical')).toBeInTheDocument()
   })
 
   it('should render with 1 active item', () => {
-    const { container } = renderWithTheme(<BannerSlider banners={banners} />)
+    const { container } = render(<BannerSlider banners={banners} />)
 
     expect(container.querySelectorAll('.slick-slide')).toHaveLength(2)
     expect(container.querySelectorAll('li.slick-active')).toHaveLength(1)

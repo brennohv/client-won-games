@@ -1,11 +1,11 @@
-import { fireEvent, screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { fireEvent } from '@testing-library/react'
+import { render, screen } from 'utils/test-utils'
 
 import Menu from '.'
 
 describe('<Menu />', () => {
   it('should render the menu', () => {
-    renderWithTheme(<Menu />)
+    render(<Menu />)
 
     expect(screen.getByLabelText(/open menu/i)).toBeInTheDocument()
     expect(screen.getByLabelText(/search/i)).toBeInTheDocument()
@@ -14,7 +14,7 @@ describe('<Menu />', () => {
   })
 
   it('should handle the open and close mobile menu ', () => {
-    renderWithTheme(<Menu />)
+    render(<Menu />)
 
     //selecionar o nosso MenuFull
     const fullMenuElement = screen.getByRole('navigation', { hidden: true })
@@ -35,7 +35,7 @@ describe('<Menu />', () => {
   })
 
   it('should show register box when logged out', () => {
-    renderWithTheme(<Menu />)
+    render(<Menu />)
 
     expect(screen.getAllByText(/Sign in/i)).toHaveLength(2)
     expect(screen.getByText(/Sign Up/i)).toBeInTheDocument()
@@ -44,7 +44,7 @@ describe('<Menu />', () => {
   })
 
   it('should show Wishlist and My account when logged in', () => {
-    renderWithTheme(<Menu userName="Brenno" />)
+    render(<Menu userName="Brenno" />)
 
     expect(screen.queryByText(/Sign in/i)).not.toBeInTheDocument()
     expect(screen.queryByText(/Sign Up/i)).not.toBeInTheDocument()
@@ -53,7 +53,7 @@ describe('<Menu />', () => {
   })
 
   it('should do not render MenuGroup and MenuFull when passed loading', () => {
-    renderWithTheme(<Menu userName="Brenno" loading />)
+    render(<Menu userName="Brenno" loading />)
 
     expect(screen.queryByText(/Sign in/i)).not.toBeInTheDocument()
     expect(screen.queryByText(/Brenno/i)).not.toBeInTheDocument()

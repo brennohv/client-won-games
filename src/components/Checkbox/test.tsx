@@ -1,11 +1,11 @@
-import { fireEvent, screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { fireEvent } from '@testing-library/react'
+import { render, screen } from 'utils/test-utils'
 
 import Checkbox from '.'
 
 describe('<Checkbox />', () => {
   it('should render the heading', () => {
-    renderWithTheme(<Checkbox label="checkbox label" labelFor="check" />)
+    render(<Checkbox label="checkbox label" labelFor="check" />)
 
     // input a partir do papel role
     expect(screen.getByRole('checkbox')).toBeInTheDocument()
@@ -16,13 +16,13 @@ describe('<Checkbox />', () => {
   })
 
   it('should not render label', () => {
-    renderWithTheme(<Checkbox />)
+    render(<Checkbox />)
 
     expect(screen.queryByLabelText(/checkbox label/i)).not.toBeInTheDocument()
   })
 
   it('should render with black label', () => {
-    renderWithTheme(
+    render(
       <Checkbox label="checkbox label" labelFor="check" labelColor="black" />
     )
     expect(screen.getByText(/checkbox label/i)).toHaveStyle({
@@ -31,7 +31,7 @@ describe('<Checkbox />', () => {
   })
 
   it('should render with white label', () => {
-    renderWithTheme(
+    render(
       <Checkbox label="checkbox label" labelFor="check" labelColor="white" />
     )
     expect(screen.getByText(/checkbox label/i)).toHaveStyle({
@@ -41,7 +41,7 @@ describe('<Checkbox />', () => {
 
   it('should dispatch onCheck when status changes ', () => {
     const onCheck = jest.fn()
-    renderWithTheme(<Checkbox label="checkbox label" onCheck={onCheck} />)
+    render(<Checkbox label="checkbox label" onCheck={onCheck} />)
 
     fireEvent.click(screen.getByRole('checkbox'))
 
@@ -51,9 +51,7 @@ describe('<Checkbox />', () => {
 
   it('should ', () => {
     const onCheck = jest.fn()
-    renderWithTheme(
-      <Checkbox label="checkbox label" onCheck={onCheck} isChecked />
-    )
+    render(<Checkbox label="checkbox label" onCheck={onCheck} isChecked />)
     fireEvent.click(screen.getByRole('checkbox'))
 
     expect(onCheck).toBeCalledTimes(1)

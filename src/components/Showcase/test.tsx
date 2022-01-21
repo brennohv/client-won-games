@@ -1,6 +1,6 @@
 import 'match-media-mock'
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+
+import { render, screen } from 'utils/test-utils'
 import highLightMock from 'components/Highlight/mock'
 import gameCardSliderMock from 'components/GameCardSlider/mock'
 
@@ -14,7 +14,7 @@ const props = {
 
 describe('<Showcase />', () => {
   it('should render the heading on the Showcase', () => {
-    renderWithTheme(<Showcase heading={props.heading} />)
+    render(<Showcase heading={props.heading} />)
 
     expect(screen.getByRole('heading', { name: /Ola/i })).toBeInTheDocument()
     expect(
@@ -25,7 +25,7 @@ describe('<Showcase />', () => {
   })
 
   it('should render without title', () => {
-    renderWithTheme(
+    render(
       <Showcase
         highlight={props.highlight}
         gameCardSlider={props.gameCardSlider}

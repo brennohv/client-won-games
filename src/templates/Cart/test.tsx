@@ -1,11 +1,10 @@
-import { screen } from '@testing-library/react'
 import highlightMock from 'components/Highlight/mock'
 import moreGamesMock from 'components/GameCardSlider/mock'
 import gamesCartMock from 'components/CartList/mock'
 import cardsMock from 'components/PaymentOptions/mock'
 
 import Cart from '.'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { render, screen } from 'utils/test-utils'
 
 const props = {
   recommendedHighlight: highlightMock,
@@ -61,7 +60,7 @@ jest.mock('components/Empty', () => {
 
 describe('<Cart />', () => {
   it('should render the sections', () => {
-    renderWithTheme(<Cart {...props} />)
+    render(<Cart {...props} />)
 
     expect(screen.getByTestId('Mock Showcase')).toBeInTheDocument()
     expect(screen.getByTestId('Mock PaymentOptions')).toBeInTheDocument()

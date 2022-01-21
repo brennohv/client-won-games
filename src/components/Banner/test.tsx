@@ -1,5 +1,4 @@
-import { screen } from '@testing-library/react'
-import { render } from 'utils/test-utils'
+import { render, screen } from 'utils/test-utils'
 
 import Banner from '.'
 

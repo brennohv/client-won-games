@@ -1,5 +1,4 @@
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { render, screen } from 'utils/test-utils'
 
 import Base from '.'
 
@@ -29,7 +28,7 @@ jest.mock('components/Footer', () => {
 
 describe('<Base />', () => {
   it('should render the heading', () => {
-    renderWithTheme(
+    render(
       <Base>
         <h1>Ola</h1>
       </Base>

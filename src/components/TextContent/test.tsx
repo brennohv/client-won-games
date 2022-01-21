@@ -1,6 +1,5 @@
-import { screen } from '@testing-library/react'
 import theme from 'styles/theme'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { render, screen } from 'utils/test-utils'
 import TextContent from '.'
 
 const props = {
@@ -10,7 +9,7 @@ const props = {
 
 describe('<TextContent />', () => {
   it('should render the title and content', () => {
-    renderWithTheme(<TextContent {...props} />)
+    render(<TextContent {...props} />)
 
     expect(
       screen.getByRole('heading', { name: /Description/i })
@@ -20,7 +19,7 @@ describe('<TextContent />', () => {
   })
 
   it('should render without title', () => {
-    renderWithTheme(<TextContent content={props.content} />)
+    render(<TextContent content={props.content} />)
 
     expect(
       screen.queryByRole('heading', { name: /Description/i })
@@ -28,7 +27,7 @@ describe('<TextContent />', () => {
   })
 
   it('should render colors Wrapper', () => {
-    renderWithTheme(<TextContent {...props} />)
+    render(<TextContent {...props} />)
 
     const wrapper = screen.getByRole('heading', {
       name: /Description/i

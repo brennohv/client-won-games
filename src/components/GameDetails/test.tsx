@@ -1,5 +1,4 @@
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { render, screen } from 'utils/test-utils'
 
 import GameDetails, { GameDetailsProps } from '.'
 
@@ -14,7 +13,7 @@ const props: GameDetailsProps = {
 
 describe('<GameDetails />', () => {
   it('should render the heading and icons', () => {
-    renderWithTheme(<GameDetails {...props} />)
+    render(<GameDetails {...props} />)
 
     expect(
       screen.getByRole('heading', { name: /Developer/i })
@@ -26,25 +25,25 @@ describe('<GameDetails />', () => {
   })
 
   it('should render Date', () => {
-    renderWithTheme(<GameDetails {...props} />)
+    render(<GameDetails {...props} />)
 
     expect(screen.getByText(/Nov 21, 2020/i)).toBeInTheDocument()
   })
 
   it('should render format rating', () => {
-    renderWithTheme(<GameDetails {...props} />)
+    render(<GameDetails {...props} />)
 
     expect(screen.getByText(/free/i)).toBeInTheDocument()
   })
 
   it('should render the publisher', () => {
-    renderWithTheme(<GameDetails {...props} />)
+    render(<GameDetails {...props} />)
 
     expect(screen.getByText(/Walktrough/i)).toBeInTheDocument()
   })
 
   it('should render format genre ', () => {
-    renderWithTheme(<GameDetails {...props} />)
+    render(<GameDetails {...props} />)
 
     expect(screen.getByText('Action / Adventure')).toBeInTheDocument()
   })

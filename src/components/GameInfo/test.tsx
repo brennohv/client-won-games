@@ -1,5 +1,4 @@
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { render, screen } from 'utils/test-utils'
 
 import GameInfo from '.'
 
@@ -12,7 +11,7 @@ const props = {
 
 describe('<GameInfo />', () => {
   it('should render the game informations', () => {
-    const { container } = renderWithTheme(<GameInfo {...props} />)
+    const { container } = render(<GameInfo {...props} />)
 
     // renderizar o heading(title)
     expect(
@@ -27,7 +26,7 @@ describe('<GameInfo />', () => {
   })
 
   it('should render the buttons', () => {
-    renderWithTheme(<GameInfo {...props} />)
+    render(<GameInfo {...props} />)
 
     // renderizar button add to cart
     expect(screen.getByText(/Add to cart/i)).toBeInTheDocument()
@@ -36,7 +35,7 @@ describe('<GameInfo />', () => {
   })
 
   it('should render FREE when 0', () => {
-    renderWithTheme(<GameInfo {...props} price={0} />)
+    render(<GameInfo {...props} price={0} />)
     expect(screen.getByText(/FREE/)).toBeInTheDocument()
   })
 })

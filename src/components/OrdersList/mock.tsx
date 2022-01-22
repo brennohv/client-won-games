@@ -1,5 +1,6 @@
 export default [
   {
+    id: '1',
     title: 'Red Dead Redemption',
     price: '$215,00',
     img: 'https://source.unsplash.com/user/willianjusten/151x70',
@@ -12,6 +13,7 @@ export default [
     }
   },
   {
+    id: '2',
     title: 'Red Dead Redemption 2',
     price: '$215,00',
     img: 'https://source.unsplash.com/user/willianjusten/151x70',

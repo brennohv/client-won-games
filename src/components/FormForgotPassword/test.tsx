@@ -34,6 +34,8 @@ describe('FormForgotPassword', () => {
     render(<FormForgotPassword />)
 
     userEvent.type(screen.getByPlaceholderText('Email'), 'false@email.com')
+
+    expect(screen.getByPlaceholderText('Email')).toHaveValue('false@email.com')
     userEvent.click(screen.getByRole('button', { name: 'Send email' }))
 
     expect(

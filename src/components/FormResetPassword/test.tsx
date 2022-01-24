@@ -63,6 +63,7 @@ describe('FormResetPassword', () => {
     userEvent.click(screen.getByRole('button', { name: 'Reset Password' }))
 
     await waitFor(() => {
+      // waitFor espera que meu signIn seja resolvido, entao consigo pegar o que ele retorna
       expect(signIn).toHaveBeenCalledWith('credentials', {
         email: 'valid@email.com',
         password: '12345',

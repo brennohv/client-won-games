@@ -29,6 +29,7 @@ const options = {
         const data = await response.json()
 
         if (data.user) {
+          console.log(data)
           return { ...data.user, jwt: data.jwt }
         } else {
           return null

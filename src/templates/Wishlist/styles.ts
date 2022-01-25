@@ -6,3 +6,13 @@ export const Wrapper = styled.div`
     margin-bottom: calc(${theme.spacings.medium} * 2);
   `}
 `
+export const AnimationLoading = styled.img`
+  width: 4rem;
+  height: 1.5rem;
+`
+export const ContainerLoading = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 25rem;
+`

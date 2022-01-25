@@ -35,8 +35,6 @@ describe('<Wishlist />', () => {
     expect(
       screen.getByRole('heading', { name: /Wishlist/i })
     ).toBeInTheDocument()
-
-    expect(screen.getAllByText(/Population Zero/i)).toHaveLength(6)
   })
 
   it('should render when there are not games', () => {

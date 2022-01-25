@@ -1,5 +1,4 @@
 import Wishlist, { WishlistProps } from 'templates/Wishlist'
-import gameCardMock from 'components/GameCardSlider/mock'
 
 import { initializeApollo } from 'utils/apollo'
 import { QueryRecommended } from 'graphql/generated/QueryRecommended'
@@ -25,7 +24,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     props: {
       recomendedGames: gamesMapper(recommended?.section?.games),
       recomendedHighlight: highlightMapper(recommended?.section?.highlight),
-      games: gameCardMock,
       title: recommended?.section?.title,
       session
     }

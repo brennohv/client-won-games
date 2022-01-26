@@ -41,7 +41,7 @@ const WishlistProvider = ({ children }: WishlistProviderProps) => {
     }
   })
 
-  console.log(data?.wishlists[0].games)
+  // console.log(data?.wishlists[0])
 
   return (
     <WishlistContext.Provider

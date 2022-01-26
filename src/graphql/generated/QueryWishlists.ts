@@ -7,11 +7,6 @@
 // GraphQL query operation: QueryWishlists
 // ====================================================
 
-export interface QueryWishlists_wishlists_user {
-  __typename: "UsersPermissionsUser";
-  id: string;
-}
-
 export interface QueryWishlists_wishlists_games_cover {
   __typename: "UploadFile";
   url: string;
@@ -35,7 +30,6 @@ export interface QueryWishlists_wishlists_games {
 export interface QueryWishlists_wishlists {
   __typename: "Wishlist";
   id: string;
-  user: QueryWishlists_wishlists_user | null;
   games: QueryWishlists_wishlists_games[];
 }
 

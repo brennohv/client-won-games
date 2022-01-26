@@ -9,9 +9,6 @@ export const QUERY_WISHLIST = gql`
   query QueryWishlists($identifier: String!) {
     wishlists(where: { user: { email: $identifier } }) {
       id
-      user {
-        id
-      }
       games {
         ...GameFragment
       }

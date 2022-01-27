@@ -1,3 +1,7 @@
+import {
+  MUTATION_UPDATE_WISHLIST,
+  MUTATION_CREATE_WISHLIST
+} from 'graphql/mutations/wishlist'
 import { QUERY_WISHLIST } from 'graphql/queries/wishlist'
 
 export const gameMock = (id: string) => ({
@@ -33,6 +37,57 @@ export const wishlistMock = {
           games: [gameMock('1'), gameMock('2')]
         }
       ]
+    }
+  }
+}
+
+export const createWishlist = {
+  request: {
+    query: MUTATION_CREATE_WISHLIST,
+    context: { session: { jwt: '123' } },
+    variables: {
+      input: {
+        data: {
+          games: ['1']
+        }
+      }
+    }
+  },
+  result: {
+    data: {
+      createWishlist: {
+        wishlist: {
+          id: 1,
+          games: [gameMock('1')]
+        }
+      }
+    }
+  }
+}
+
+export const updateWishlist = {
+  request: {
+    query: MUTATION_UPDATE_WISHLIST,
+    context: { session: { jwt: '123' } },
+    variables: {
+      input: {
+        where: {
+          id: 1
+        },
+        data: {
+          games: ['1', '2', '3']
+        }
+      }
+    }
+  },
+  result: {
+    data: {
+      updateWishlist: {
+        wishlist: {
+          id: 1,
+          games: [gameMock('1'), gameMock('2'), gameMock('3')]
+        }
+      }
     }
   }
 }

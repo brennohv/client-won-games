@@ -1,10 +1,11 @@
-import React, { createContext, useContext } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 import { useSession } from 'next-auth/client'
 
 import { GameCardProps } from 'components/GameCard'
 import { wishlistMapper } from 'utils/mappers'
 
 import { useQueryWishlist } from 'graphql/queries/wishlist'
+import { QueryWishlists_wishlists_games } from 'graphql/generated/QueryWishlists'
 
 export type WishlistContextData = {
   items: GameCardProps[]
@@ -32,6 +33,9 @@ export type WishlistProviderProps = {
 
 const WishlistProvider = ({ children }: WishlistProviderProps) => {
   const [session] = useSession()
+  const [wishlistItems, setWishlistItems] = useState<
+    QueryWishlists_wishlists_games[]
+  >([])
 
   const { data, loading } = useQueryWishlist({
     skip: !session?.user?.email,
@@ -40,15 +44,20 @@ const WishlistProvider = ({ children }: WishlistProviderProps) => {
       identifier: session?.user?.email as string
     }
   })
-
   // console.log(data?.wishlists[0])
+  useEffect(() => {
+    setWishlistItems(data?.wishlists[0]?.games || [])
+  }, [data])
+
+  const isInWishlist = (id: string) =>
+    !!wishlistItems.find((game) => game.id === id)
 
   return (
     <WishlistContext.Provider
       value={{
-        items: wishlistMapper(data?.wishlists[0].games),
+        items: wishlistMapper(wishlistItems),
         loading,
-        isInWishlist: () => false,
+        isInWishlist,
         addToWishlist: () => null,
         removeFromWishlist: () => null
       }}

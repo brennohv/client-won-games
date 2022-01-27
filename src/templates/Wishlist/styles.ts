@@ -10,9 +10,13 @@ export const AnimationLoading = styled.img`
   width: 4rem;
   height: 1.5rem;
 `
-export const ContainerLoading = styled.div`
+export const Loading = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
-  height: 25rem;
+  justify-content: center;
+  height: 40rem;
+  svg {
+    height: 10rem;
+    width: 10rem;
+  }
 `

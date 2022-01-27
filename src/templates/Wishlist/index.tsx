@@ -11,6 +11,7 @@ import Empty from 'components/Empty'
 import Showcase from 'components/Showcase'
 
 import { useWishlist } from 'hooks/use-wishlist'
+import Loader from 'components/Loader'
 
 export type WishlistProps = {
   recomendedGames: GameCardProps[]
@@ -33,28 +34,21 @@ const Wishlist = ({
             Wishlist
           </Heading>
           {loading ? (
-            <S.ContainerLoading>
-              <S.AnimationLoading
-                src="/img/dots.svg"
-                alt="Loading"
-              ></S.AnimationLoading>
-            </S.ContainerLoading>
+            <S.Loading>
+              <Loader />
+            </S.Loading>
+          ) : items.length >= 1 ? (
+            <Grid>
+              {items?.map((game, index) => (
+                <GameCard favorite key={`Wishlist-${index}`} {...game} />
+              ))}
+            </Grid>
           ) : (
-            <>
-              {items?.length >= 1 ? (
-                <Grid>
-                  {items?.map((game, index) => (
-                    <GameCard favorite key={`Wishlist-${index}`} {...game} />
-                  ))}
-                </Grid>
-              ) : (
-                <Empty
-                  title="Nenhum resultado encontrado"
-                  description="Infelizmente nao achamos nenhum resultado para sua busca"
-                  hasLink
-                />
-              )}
-            </>
+            <Empty
+              title="Nenhum resultado encontrado"
+              description="Infelizmente nao achamos nenhum resultado para sua busca"
+              hasLink
+            />
           )}
         </S.Wrapper>
         <Divider />

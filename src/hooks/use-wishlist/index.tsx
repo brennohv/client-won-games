@@ -49,21 +49,27 @@ const WishlistProvider = ({ children }: WishlistProviderProps) => {
     QueryWishlists_wishlists_games[]
   >([])
 
-  const [createWishlist] = useMutation(MUTATION_CREATE_WISHLIST, {
-    context: { session },
-    onCompleted: (data) => {
-      setWishlistItems(data?.createWishlist?.wishlist?.games)
+  const [createWishlist, { loading: loadingCreate }] = useMutation(
+    MUTATION_CREATE_WISHLIST,
+    {
+      context: { session },
+      onCompleted: (data) => {
+        setWishlistItems(data?.createWishlist?.wishlist?.games)
+      }
     }
-  })
+  )
 
-  const [updateWishlist] = useMutation(MUTATION_UPDATE_WISHLIST, {
-    context: { session },
-    onCompleted: (data) => {
-      setWishlistItems(data.updateWishlist?.wishlist?.games)
+  const [updateWishlist, { loading: loadingUpdate }] = useMutation(
+    MUTATION_UPDATE_WISHLIST,
+    {
+      context: { session },
+      onCompleted: (data) => {
+        setWishlistItems(data.updateWishlist?.wishlist?.games)
+      }
     }
-  })
+  )
 
-  const { data, loading } = useQueryWishlist({
+  const { data, loading: loadingQuery } = useQueryWishlist({
     skip: !session?.user?.email,
     context: { session },
     variables: {
@@ -106,14 +112,31 @@ const WishlistProvider = ({ children }: WishlistProviderProps) => {
     })
   }
 
+  const removeFromWishlist = (id: string) => {
+    const remove = idGamesAntigos.filter((games) => games !== id)
+
+    return updateWishlist({
+      variables: {
+        input: {
+          where: {
+            id: wishListIdUser
+          },
+          data: {
+            games: remove
+          }
+        }
+      }
+    })
+  }
+
   return (
     <WishlistContext.Provider
       value={{
         items: wishlistMapper(wishlistItems),
-        loading,
+        loading: loadingQuery || loadingUpdate || loadingCreate,
         isInWishlist,
         addToWishlist,
-        removeFromWishlist: () => null
+        removeFromWishlist
       }}
     >
       {children}

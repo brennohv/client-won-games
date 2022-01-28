@@ -91,6 +91,32 @@ export const updateWishlist = {
     }
   }
 }
+export const removeWishlist = {
+  request: {
+    query: MUTATION_UPDATE_WISHLIST,
+    context: { session: { jwt: '123' } },
+    variables: {
+      input: {
+        where: {
+          id: 1
+        },
+        data: {
+          games: ['1']
+        }
+      }
+    }
+  },
+  result: {
+    data: {
+      updateWishlist: {
+        wishlist: {
+          id: 1,
+          games: [gameMock('1')]
+        }
+      }
+    }
+  }
+}
 
 export const wishlistItems = [
   // objeto que vou receber assim que tratar com o wishlistMapper

@@ -1,3 +1,4 @@
+import 'session.mock'
 import { render, screen } from 'utils/test-utils'
 
 import GameInfo from '.'
@@ -23,15 +24,6 @@ describe('<GameInfo />', () => {
     expect(screen.getByText(/€200.00/)).toBeInTheDocument()
 
     expect(container.firstChild).toMatchSnapshot()
-  })
-
-  it('should render the buttons', () => {
-    render(<GameInfo {...props} />)
-
-    // renderizar button add to cart
-    expect(screen.getByText(/Add to cart/i)).toBeInTheDocument()
-    // renderizar button wishlist
-    expect(screen.getByText(/Wishlist/i)).toBeInTheDocument()
   })
 
   it('should render FREE when 0', () => {

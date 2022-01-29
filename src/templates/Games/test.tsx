@@ -23,6 +23,11 @@ jest.mock('next/link', () => ({
 }))
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
+const useSession = jest.spyOn(require('next-auth/client'), 'useSession')
+const session = { jwt: '123', user: { email: 'brennovicentini@gmail.com' } }
+useSession.mockImplementation(() => [session])
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const useRouter = jest.spyOn(require('next/router'), 'useRouter')
 const push = jest.fn()
 

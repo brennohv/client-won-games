@@ -40,7 +40,7 @@ const Wishlist = ({
           ) : items.length >= 1 ? (
             <Grid>
               {items?.map((game, index) => (
-                <GameCard favorite key={`Wishlist-${index}`} {...game} />
+                <GameCard key={`Wishlist-${index}`} {...game} />
               ))}
             </Grid>
           ) : (

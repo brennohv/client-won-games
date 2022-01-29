@@ -1,7 +1,11 @@
-import { fireEvent } from '@testing-library/react'
 import { render, screen } from 'utils/test-utils'
 
 import GameCard from '.'
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const useSession = jest.spyOn(require('next-auth/client'), 'useSession')
+const session = { jwt: '123', user: { email: 'brennovicentini@gmail.com' } }
+useSession.mockImplementation(() => [session])
 
 const props = {
   id: '1',
@@ -66,20 +70,6 @@ describe('<GameCard />', () => {
     expect(screen.queryByText('€15.00')).not.toHaveStyle({
       textDecoration: 'line-through'
     })
-  })
-  it('should render a filled Favorite icon when favorite is true ', () => {
-    render(<GameCard {...props} favorite />)
-
-    expect(screen.getByLabelText(/Remove from Wishlist/i)).toBeInTheDocument()
-  })
-
-  it('should call onFav method when favorite is clicked', () => {
-    const onFav = jest.fn()
-    render(<GameCard {...props} favorite onFav={onFav} />)
-
-    fireEvent.click(screen.getAllByRole('button')[0])
-
-    expect(onFav).toBeCalled()
   })
 
   it('should render Ribbon', () => {

@@ -6,6 +6,11 @@ import gameCards from './mock'
 import GameCardSlider from '.'
 import theme from 'styles/theme'
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const useSession = jest.spyOn(require('next-auth/client'), 'useSession')
+const session = { jwt: '123', user: { email: 'brennovicentini@gmail.com' } }
+useSession.mockImplementation(() => [session])
+
 describe('<GameSlider />', () => {
   it('should render with 4 active items', () => {
     const { container } = render(<GameCardSlider gameCards={gameCards} />)

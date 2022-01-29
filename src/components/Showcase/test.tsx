@@ -6,6 +6,11 @@ import gameCardSliderMock from 'components/GameCardSlider/mock'
 
 import Showcase from '.'
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const useSession = jest.spyOn(require('next-auth/client'), 'useSession')
+const session = { jwt: '123', user: { email: 'brennovicentini@gmail.com' } }
+useSession.mockImplementation(() => [session])
+
 const props = {
   heading: 'ola',
   highlight: highLightMock,

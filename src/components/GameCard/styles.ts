@@ -1,4 +1,5 @@
 import styled, { css, DefaultTheme } from 'styled-components'
+import * as ButtonStyles from 'components/Button/styles'
 
 export const Wrapper = styled.article`
   ${({ theme }) => css`
@@ -77,11 +78,15 @@ export const FavButton = styled.div`
   ${({ theme }) => css`
     color: ${theme.colors.primary};
     position: absolute;
-    right: 0;
+    right: -1rem;
     top: -0.5rem;
     cursor: pointer;
     svg {
       width: 2.5rem;
+    }
+
+    ${ButtonStyles.Wrapper} {
+      padding: 0;
     }
   `}
 `

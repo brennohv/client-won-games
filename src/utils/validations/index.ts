@@ -51,7 +51,6 @@ export function signInValidation(values: SignInValues) {
 // { abortEarly: false } faz com que nao pare no primeiro erro, entao consigo listar todos os erros de uma so vez
 export function signUpValidation(values: UsersPermissionsRegisterInput) {
   const schema = Joi.object(fieldValidations)
-  console.log(schema.describe())
   return getFieldErrors(schema.validate(values, { abortEarly: false }))
 }
 

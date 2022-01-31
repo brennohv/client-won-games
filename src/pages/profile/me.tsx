@@ -1,5 +1,8 @@
 import FormProfile, { FormProfileProps } from 'components/FormProfile'
-import { QueryProfile } from 'graphql/generated/QueryProfile'
+import {
+  QueryProfile,
+  QueryProfileVariables
+} from 'graphql/generated/QueryProfile'
 import { QUERY_PROFILE_ME } from 'graphql/queries/profile'
 import { GetServerSidePropsContext } from 'next'
 import Profile from 'templates/Profile'
@@ -18,15 +21,21 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await protectedRoutes(context)
   const apolloClient = initializeApollo(null, session)
 
-  const { data } = await apolloClient.query<QueryProfile>({
-    query: QUERY_PROFILE_ME
+  const { data } = await apolloClient.query<
+    QueryProfile,
+    QueryProfileVariables
+  >({
+    query: QUERY_PROFILE_ME,
+    variables: {
+      identifier: session?.id as string
+    }
   })
 
   return {
     props: {
       session,
-      username: data.me?.username,
-      email: data.me?.email
+      username: data.user?.username,
+      email: data.user?.email
     }
   }
 }

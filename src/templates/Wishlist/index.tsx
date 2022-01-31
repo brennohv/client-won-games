@@ -33,6 +33,7 @@ const Wishlist = ({
           <Heading lineLeft lineColor="secondary">
             Wishlist
           </Heading>
+
           {loading ? (
             <S.Loading>
               <Loader />

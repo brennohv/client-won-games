@@ -113,7 +113,7 @@ const WishlistProvider = ({ children }: WishlistProviderProps) => {
   }
 
   const removeFromWishlist = (id: string) => {
-    const remove = idGamesAntigos.filter((games) => games !== id)
+    const remove = idGamesAntigos.filter((idsAntigos) => idsAntigos !== id)
 
     return updateWishlist({
       variables: {

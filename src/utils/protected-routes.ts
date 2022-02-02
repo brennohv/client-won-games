@@ -7,10 +7,11 @@ export default async function protectedRoutes(
   const session = await getSession(context)
 
   if (!session) {
-    context.res.writeHead(302, {
-      Location: `/sign-in?callbackUrl=${context.resolvedUrl}`
-    })
-    context.res.end()
+    context.res.setHeader(
+      'Location',
+      `/sign-in?callbackUrl=${context.resolvedUrl}`
+    )
+    context.res.statusCode = 302
   }
 
   return session

@@ -1,9 +1,11 @@
+import Link from 'next/link'
+
+import * as S from './styles'
 import Heading from 'components/Heading'
 import Button from 'components/Button'
-import * as S from './styles'
 
+import { CardElement } from '@stripe/react-stripe-js'
 import { AddShoppingCart } from '@styled-icons/material-outlined'
-import Link from 'next/link'
 
 const PaymentForm = () => {
   return (
@@ -12,6 +14,12 @@ const PaymentForm = () => {
         <Heading color="black" lineBottom size="small">
           Payment
         </Heading>
+
+        <CardElement
+          options={{
+            hidePostalCode: true
+          }}
+        />
       </S.Body>
 
       <S.Footer>

@@ -30,6 +30,7 @@ const PaymentForm = ({ session }: PaymentForm) => {
     async function setPaymentMode() {
       if (items.length) {
         // bater na API /orders/create-payment-intent
+        setFreeGames(false)
         const data = await createPaymentIntent({
           items,
           jwt: session.jwt as string

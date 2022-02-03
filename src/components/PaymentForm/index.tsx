@@ -28,7 +28,12 @@ const PaymentForm = () => {
 
         <CardElement
           options={{
-            hidePostalCode: true
+            hidePostalCode: true,
+            style: {
+              base: {
+                fontSize: '16px'
+              }
+            }
           }}
           onChange={handleSubmit}
         />

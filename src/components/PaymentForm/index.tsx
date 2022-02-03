@@ -39,7 +39,6 @@ const PaymentForm = ({ session }: PaymentForm) => {
         // faço o fluxo de jogo gratuito
         if (data.freeGames) {
           setFreeGames(true)
-          console.log(data.freeGames)
           return
         }
 
@@ -52,7 +51,6 @@ const PaymentForm = ({ session }: PaymentForm) => {
           // senão o paymentIntent foi valido
           // setClientSecret
           setClientSecret(data.client_secret)
-          console.log(data)
         }
       }
     }
@@ -63,7 +61,7 @@ const PaymentForm = ({ session }: PaymentForm) => {
   const handleSubmit = async (event: StripeCardElementChangeEvent) => {
     setError(event.error ? event.error.message : '')
     setDisabled(event.empty)
-    console.log(clientSecret, freeGames)
+    console.log(clientSecret)
   }
 
   return (
@@ -72,18 +70,23 @@ const PaymentForm = ({ session }: PaymentForm) => {
         <Heading color="black" lineBottom size="small">
           Payment
         </Heading>
-
-        <CardElement
-          options={{
-            hidePostalCode: true,
-            style: {
-              base: {
-                fontSize: '16px'
+        {freeGames ? (
+          <S.FreeGames>
+            So jogos gratuitos clique em comprar e se divirta
+          </S.FreeGames>
+        ) : (
+          <CardElement
+            options={{
+              hidePostalCode: true,
+              style: {
+                base: {
+                  fontSize: '16px'
+                }
               }
-            }
-          }}
-          onChange={handleSubmit}
-        />
+            }}
+            onChange={handleSubmit}
+          />
+        )}
 
         {error && (
           <Error>
@@ -100,7 +103,10 @@ const PaymentForm = ({ session }: PaymentForm) => {
           </Button>
         </Link>
 
-        <Button icon={<AddShoppingCart />} disabled={!!error || disabled}>
+        <Button
+          icon={<AddShoppingCart />}
+          disabled={!freeGames && (!!error || disabled)}
+        >
           Buy now
         </Button>
       </S.Footer>

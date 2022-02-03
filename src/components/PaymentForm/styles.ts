@@ -23,3 +23,8 @@ export const Footer = styled.div`
     font-weight: ${theme.font.bold};
   `}
 `
+export const FreeGames = styled.p`
+  ${({ theme }) => css`
+    color: ${theme.colors.black};
+  `}
+`

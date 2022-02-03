@@ -31,10 +31,7 @@ describe('useWishlist', () => {
 
     await waitForNextUpdate()
 
-    expect(result.current.items).toEqual([
-      wishlistItems['0'],
-      wishlistItems['1']
-    ])
+    expect(result.current.items).toEqual([wishlistItems[0], wishlistItems[1]])
   })
 
   it('should return true when item is in wishlist or false when is not in wishlist ', async () => {

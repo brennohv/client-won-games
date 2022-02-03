@@ -14,9 +14,11 @@ import { StripeCardElementChangeEvent } from '@stripe/stripe-js'
 
 const PaymentForm = () => {
   const [error, setError] = useState<string | null>(null)
+  const [disabled, setDisabled] = useState(true)
 
-  const handleSubmit = (event: StripeCardElementChangeEvent) => {
+  const handleSubmit = async (event: StripeCardElementChangeEvent) => {
     setError(event.error ? event.error.message : '')
+    setDisabled(event.empty)
   }
 
   return (
@@ -53,7 +55,9 @@ const PaymentForm = () => {
           </Button>
         </Link>
 
-        <Button icon={<AddShoppingCart />}>Buy now</Button>
+        <Button icon={<AddShoppingCart />} disabled={!!error || disabled}>
+          Buy now
+        </Button>
       </S.Footer>
     </S.Wrapper>
   )

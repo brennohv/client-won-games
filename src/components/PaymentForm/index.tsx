@@ -1,13 +1,13 @@
 import * as S from './styles'
 
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 
-import { Error } from 'components/Form'
+import { Error, FormLoading } from 'components/Form'
 import Heading from 'components/Heading'
 import Button from 'components/Button'
 
-import { CardElement } from '@stripe/react-stripe-js'
+import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js'
 import { AddShoppingCart, ErrorOutline } from '@styled-icons/material-outlined'
 
 import { StripeCardElementChangeEvent } from '@stripe/stripe-js'
@@ -24,7 +24,10 @@ const PaymentForm = ({ session }: PaymentForm) => {
   const [disabled, setDisabled] = useState(true)
   const [clientSecret, setClientSecret] = useState('')
   const [freeGames, setFreeGames] = useState(false)
+  const [loading, setLoading] = useState(false)
   const { items } = useCart()
+  const stripe = useStripe()
+  const elements = useElements()
 
   useEffect(() => {
     async function setPaymentMode() {
@@ -59,58 +62,86 @@ const PaymentForm = ({ session }: PaymentForm) => {
     setPaymentMode()
   }, [items, session])
 
-  const handleSubmit = async (event: StripeCardElementChangeEvent) => {
+  const handleChange = async (event: StripeCardElementChangeEvent) => {
     setError(event.error ? event.error.message : '')
     setDisabled(event.empty)
     console.log(clientSecret)
   }
 
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault()
+    setLoading(true)
+
+    // se for freeGames
+    // salva no banco
+    // redireciona para success
+
+    const result = await stripe!.confirmCardPayment(clientSecret, {
+      payment_method: {
+        card: elements!.getElement(CardElement)!
+      }
+    })
+
+    if (result.error) {
+      setError(`Payment failed ${result.error.message}`)
+      setLoading(false)
+    } else {
+      setError(null)
+      setLoading(false)
+
+      // salvar a compra no banco do Strapi
+      // redirectionar para a página de Sucesso
+    }
+  }
+
   return (
     <S.Wrapper>
-      <S.Body>
-        <Heading color="black" lineBottom size="small">
-          Payment
-        </Heading>
-        {freeGames ? (
-          <S.FreeGames>
-            So jogos gratuitos clique em comprar e se divirta
-          </S.FreeGames>
-        ) : (
-          <CardElement
-            options={{
-              hidePostalCode: true,
-              style: {
-                base: {
-                  fontSize: '16px'
+      <form onSubmit={handleSubmit}>
+        <S.Body>
+          <Heading color="black" lineBottom size="small">
+            Payment
+          </Heading>
+          {freeGames ? (
+            <S.FreeGames>
+              So jogos gratuitos clique em comprar e se divirta
+            </S.FreeGames>
+          ) : (
+            <CardElement
+              options={{
+                hidePostalCode: true,
+                style: {
+                  base: {
+                    fontSize: '16px'
+                  }
                 }
-              }
-            }}
-            onChange={handleSubmit}
-          />
-        )}
+              }}
+              onChange={handleChange}
+            />
+          )}
 
-        {error && (
-          <Error>
-            <ErrorOutline size={20} />
-            {error}
-          </Error>
-        )}
-      </S.Body>
+          {error && (
+            <Error>
+              <ErrorOutline size={20} />
+              {error}
+            </Error>
+          )}
+        </S.Body>
 
-      <S.Footer>
-        <Link href="/games" passHref>
-          <Button as="a" minimal>
-            Continue shopping
+        <S.Footer>
+          <Link href="/games" passHref>
+            <Button as="a" minimal>
+              Continue shopping
+            </Button>
+          </Link>
+
+          <Button
+            icon={loading ? <FormLoading /> : <AddShoppingCart />}
+            disabled={!freeGames && (!!error || disabled)}
+          >
+            {!loading && <span>Buy now</span>}
           </Button>
-        </Link>
-
-        <Button
-          icon={<AddShoppingCart />}
-          disabled={!freeGames && (!!error || disabled)}
-        >
-          Buy now
-        </Button>
-      </S.Footer>
+        </S.Footer>
+      </form>
     </S.Wrapper>
   )
 }

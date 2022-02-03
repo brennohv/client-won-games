@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { Error } from 'components/Form'
 
 export const Wrapper = styled.main``
 
@@ -6,6 +7,10 @@ export const Body = styled.div`
   ${({ theme }) => css`
     padding: ${theme.spacings.small};
     background-color: ${theme.colors.white};
+
+    ${Error} {
+      padding-top: ${theme.spacings.xsmall};
+    }
   `}
 `
 

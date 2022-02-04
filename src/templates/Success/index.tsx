@@ -7,6 +7,8 @@ import { GameCardProps } from 'components/GameCard'
 import { HighlightProps } from 'components/Highlight'
 import { Divider } from 'components/Divider'
 import Link from 'next/link'
+import { useCart } from 'hooks/use-cart'
+import { useEffect } from 'react'
 
 export type SuccessProps = {
   heading: string
@@ -19,6 +21,12 @@ const Success = ({
   recommendedHighlight,
   recommendedGames
 }: SuccessProps) => {
+  const { clearCart } = useCart()
+
+  useEffect(() => {
+    clearCart()
+  }, [clearCart])
+
   return (
     <Base>
       <Container>

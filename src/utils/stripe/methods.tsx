@@ -38,7 +38,7 @@ export const createPaymentIntent = async ({
 
 type CreatePaymentParams = {
   items: CartItem[]
-  paymentIntent: PaymentIntent
+  paymentIntent?: PaymentIntent
   jwt: string
 }
 

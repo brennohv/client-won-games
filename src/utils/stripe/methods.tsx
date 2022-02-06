@@ -1,4 +1,24 @@
+import { PaymentIntent } from '@stripe/stripe-js'
 import { CartItem } from 'hooks/use-cart'
+
+type FetcherParams = {
+  url: string
+  body: string
+  jwt: string
+}
+
+export const fetcher = async ({ url, body, jwt }: FetcherParams) => {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}${url}`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${jwt}`,
+      'Content-Type': 'application/json'
+    },
+    body
+  })
+
+  return await response.json()
+}
 
 export type CreatePaymentIntentProps = {
   items: CartItem[]
@@ -9,17 +29,31 @@ export const createPaymentIntent = async ({
   items,
   jwt
 }: CreatePaymentIntentProps) => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/orders/create-payment-intent`,
-    {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${jwt}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ cart: items })
-    }
-  )
+  return fetcher({
+    url: '/orders/create-payment-intent',
+    body: JSON.stringify({ cart: items }),
+    jwt
+  })
+}
 
-  return await response.json()
+type CreatePaymentParams = {
+  items: CartItem[]
+  paymentIntent: PaymentIntent
+  jwt: string
+}
+
+export const createPayment = async ({
+  items,
+  jwt,
+  paymentIntent
+}: CreatePaymentParams) => {
+  return fetcher({
+    url: '/orders',
+    body: JSON.stringify({
+      cart: items,
+      paymentIntentId: paymentIntent?.id,
+      paymentMethod: paymentIntent?.payment_method
+    }),
+    jwt
+  })
 }

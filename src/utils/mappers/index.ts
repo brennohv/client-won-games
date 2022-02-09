@@ -3,6 +3,7 @@ import { HighlightFragment } from 'graphql/generated/HighlightFragment'
 import { QueryGames_games } from 'graphql/generated/QueryGames'
 import { QueryHome_banners } from 'graphql/generated/QueryHome'
 import { QueryWishlists_wishlists_games } from 'graphql/generated/QueryWishlists'
+import { QueryOrders_orders } from 'graphql/generated/QueryOrders'
 
 export const bannerMapper = (banners: QueryHome_banners[]) => {
   return banners.map((banner) => ({
@@ -70,6 +71,29 @@ export const wishlistMapper = (
         img: `http://localhost:1337${game.cover?.url}`,
         developer: game.developers[0].name,
         price: game.price
+      }))
+    : []
+}
+
+export const ordersMapper = (orders: QueryOrders_orders[] | undefined) => {
+  return orders
+    ? orders.map((order) => ({
+        flag: order.card_brand ? order.card_brand : null,
+        img: order.card_brand
+          ? `/public/img/card/${order.card_brand}.png`
+          : null,
+        number: order.card_last4 ? `**** **** **** ${order.card_last4}` : null,
+        purchaseDate: new Intl.DateTimeFormat('en-US', {
+          day: 'numeric',
+          month: 'short',
+          year: 'numeric'
+        }).format(new Date(order.created_at)),
+        paymentInfo: order.games.map((game) => ({
+          id: game.id,
+          title: game.name,
+          price: formatPrice(game.price),
+          img: `${process.env.NEXT_PUBLIC_API_URL}${game.cover?.url}`
+        }))
       }))
     : []
 }

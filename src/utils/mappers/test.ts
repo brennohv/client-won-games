@@ -1,7 +1,9 @@
+import { ordersMapper } from './index'
 import { HighlightFragment } from 'graphql/generated/HighlightFragment'
 import { QueryGames_games } from 'graphql/generated/QueryGames'
 import { QueryHome_banners } from 'graphql/generated/QueryHome'
 import { bannerMapper, gamesMapper, highlightMapper, cartMapper } from '.'
+import { QueryOrders_orders } from 'graphql/generated/QueryOrders'
 
 describe('bannerMapper()', () => {
   it('should return the right format when mapped', () => {
@@ -124,6 +126,90 @@ describe('carMapper', () => {
         img: `http://localhost:1337/uploads/tomb_raider_goty_41d594f5f3.jpg`,
         price: '€3.99',
         title: 'Tomb Raider GOTY'
+      }
+    ])
+  })
+})
+
+describe('ordersMapper', () => {
+  const ordersFree = [
+    {
+      __typename: 'Order',
+      id: '5',
+      created_at: '2022-02-06T16:04:00.699Z',
+      card_brand: null,
+      card_last4: null,
+      games: [
+        {
+          id: '8',
+          name: 'Neverwinter Nights 2 Complete',
+          price: 0,
+          cover: {
+            url: '/uploads/neverwinter_nights_2_complete_0298bbe9b5.jpg'
+          }
+        }
+      ]
+    }
+  ] as QueryOrders_orders[]
+
+  const ordersNormal = [
+    {
+      __typename: 'Order',
+      id: '5',
+      created_at: '2022-02-06T16:04:00.699Z',
+      card_brand: 'visa',
+      card_last4: '4242',
+      games: [
+        {
+          id: '8',
+          name: 'Neverwinter Nights 2 Complete',
+          price: 120,
+          cover: {
+            url: '/uploads/neverwinter_nights_2_complete_0298bbe9b5.jpg'
+          }
+        }
+      ]
+    }
+  ] as QueryOrders_orders[]
+
+  it('should return [] if no orders', () => {
+    expect(ordersMapper(undefined)).toStrictEqual([])
+  })
+
+  it('should render correctly order free after mapper', () => {
+    expect(ordersMapper(ordersFree)).toStrictEqual([
+      {
+        flag: null,
+        img: null,
+        number: null,
+        purchaseDate: 'Feb 6, 2022',
+        paymentInfo: [
+          {
+            id: '8',
+            title: 'Neverwinter Nights 2 Complete',
+            price: '€0.00',
+            img: 'http://localhost:1337/uploads/neverwinter_nights_2_complete_0298bbe9b5.jpg'
+          }
+        ]
+      }
+    ])
+  })
+
+  it('should render correctly order normal after mapper', () => {
+    expect(ordersMapper(ordersNormal)).toStrictEqual([
+      {
+        flag: 'visa',
+        img: '/public/img/card/visa.png',
+        number: '**** **** **** 4242',
+        purchaseDate: 'Feb 6, 2022',
+        paymentInfo: [
+          {
+            id: '8',
+            title: 'Neverwinter Nights 2 Complete',
+            price: '€120.00',
+            img: 'http://localhost:1337/uploads/neverwinter_nights_2_complete_0298bbe9b5.jpg'
+          }
+        ]
       }
     ])
   })

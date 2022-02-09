@@ -22,3 +22,22 @@ const OrdersList = ({ orders }: OrdersListProps) => (
 )
 
 export default OrdersList
+
+/*
+      type GameItemProps = {
+    id: string;
+    title: string;
+    price: string;
+    img: string;
+    linkDownload?: string | undefined;
+    paymentInfo?: PaymentProps | undefined;
+
+
+    type PaymentProps = {
+  flag: string
+  number: string
+  purchaseDate: string
+  img: string
+}
+}
+*/

@@ -149,12 +149,13 @@ const PaymentForm = ({ session }: PaymentForm) => {
 
         <S.Footer>
           <Link href="/games" passHref>
-            <Button as="a" minimal>
+            <Button as="a" minimal fullWidht>
               Continue shopping
             </Button>
           </Link>
 
           <Button
+            fullWidht
             icon={loading ? <FormLoading /> : <AddShoppingCart />}
             disabled={!freeGames && (!!error || disabled)}
           >

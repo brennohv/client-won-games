@@ -51,7 +51,7 @@ const ExploreSidebar = ({
     //armazenando os values.name como um array, exemplo: platforms: ['windows', 'linux']
     const currentList = (values[name] as []) || []
 
-    //xor retornar um array da diferença simetrica entre 2 arrays
+    // xor retornar um array da diferença simetrica entre 2 arrays
     // values.name e array [name]: xor
     // estou fazendo um spread dos initialValues com a diferença simetrica de xor
 

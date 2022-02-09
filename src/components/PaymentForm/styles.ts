@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components'
 import { Error } from 'components/Form'
+import * as ButtonStyles from 'components/Button/styles'
 
 export const Wrapper = styled.main``
 
@@ -21,6 +22,12 @@ export const Footer = styled.div`
     display: flex;
     align-items: center;
     font-weight: ${theme.font.bold};
+
+    ${ButtonStyles.Wrapper} {
+      padding-left: ${theme.spacings.xxsmall};
+      padding-right: ${theme.spacings.xxsmall};
+      outline: 0;
+    }
   `}
 `
 export const FreeGames = styled.p`

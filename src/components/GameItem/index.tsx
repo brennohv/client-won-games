@@ -16,6 +16,9 @@ export type GameItemProps = {
   img: string
   linkDownload?: string
   paymentInfo?: PaymentProps
+  hideIsInCart?: boolean
+  // hideIsInCart faz com que eu possa utilizar esse componente em orderList
+  // sem que aparaça o removeFromCart
 }
 
 const GameItem = ({
@@ -24,7 +27,8 @@ const GameItem = ({
   price,
   img,
   linkDownload,
-  paymentInfo
+  paymentInfo,
+  hideIsInCart
 }: GameItemProps) => {
   const { isInCart, removeFromCart } = useCart()
   return (
@@ -49,7 +53,7 @@ const GameItem = ({
           </S.Title>
           <S.Group>
             <S.Price>{price}</S.Price>
-            {isInCart(id) && (
+            {!hideIsInCart && isInCart(id) && (
               <S.RemoveFromCart onClick={() => removeFromCart(id)}>
                 Remove
               </S.RemoveFromCart>
@@ -63,10 +67,12 @@ const GameItem = ({
           <p>{paymentInfo?.purchaseDate}</p>
           <S.CardInfo>
             <S.PurchaseDate>{paymentInfo?.number}</S.PurchaseDate>
-            <S.CardImage
-              src={paymentInfo?.img}
-              alt={paymentInfo?.flag}
-            ></S.CardImage>
+            {!!paymentInfo.img && (
+              <S.CardImage
+                src={paymentInfo?.img}
+                alt={paymentInfo?.flag}
+              ></S.CardImage>
+            )}
           </S.CardInfo>
         </S.SectionPayment>
       )}

@@ -155,7 +155,7 @@ describe('ordersMapper', () => {
   const ordersNormal = [
     {
       __typename: 'Order',
-      id: '5',
+      id: '6',
       created_at: '2022-02-06T16:04:00.699Z',
       card_brand: 'visa',
       card_last4: '4242',
@@ -179,11 +179,14 @@ describe('ordersMapper', () => {
   it('should render correctly order free after mapper', () => {
     expect(ordersMapper(ordersFree)).toStrictEqual([
       {
-        flag: null,
-        img: null,
-        number: null,
-        purchaseDate: 'Feb 6, 2022',
-        paymentInfo: [
+        id: '5',
+        paymentInfo: {
+          flag: null,
+          img: null,
+          number: 'Free Game',
+          purchaseDate: 'Feb 6, 2022'
+        },
+        games: [
           {
             id: '8',
             title: 'Neverwinter Nights 2 Complete',
@@ -198,11 +201,14 @@ describe('ordersMapper', () => {
   it('should render correctly order normal after mapper', () => {
     expect(ordersMapper(ordersNormal)).toStrictEqual([
       {
-        flag: 'visa',
-        img: '/public/img/card/visa.png',
-        number: '**** **** **** 4242',
-        purchaseDate: 'Feb 6, 2022',
-        paymentInfo: [
+        id: '6',
+        paymentInfo: {
+          flag: 'visa',
+          img: '/img/card/visa.png',
+          number: '**** **** **** 4242',
+          purchaseDate: 'Feb 6, 2022'
+        },
+        games: [
           {
             id: '8',
             title: 'Neverwinter Nights 2 Complete',

@@ -78,17 +78,20 @@ export const wishlistMapper = (
 export const ordersMapper = (orders: QueryOrders_orders[] | undefined) => {
   return orders
     ? orders.map((order) => ({
-        flag: order.card_brand ? order.card_brand : null,
-        img: order.card_brand
-          ? `/public/img/card/${order.card_brand}.png`
-          : null,
-        number: order.card_last4 ? `**** **** **** ${order.card_last4}` : null,
-        purchaseDate: new Intl.DateTimeFormat('en-US', {
-          day: 'numeric',
-          month: 'short',
-          year: 'numeric'
-        }).format(new Date(order.created_at)),
-        paymentInfo: order.games.map((game) => ({
+        id: order.id,
+        paymentInfo: {
+          flag: order.card_brand ? order.card_brand : null,
+          img: order.card_brand ? `/img/card/${order.card_brand}.png` : null,
+          number: order.card_last4
+            ? `**** **** **** ${order.card_last4}`
+            : 'Free Game',
+          purchaseDate: new Intl.DateTimeFormat('en-US', {
+            day: 'numeric',
+            month: 'short',
+            year: 'numeric'
+          }).format(new Date(order.created_at))
+        },
+        games: order.games.map((game) => ({
           id: game.id,
           title: game.name,
           price: formatPrice(game.price),

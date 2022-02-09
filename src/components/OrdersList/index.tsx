@@ -1,10 +1,16 @@
 import Empty from 'components/Empty'
-import GameItem, { GameItemProps } from 'components/GameItem'
+import GameItem, { GameItemProps, PaymentProps } from 'components/GameItem'
 import Heading from 'components/Heading'
 import * as S from './styles'
 
+type OrderProps = {
+  id: string
+  paymentInfo: PaymentProps
+  games: GameItemProps[]
+}
+
 export type OrdersListProps = {
-  orders?: GameItemProps[]
+  orders?: OrderProps[]
 }
 
 const OrdersList = ({ orders }: OrdersListProps) => (
@@ -14,7 +20,16 @@ const OrdersList = ({ orders }: OrdersListProps) => (
     </Heading>
 
     {orders?.length ? (
-      orders.map((order) => <GameItem key={order.title} {...order}></GameItem>)
+      orders.map((order) => {
+        return order.games.map((game) => (
+          <GameItem
+            hideIsInCart
+            key={`${order.id} ${game.id}`}
+            paymentInfo={order.paymentInfo}
+            {...game}
+          ></GameItem>
+        ))
+      })
     ) : (
       <Empty title="No Orders" hasLink description="make your first purchase" />
     )}

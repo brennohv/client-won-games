@@ -54,7 +54,7 @@ describe('<GameItem />', () => {
   it('should render the Payment info', () => {
     const paymentInfo = {
       flag: 'mastercard',
-      img: '/img/master-card.png',
+      img: '/img/card/mastercard.png',
       number: '**** **** **** 4326',
       purchaseDate: 'Purchase made on 07/20/2020 at 20:32'
     }
@@ -68,5 +68,36 @@ describe('<GameItem />', () => {
 
     expect(screen.getByText(paymentInfo.purchaseDate)).toBeInTheDocument()
     expect(screen.getByText(paymentInfo.number)).toBeInTheDocument()
+  })
+
+  it('should do not render img when free game', () => {
+    const paymentInfo = {
+      flag: null,
+      img: null,
+      number: 'Free Game',
+      purchaseDate: 'Purchase made on 07/20/2020 at 20:32'
+    }
+
+    render(<GameItem {...props} paymentInfo={paymentInfo} />)
+
+    expect(screen.getByText(/Free game/i)).toBeInTheDocument()
+  })
+
+  it('should do not render removeFromCart when passed hideIsInCart ', () => {
+    const cartProviderProps = {
+      ...CartContextDefaultValues,
+      isInCart: () => true
+    }
+    const paymentInfo = {
+      flag: null,
+      img: null,
+      number: 'Free Game',
+      purchaseDate: 'Purchase made on 07/20/2020 at 20:32'
+    }
+    render(<GameItem {...props} paymentInfo={paymentInfo} hideIsInCart />, {
+      cartProviderProps
+    })
+
+    expect(screen.queryByText(/remove/)).not.toBeInTheDocument()
   })
 })

@@ -21,6 +21,11 @@ export default function OrdersPage({ orders }: OrdersListProps) {
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await protectedRoutes(context)
   const client = initializeApollo(null, session)
+
+  if (!session) {
+    return { props: {} }
+  }
+
   const { data } = await client.query<QueryOrders, QueryOrdersVariables>({
     query: QUERY_ORDERS,
     variables: {

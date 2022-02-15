@@ -1,4 +1,5 @@
 import 'match-media-mock'
+import 'next-image-mock'
 
 import { render, screen } from 'utils/test-utils'
 import highLightMock from 'components/Highlight/mock'

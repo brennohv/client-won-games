@@ -11,11 +11,11 @@ export const Wrapper = styled.article`
     background-color: ${theme.colors.white};
   `}
 `
-export const Image = styled.img``
 
 export const ImageBox = styled.a`
-  height: 14rem;
+  min-height: 14rem;
   width: 100%;
+  position: relative;
   background: #f6f7f8;
   background-image: linear-gradient(
     to right,
@@ -27,8 +27,6 @@ export const ImageBox = styled.a`
   background-size: 80rem 14rem;
   animation: placeholderShimmer 1s linear infinite forwards;
   img {
-    width: 100%;
-    height: 100%;
     object-fit: cover;
   }
   @keyframes placeholderShimmer {

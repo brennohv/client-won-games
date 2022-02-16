@@ -12,6 +12,7 @@ import { useRouter } from 'next/router'
 import { parseQueryStringToFilter, parseQueryStringToWhere } from 'utils/filter'
 import { ParsedUrlQueryInput } from 'querystring'
 import Empty from 'components/Empty'
+import { getImageUrl } from 'utils/getImageUrl'
 
 export type GamesTemplateProps = {
   filterItems: ItemProps[]
@@ -74,7 +75,7 @@ const GamesTemplate = ({ filterItems }: GamesTemplateProps) => {
                     slug={game.slug}
                     title={game.name}
                     developer={game.developers[0].name}
-                    img={`http://localhost:1337${game.cover!.url}`}
+                    img={`${getImageUrl(game.cover!.url)}`}
                     price={game.price}
                   />
                 ))}

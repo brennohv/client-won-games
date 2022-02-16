@@ -16,6 +16,7 @@ import {
   QueryUpComingGamesVariables
 } from 'graphql/generated/QueryUpComingGames'
 import { QUERY_UPCOMING } from 'graphql/queries/upComing'
+import { getImageUrl } from 'utils/getImageUrl'
 
 const apolloClient = initializeApollo()
 const TODAY = new Date().toISOString().slice(0, 10)
@@ -75,7 +76,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   return {
     revalidate: 60,
     props: {
-      cover: `http://localhost:1337${game.cover?.src}`,
+      cover: `${getImageUrl(game.cover?.src)}`,
       gameInfo: {
         id: game.id,
         title: game.name,
@@ -83,7 +84,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         price: game.price
       },
       gallery: game.gallery.map((image) => ({
-        src: `http://localhost:1337${image.src}`,
+        src: `${getImageUrl(image.src)}`,
         label: image.label
       })),
       description: game.description,

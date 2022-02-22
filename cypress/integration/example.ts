@@ -5,7 +5,7 @@ describe('Cypress TS', () => {
     cy.google()
   })
 
-  it('should visit url, then change dark or ligth theme', () => {
+  it('should visit url, then change dark/ligth theme', () => {
     cy.visit('https://willianjusten.com.br')
 
     cy.findByTitle(/Mudar o tema/i).click()

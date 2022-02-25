@@ -7,8 +7,8 @@ describe('Home', () => {
     cy.shouldRenderBanner()
 
     cy.shouldRenderShowcase({ name: 'News' })
-    cy.shouldRenderShowcase({ name: 'Most popular' })
-    cy.shouldRenderShowcase({ name: 'Upcoming' })
-    cy.shouldRenderShowcase({ name: 'Free games' })
+    cy.shouldRenderShowcase({ name: 'Most popular', highlight: true })
+    cy.shouldRenderShowcase({ name: 'Upcoming', highlight: true })
+    cy.shouldRenderShowcase({ name: 'Free games' , highlight: true })
   });
 });

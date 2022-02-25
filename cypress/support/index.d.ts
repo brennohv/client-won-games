@@ -9,6 +9,12 @@ type ShowcaseAttributes = {
 declare namespace Cypress {
   interface Chainable {
     /**
+     * Custom command to check showcase in page
+     * @example cy.shouldRenderShowcase()
+      */
+    shouldRenderShowcase(attrs: ShowcaseAttributes): Chainable<Element>
+
+    /**
      * Custom command to visit google page
      * @example cy.google()
      */
@@ -20,10 +26,6 @@ declare namespace Cypress {
      */
     shouldRenderBanner(): Chainable<Element>
 
-    /**
-     * Custom command to check showcase in page
-     * @example cy.shouldRenderShowcase()
-      */
-    shouldRenderShowcase(attrs: ShowcaseAttributes): Chainable<Element>
+
   }
 }

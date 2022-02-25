@@ -17,7 +17,7 @@ const Showcase = ({
   highlight,
   gameCardColor
 }: ShowCaseProps) => (
-  <S.Wrapper>
+  <S.Wrapper data-cy={heading || 'showcase'}>
     {!!heading && (
       <Heading lineLeft lineColor="secondary">
         {heading}

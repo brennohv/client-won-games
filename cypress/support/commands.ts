@@ -61,7 +61,7 @@ Cypress.Commands.add('shouldRenderShowcase', ({name, highlight = false, games = 
         cy.findByRole('link').should('have.attr', 'href')
       })
     }
-
+ //aaaa
     if(games) {
       cy.get(`[data-cy="games"]`).should('have.length.greaterThan', 0)
     }

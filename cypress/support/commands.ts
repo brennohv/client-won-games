@@ -50,7 +50,7 @@ Cypress.Commands.add('shouldRenderBanner', () => {
   })
 })
 
-Cypress.Commands.add('shouldRenderShowcase', ({name, highlight = false}) => {
+Cypress.Commands.add('shouldRenderShowcase', ({name, highlight = false, games = false}) => {
   cy.get(`[data-cy="${name}"]`).within(() => {
     cy.findByRole('heading', { name }).should('exist')
 
@@ -61,5 +61,10 @@ Cypress.Commands.add('shouldRenderShowcase', ({name, highlight = false}) => {
         cy.findByRole('link').should('have.attr', 'href')
       })
     }
+
+    if(games) {
+      cy.get(`[data-cy="games"]`).should('have.length.greaterThan', 0)
+    }
+
   })
 })

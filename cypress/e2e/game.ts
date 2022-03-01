@@ -13,5 +13,10 @@ describe('Game', () => {
 
     // Gallery
     cy.findAllByRole('button', { name: /Thumb/i}).should('have.length.gt', 0)
+
+    // Content
+    cy.getByDataCy('content').within(() => {
+      cy.findByRole('heading', { name: /description/i }).should('exist')
+    }).children().should('have.length.at.least', 2)
   });
 });

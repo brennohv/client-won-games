@@ -29,6 +29,10 @@ import '@testing-library/cypress/add-commands';
 
 Cypress.Commands.add('google', () => cy.visit('https://google.com'))
 
+Cypress.Commands.add('getByDataCy', (selector, ...args) => {
+  cy.get(`[data-cy="${selector}"]`, ...args)
+})
+
 Cypress.Commands.add('shouldRenderBanner', () => {
   // within é uma callback que cria um escopo dentro do elemento anterior */
   cy.get('.slick-slider').within(() => {
@@ -51,17 +55,17 @@ Cypress.Commands.add('shouldRenderBanner', () => {
 })
 
 Cypress.Commands.add('shouldRenderShowcase', ({name, highlight = false, games = false}) => {
-  cy.get(`[data-cy="${name}"]`).within(() => {
+  cy.getByDataCy(`${name}`).within(() => {
     cy.findByRole('heading', { name }).should('exist')
 
-    cy.get(`[data-cy="highlight"]`).should(highlight ? 'exist' : 'not.exist')
+    cy.getByDataCy("highlight").should(highlight ? 'exist' : 'not.exist')
 
     if(highlight) {
       cy.get(`[data-cy="highlight"]`).within(() => {
         cy.findByRole('link').should('have.attr', 'href')
       })
     }
- //aaaa
+
     if(games) {
       cy.get(`[data-cy="games"]`).should('have.length.greaterThan', 0)
     }

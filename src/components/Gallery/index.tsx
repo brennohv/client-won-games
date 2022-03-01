@@ -88,7 +88,7 @@ const Gallery = ({ images }: GalleryProps) => {
             role={'button'}
             key={`thumb-${index}`}
             src={image.src}
-            alt={image.label}
+            alt={`Thumb - ${image.label}`}
           ></S.Image>
         ))}
       </Slider>

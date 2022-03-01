@@ -220,6 +220,7 @@ exports[`<GameInfo /> should render the game informations 1`] = `
 
 <div
   class="c0"
+  data-cy="game-info"
 >
   <div
     class="c1"

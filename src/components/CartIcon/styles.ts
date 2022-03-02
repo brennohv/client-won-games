@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.button`
   ${({ theme }) => css`
     width: 2.4rem;
     height: 2.4rem;

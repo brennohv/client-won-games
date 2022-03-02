@@ -54,7 +54,10 @@ const GameItem = ({
           <S.Group>
             <S.Price>{price}</S.Price>
             {!hideIsInCart && isInCart(id) && (
-              <S.RemoveFromCart onClick={() => removeFromCart(id)}>
+              <S.RemoveFromCart
+                role="button"
+                onClick={() => removeFromCart(id)}
+              >
                 Remove
               </S.RemoveFromCart>
             )}

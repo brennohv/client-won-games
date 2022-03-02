@@ -8,7 +8,7 @@ describe('<CartIcon />', () => {
     render(<CartIcon />)
 
     expect(screen.getByLabelText('Shopping cart')).toBeInTheDocument()
-    expect(screen.queryByLabelText(/Quantity/i)).not.toBeInTheDocument()
+    expect(screen.queryByLabelText(/cart items/i)).not.toBeInTheDocument()
   })
 
   it('should render the Badge', () => {
@@ -16,7 +16,7 @@ describe('<CartIcon />', () => {
       cartProviderProps: { ...CartContextDefaultValues, quantity: 3 }
     })
 
-    expect(screen.getByLabelText(/Quantity/i)).toBeInTheDocument()
+    expect(screen.getByLabelText(/cart items/i)).toBeInTheDocument()
     expect(screen.getByText(/3/)).toBeInTheDocument()
   })
 })

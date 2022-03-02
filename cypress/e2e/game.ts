@@ -1,9 +1,12 @@
 /// <reference path="../support/index.d.ts" />
 
 describe('Game', () => {
-  it('should render game page', () => {
-    cy.visit('/game/cyberpunk-2077')
 
+  before(() => {
+    cy.visit('/game/cyberpunk-2077')
+  })
+
+  it.skip('should render game page', () => {
     cy.getByDataCy('game-info').within(() => {
       cy.findByRole('heading', { name: 'Cyberpunk 2077'}).should('exist')
       cy.findByText('€40.19').should('exist')
@@ -39,5 +42,37 @@ describe('Game', () => {
     //Showcase
     cy.shouldRenderShowcase({name:"Upcoming", highlight: true})
     cy.shouldRenderShowcase({name:"You may like these games", games: true})
+  });
+
+  it('should add/remove to cart when click', () => {
+    // Adicionando no carrinho
+    cy.getByDataCy('game-info').within(() => {
+      cy.findByRole('button', {name: /add to cart/i}).click()
+      cy.findByRole('button', {name : /remove from cart/i}).should('exist')
+    })
+
+    // Abrindo Cart-list
+    cy
+      .findAllByRole('button', {name: /cart items/i})
+      .first()
+      .should('have.text', 1)
+      .click()
+
+    // Verificando se há o jogo no carrinho
+    cy.getByDataCy('cart-list').within(() => {
+      cy.findByRole('heading', {name: /Cyberpunk 2077/i}).should('exist')
+      cy.findByRole('button', {name: /Remove/i}).should('exist')
+      cy.findByRole('heading', {name: /You do not have games on cart/i}).should('not.exist')
+    })
+
+    // Fechando Cart-list
+    cy.findAllByLabelText(/shopping cart/i)
+      .first()
+      .click()
+
+    // Removendo do carrinho
+    cy.findByRole('button', {name: /remove from cart/i}).click()
+
+    cy.findByRole('button', {name: /add to cart/i}).should('exist')
   });
 });

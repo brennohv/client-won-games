@@ -37,6 +37,14 @@ declare namespace Cypress {
      */
     shouldRenderBanner(): Chainable<Element>
 
+    /**
+     * Custom command to do map in fields
+     * @example cy.getFields([
+          { label: 'Lowest to highest', name: 'price:asc' },
+          { label: 'Highest to lowest', name: 'price:desc' }
+      ])
+     */
+
 
   }
 }

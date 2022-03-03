@@ -1,12 +1,11 @@
 /// <reference path="../support/index.d.ts" />
 
 describe('Game', () => {
-
   before(() => {
     cy.visit('/game/cyberpunk-2077')
   })
 
-  it.skip('should render game page', () => {
+  it('should render game page', () => {
     cy.getByDataCy('game-info').within(() => {
       cy.findByRole('heading', { name: 'Cyberpunk 2077'}).should('exist')
       cy.findByText('€40.19').should('exist')
@@ -72,7 +71,6 @@ describe('Game', () => {
 
     // Removendo do carrinho
     cy.findByRole('button', {name: /remove from cart/i}).click()
-
     cy.findByRole('button', {name: /add to cart/i}).should('exist')
   });
 });

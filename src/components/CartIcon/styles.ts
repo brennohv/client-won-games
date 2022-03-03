@@ -4,8 +4,14 @@ export const Wrapper = styled.button`
   ${({ theme }) => css`
     width: 2.4rem;
     height: 2.4rem;
-    color: ${theme.colors.white};
+    cursor: pointer;
     position: relative;
+    border: none;
+    background-color: transparent;
+
+    & > svg {
+      color: ${theme.colors.white};
+    }
   `}
 `
 

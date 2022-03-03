@@ -69,6 +69,11 @@ Cypress.Commands.add('shouldRenderShowcase', ({name, highlight = false, games = 
     if(games) {
       cy.get(`[data-cy="games"]`).should('have.length.greaterThan', 0)
     }
+  })
+})
 
+Cypress.Commands.add('getFields', (fields) => {
+  fields.map(({ label }) => {
+    cy.findByText(label).should('exist')
   })
 })

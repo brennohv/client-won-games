@@ -7,8 +7,13 @@ type ShowcaseAttributes = {
   games?: boolean
 }
 
-type DataCyAtributes = {
+type DataCyAttributes = {
   selector: string
+}
+
+type GetFieldsAttributes = {
+  label: string
+  name: string | number
 }
 
 declare namespace Cypress {
@@ -44,7 +49,7 @@ declare namespace Cypress {
           { label: 'Highest to lowest', name: 'price:desc' }
       ])
      */
-
+    getFields(fields: GetFieldsAttributes[]): Chainable<Element>
 
   }
 }

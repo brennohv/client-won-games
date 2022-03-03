@@ -12,17 +12,9 @@ describe('Games Page', () => {
     cy.findByRole('heading', {name: /Genres/i}).should('exist')
 
     //Fields
-    priceFields.map(({ label }) => {
-      cy.findByText(label).should('exist')
-    })
-    categoriesField.map(({ label }) => {
-      cy.findByText(label).should('exist')
-    })
-    platformsFields.map(({ label }) => {
-      cy.findByText(label).should('exist')
-    })
-    sortFields.map(({ label }) => {
-      cy.findByText(label).should('exist')
-    })
+    cy.getFields(priceFields)
+    cy.getFields(categoriesField)
+    cy.getFields(platformsFields)
+    cy.getFields(sortFields)
   });
 });

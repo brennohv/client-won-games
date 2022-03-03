@@ -40,7 +40,12 @@ describe('Games Page', () => {
     cy.findByText(/Highest to lowest/i).click()
     cy.location('href').should('contain', 'price%3Adesc')
     cy.getByDataCy('games').first().within(() => {
-      cy.findByText('FREE').should('not.exist')
+      //pegando o elemento de preço do primeiro game
+      cy.findByLabelText('price')
+        .invoke('text')
+        .then(text => text.replace('€', ''))
+        .then(parseFloat)
+        .should('be.gt', 0)
     })
   });
 });

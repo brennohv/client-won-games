@@ -27,4 +27,20 @@ describe('Games Page', () => {
       .click()
     cy.getByDataCy('games').should('have.length', 30)
   });
+
+  it('should order games when clicked Lowest/Highest', () => {
+    // Lowest to highest
+    cy.findByText(/lowest to highest/i).click()
+    cy.location('href').should('contain', 'price%3Aasc')
+    cy.getByDataCy('games').first().within(() => {
+      cy.findByText('FREE').should('exist')
+    })
+
+    // Highest to lowest
+    cy.findByText(/Highest to lowest/i).click()
+    cy.location('href').should('contain', 'price%3Adesc')
+    cy.getByDataCy('games').first().within(() => {
+      cy.findByText('FREE').should('not.exist')
+    })
+  });
 });

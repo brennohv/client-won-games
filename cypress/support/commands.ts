@@ -94,3 +94,8 @@ Cypress.Commands.add('shouldBeLessThan', (value, label) => {
       .then(parseFloat)
       .should('be.lt', value)
 })
+
+Cypress.Commands.add('shouldBeEqualFree', (label) => {
+  cy.findByLabelText(label)
+      .should('have.text', 'FREE')
+})

@@ -66,5 +66,13 @@ declare namespace Cypress {
      * }
      */
     shouldBeLessThan(value: number, label: string): Chainable<Element>
+
+    /**
+     * Custom command to check price lessthan
+     * @example cy.shouldBeEqualFree( label) => {
+     *  cy.findByLabelText(label).should( 'have.text', 'FREE' )
+     * }
+     */
+    shouldBeEqualFree(label: string): Chainable<Element>
   }
 }

@@ -44,4 +44,48 @@ describe('Games Page', () => {
       cy.shouldBeGreaterThan(0 ,'price')
     })
   });
+
+  it('should render only games that match the price select', () => {
+    //Free games
+    cy.findByLabelText('Free').click()
+    cy.location('href').should('contain', 'price_lte=0')
+    cy.getByDataCy('games').first().within( () => {
+      cy.shouldBeEqualFree('price')
+    })
+
+    //$50
+    cy.findByLabelText('Under $50').click()
+    cy.location('href').should('contain', 'price_lte=50')
+    cy.getByDataCy('games').first().within( () => {
+      cy.shouldBeLessThan(50, 'price')
+    })
+
+    //$100
+    cy.findByLabelText('Under $100').click()
+    cy.location('href').should('contain', 'price_lte=100')
+    cy.getByDataCy('games').first().within( () => {
+      cy.shouldBeLessThan(100, 'price')
+    })
+
+    //$150
+    cy.findByLabelText('Under $150').click()
+    cy.location('href').should('contain', 'price_lte=150')
+    cy.getByDataCy('games').first().within( () => {
+      cy.shouldBeLessThan(150, 'price')
+    })
+
+    //$250
+    cy.findByLabelText('Under $250').click()
+    cy.location('href').should('contain', 'price_lte=250')
+    cy.getByDataCy('games').first().within( () => {
+      cy.shouldBeLessThan(250, 'price')
+    })
+
+    //$500
+    cy.findByLabelText('Under $500').click()
+    cy.location('href').should('contain', 'price_lte=500')
+    cy.getByDataCy('games').first().within( () => {
+      cy.shouldBeLessThan(500, 'price')
+    })
+  });
 });

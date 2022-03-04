@@ -77,3 +77,20 @@ Cypress.Commands.add('getFields', (fields) => {
     cy.findByText(label).should('exist')
   })
 })
+
+
+Cypress.Commands.add('shouldBeGreaterThan', (value, label) => {
+  cy.findByLabelText(label)
+      .invoke('text')
+      .then(text => text.replace('€', ''))
+      .then(parseFloat)
+      .should('be.gt', value)
+})
+
+Cypress.Commands.add('shouldBeLessThan', (value, label) => {
+  cy.findByLabelText(label)
+      .invoke('text')
+      .then(text => text.replace('€', ''))
+      .then(parseFloat)
+      .should('be.lt', value)
+})

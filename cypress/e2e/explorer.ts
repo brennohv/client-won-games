@@ -41,11 +41,7 @@ describe('Games Page', () => {
     cy.location('href').should('contain', 'price%3Adesc')
     cy.getByDataCy('games').first().within(() => {
       //pegando o elemento de preço do primeiro game
-      cy.findByLabelText('price')
-        .invoke('text')
-        .then(text => text.replace('€', ''))
-        .then(parseFloat)
-        .should('be.gt', 0)
+      cy.shouldBeGreaterThan(0 ,'price')
     })
   });
 });

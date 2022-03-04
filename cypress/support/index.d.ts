@@ -51,5 +51,20 @@ declare namespace Cypress {
      */
     getFields(fields: GetFieldsAttributes[]): Chainable<Element>
 
+    /**
+     * Custom command to check price greatherthan
+     * @example cy.shouldBeGreatherThan(number, label) => {
+     *   cy.findByLabelText(label).should('be.gt', value)
+     * }
+     */
+    shouldBeGreaterThan(value: number, label: string): Chainable<Element>
+
+    /**
+     * Custom command to check price lessthan
+     * @example cy.shouldBelessThan(number, label) => {
+     *  cy.findByLabelText(label).should('be.lt', value)
+     * }
+     */
+    shouldBeLessThan(value: number, label: string): Chainable<Element>
   }
 }

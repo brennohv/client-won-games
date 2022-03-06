@@ -6,7 +6,7 @@ describe('Games Page', () => {
     cy.visit('/games')
   })
 
-  it('should render fields and headings in games page', () => {
+  it.skip('should render fields and headings in games page', () => {
     // Headings
     cy.findByRole('heading', {name: /Sort by price/i}).should('exist')
     cy.findByRole('heading', {name: /^Price/i}).should('exist')
@@ -20,7 +20,7 @@ describe('Games Page', () => {
     cy.getFields(sortFields)
   });
 
-  it('should render fifteen games and show more games when show more is clicked', () => {
+  it.skip('should render fifteen games and show more games when show more is clicked', () => {
     cy.getByDataCy('games').should('have.length', 15)
     cy.findByRole('button', {name: /show more/i})
       .should('exist')
@@ -28,7 +28,7 @@ describe('Games Page', () => {
     cy.getByDataCy('games').should('have.length', 30)
   });
 
-  it('should order games when clicked Lowest/Highest', () => {
+  it.skip('should order games when clicked Lowest/Highest', () => {
     // Lowest to highest
     cy.findByText(/lowest to highest/i).click()
     cy.location('href').should('contain', 'price%3Aasc')
@@ -45,7 +45,7 @@ describe('Games Page', () => {
     })
   });
 
-  it('should render only games that match the price select', () => {
+  it.skip('should render only games that match the price select', () => {
     //Free games
     cy.findByLabelText('Free').click()
     cy.location('href').should('contain', 'price_lte=0')
@@ -87,5 +87,26 @@ describe('Games Page', () => {
     cy.getByDataCy('games').first().within( () => {
       cy.shouldBeLessThan(500, 'price')
     })
+  });
+
+  it.skip('should order games when click platforms or genres', () => {
+    cy.findByLabelText(/Windows/i).click()
+    cy.findByLabelText(/Linux/i).click()
+    cy.findByLabelText(/mac os/i).click()
+    cy.findByLabelText(/action/i).click()
+    cy.location('href').should('contain', 'platforms=windows')
+    cy.location('href').should('contain', 'platforms=mac')
+    cy.location('href').should('contain', 'platforms=linux')
+    cy.location('href').should('contain', 'categories=action')
+  });
+
+  it('should not render games when it does not have', () => {
+    cy.visit('/games')
+    cy.findByLabelText(/free/i).click()
+    cy.findByLabelText(/linux/i).click()
+    cy.findByLabelText(/action/i).click()
+
+    cy.getByDataCy('games').should('not.exist')
+    cy.findByRole('image', {name: /A person playing video game/i}).should('exist')
   });
 });

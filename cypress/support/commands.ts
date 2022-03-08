@@ -99,3 +99,13 @@ Cypress.Commands.add('shouldBeEqualFree', (label) => {
   cy.findByLabelText(label)
       .should('have.text', 'FREE')
 })
+
+Cypress.Commands.add('shouldSignUp', (user) => {
+  cy.visit('/sign-up')
+
+    cy.findByPlaceholderText(/username/i).type(user.username)
+    cy.findByPlaceholderText(/email/i).type(user.email)
+    cy.findByPlaceholderText(/^password/i).type(user.password)
+    cy.findByPlaceholderText(/confirm password/i).type(user.password)
+    cy.findByRole('button', {name: /sign up now/i}).click()
+})

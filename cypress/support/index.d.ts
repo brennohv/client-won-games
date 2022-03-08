@@ -1,6 +1,12 @@
 // load type definitions from Cypress module
 /// <reference types="cypress" />
 
+type Users = {
+  username: string
+  email: string
+  password: string
+}
+
 type ShowcaseAttributes = {
   name: string
   highlight?: boolean
@@ -35,6 +41,16 @@ declare namespace Cypress {
      * @example cy.google()
      */
     google(): Chainable<Window>
+
+    /**
+     * Custom command to sign-up rand()
+     * @example cy.createUser(user: {
+     *  username:
+     *  email:
+     *  password:
+     * })
+     */
+    createUser(user: Users): Chainable<Element>
 
     /**
      * Custom command to render banner elements

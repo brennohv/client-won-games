@@ -100,7 +100,7 @@ Cypress.Commands.add('shouldBeEqualFree', (label) => {
       .should('have.text', 'FREE')
 })
 
-Cypress.Commands.add('shouldSignUp', (user) => {
+Cypress.Commands.add('createUser', (user) => {
   cy.visit('/sign-up')
 
     cy.findByPlaceholderText(/username/i).type(user.username)

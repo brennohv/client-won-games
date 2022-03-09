@@ -22,7 +22,7 @@ describe('<FormSignIn />', () => {
     expect(screen.getByPlaceholderText('Password')).toBeInTheDocument()
     //verifique o button
     expect(
-      screen.getByRole('button', { name: /Sing in now/i })
+      screen.getByRole('button', { name: /Sign in now/i })
     ).toBeInTheDocument()
 
     expect(container.parentElement).toMatchSnapshot()

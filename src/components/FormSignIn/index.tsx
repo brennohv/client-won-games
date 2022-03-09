@@ -92,7 +92,7 @@ const FormSignIn = () => {
         </Link>
 
         <Button size="large" fullWidht type="submit" disabled={loading}>
-          {loading ? <FormLoading /> : <span>Sing in now</span>}
+          {loading ? <FormLoading /> : <span>Sign in now</span>}
         </Button>
 
         <FormLink>

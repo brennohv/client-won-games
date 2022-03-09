@@ -53,6 +53,20 @@ declare namespace Cypress {
     createUser(user: Users): Chainable<Element>
 
     /**
+     * Custom command to sign-in(`user?`).
+     *
+     * `Default:*`
+     *
+     *  email: e2e@wongames.com,
+     *
+     *  password: 123456,
+     *
+     *  username: e2eTeste
+     * @example cy.signIn(user?: {username:, email:, password: })
+     */
+    signIn(user?: Users): Chainable<Element>
+
+    /**
      * Custom command to render banner elements
      * @example cy.shouldRenderBanner()
      */

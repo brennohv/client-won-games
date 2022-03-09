@@ -34,10 +34,10 @@ const FormProfile = ({ email, username }: FormProfileProps) => {
         <S.ButtonContainer>
           <Link href={`/forgot-password?email=${email}`} passHref>
             <Button minimal size="medium" as="a">
-              Reset your password
+              Reset password
             </Button>
           </Link>
-          <Button size="large">Save</Button>
+          <Button size="medium">Save</Button>
         </S.ButtonContainer>
       </S.Form>
     </>

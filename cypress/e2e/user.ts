@@ -12,7 +12,7 @@ describe('user', () => {
     cy.findByRole('button' , {name: user.username}).should('exist')
   });
 
-  it('should sign-in', () => {
+  it.only('should sign-in', () => {
     cy.visit('/sign-in')
 
     cy.signIn()
@@ -22,7 +22,7 @@ describe('user', () => {
     cy.findByRole('link', {name: /sign in/i}).should('exist')
   });
 
-  it.only('should access protected path without sign-in', () => {
+  it('should access protected path without sign-in', () => {
     cy.visit('/profile/me')
 
     cy.url().should('eq', `${Cypress.config().baseUrl}/sign-in?callbackUrl=/profile/me`)

@@ -19,7 +19,7 @@ describe('Forgot Password', () => {
   });
 
   it('should fill input and  does not success response', () => {
-    cy.intercept('POST', '**/auth/forgot-password', (res) => {
+    cy.intercept('POST', '**/auth/forgot-password' /* URL da API */, (res) => {
       res.reply({
         body: {
           statusCode: 400,

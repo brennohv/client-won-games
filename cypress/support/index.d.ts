@@ -31,6 +31,18 @@ declare namespace Cypress {
     shouldRenderShowcase(attrs: ShowcaseAttributes): Chainable<Element>
 
     /**
+     * Custom command to add game to cart
+     * @example cy.addToCart('0')
+     */
+    addToCartByIndex(index: number): Chainable<Element>
+
+    /**
+     * Custom command to remove game from cart
+     * @example cy.removeToCart('0')
+     */
+     removeFromCartByIndex(index: number): Chainable<Element>
+
+    /**
      * Custom command to get element by data-cy
      * @example cy.getByDataCy('selector')
      */

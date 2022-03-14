@@ -1,16 +1,11 @@
 /// <reference path="../support/index.d.ts" />
 
-import { first } from "cypress/types/lodash";
-
 describe('Cart', () => {
   it('should add/remove game from cart', () => {
     cy.visit('/')
 
     // Adicionando o primeiro game no carrinho
-    cy.getByDataCy('games').eq(0).within(() => {
-      cy.findByLabelText('add to cart').click()
-      cy.findByLabelText('remove from cart').should('exist')
-    })
+    cy.addToCartByIndex(0)
 
     // Verificando se aparece a quantidade de games no icone
     cy.findAllByLabelText('Cart Items')
@@ -28,9 +23,7 @@ describe('Cart', () => {
     cy.findAllByLabelText('Cart Items').first().click()
 
     // Removendo do carrinho
-    cy.getByDataCy('games').first().within(() => {
-      cy.findByLabelText('remove from cart').click()
-    })
+    cy.removeFromCartByIndex(0)
 
     // Verificando se removeu do carrinho
     cy.findAllByLabelText('Cart Items')

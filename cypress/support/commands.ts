@@ -128,3 +128,17 @@ Cypress.Commands.add('removeFromCartByIndex', (index) => {
     cy.findByLabelText('remove from cart').click()
   })
 })
+
+Cypress.Commands.add('addToWishlistByIndex', (index) => {
+  cy.getByDataCy('games').eq(index).within(() => {
+    cy.findAllByLabelText('Add to Wishlist').click()
+  })
+})
+
+Cypress.Commands.add('removeFromWishlistByIndex', (index, QuantityInWishlist) => {
+  cy.getByDataCy('wishlist').within(() => {
+    cy.getByDataCy('games').eq(index).should('have.length', QuantityInWishlist).within(() => {
+      cy.findByLabelText('Remove from Wishlist').click()
+    })
+  })
+})

@@ -18,17 +18,13 @@ describe('wishlist', () => {
     cy.findByRole('heading', { name: /nenhum resultado encontrado/i })
 
     //Adicionando o jogo no wishlist
-    cy.getByDataCy('You may like these games').within(() => {
-      cy.getByDataCy('games').first().within(() => {
-        cy.findAllByLabelText('Add to Wishlist').click()
-      })
-    })
+    // cy.getByDataCy('You may like these games').within(() => {
+    // })
+
+    cy.addToWishlistByIndex(0)
 
     // Removendo do Wishlist
-    cy.getByDataCy('wishlist').within(() => {
-      cy.getByDataCy('games').should('have.length', 1)
-      cy.findByLabelText('Remove from Wishlist').click()
-    })
+    cy.removeFromWishlistByIndex(0, 1)
 
     //Verificando se nao há jogos na wishlist
     cy.getByDataCy('wishlist').should('not.exist')

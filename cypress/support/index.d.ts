@@ -37,10 +37,29 @@ declare namespace Cypress {
     addToCartByIndex(index: number): Chainable<Element>
 
     /**
+     * Custom command to add game to wishlist
+     * @example cy.addToWishlistByIndex('0')
+     */
+     addToWishlistByIndex(index: number): Chainable<Element>
+
+    /**
      * Custom command to remove game from cart
      * @example cy.removeToCart('0')
      */
-     removeFromCartByIndex(index: number): Chainable<Element>
+    removeFromCartByIndex(index: number): Chainable<Element>
+
+    /**
+     * Custom command to remove game from wishlist
+     * @example
+     *  cy.removeFromWishlistByIndex(1, 3)
+     *  cy.getByDataCy('wishlist').within(() => {
+     *     cy.getByDataCy('games').eq(1).should('have.length', 3).within(() => {
+     *      cy.findByLabelText('Remove from Wishlist').click()
+           })
+        })
+     *
+     */
+    removeFromWishlistByIndex(index: number, QuantityInWishlist: number): Chainable<Element>
 
     /**
      * Custom command to get element by data-cy

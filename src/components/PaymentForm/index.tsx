@@ -123,7 +123,7 @@ const PaymentForm = ({ session }: PaymentForm) => {
           </Heading>
           {freeGames ? (
             <S.FreeGames>
-              So jogos gratuitos clique em comprar e se divirta
+              Somente jogos gratuitos, clique em comprar e se divirta
             </S.FreeGames>
           ) : (
             <CardElement

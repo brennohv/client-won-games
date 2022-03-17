@@ -1,12 +1,12 @@
 import { build, fake } from '@jackfranklin/test-data-bot'
 
-export type Users = {
+export type User = {
   username: string
   email: string
   password: string
 }
 
-export const CreateUser = build<Users>({
+export const CreateUser = build<User>({
   fields: {
     username: fake(f => f.internet.userName()),
     password: fake(f => f.internet.password()),

@@ -32,7 +32,7 @@ const GameItem = ({
 }: GameItemProps) => {
   const { isInCart, removeFromCart } = useCart()
   return (
-    <S.Wrapper>
+    <S.Wrapper data-cy="game item">
       <S.SectionGame>
         <S.ImageBox>
           <S.Image src={img} alt={title} role="img"></S.Image>

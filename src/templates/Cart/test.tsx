@@ -6,6 +6,13 @@ import Cart from '.'
 import { render, screen } from 'utils/test-utils'
 
 const props = {
+  session: {
+    jwt: 'token',
+    user: {
+      email: 'won@games.com'
+    },
+    expires: '13234'
+  },
   recommendedHighlight: highlightMock,
   recommendedGames: moreGamesMock,
   gamesCart: gamesCartMock,

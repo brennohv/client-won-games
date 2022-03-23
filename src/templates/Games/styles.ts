@@ -1,6 +1,29 @@
 import { Container } from './../../components/Container/index'
 import styled, { css } from 'styled-components'
 import media from 'styled-media-query'
+import * as BaseStyle from 'templates/Base/styles'
+
+type WrapperProps = {
+  whenFilterIsOpen: boolean
+}
+
+const wrapperModifier = {
+  open: () => css`
+    ${media.lessThan('medium')`
+      overflow-y: hidden;
+    `}
+  `
+}
+
+export const Wrapper = styled.div<WrapperProps>`
+  ${({ whenFilterIsOpen }) => css`
+    ${media.lessThan('medium')`
+      ${BaseStyle.Wrapper} {
+        ${whenFilterIsOpen && wrapperModifier.open()}
+      }
+    `}
+  `}
+`
 
 export const Main = styled(Container)`
   ${({ theme }) => css`

@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react'
 import * as S from './styles'
 import { ParsedUrlQueryInput } from 'querystring'
 import xor from 'lodash.xor'
+import { useHandleScroll } from 'hooks/handleScroll'
 
 export type Field = {
   label: string
@@ -37,10 +38,22 @@ const ExploreSidebar = ({
   onFilter
 }: ExploreSidebarProps) => {
   const [values, setValues] = useState(initialValues)
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpenFilter, setIsOpenFilter] = useState(false)
+  const { hideScrollOnMobile } = useHandleScroll()
 
   const handleFilterMenu = () => {
-    setIsOpen(false)
+    setIsOpenFilter(false)
+    hideScrollOnMobile(false)
+  }
+
+  const handleOpenFilter = () => {
+    hideScrollOnMobile(true)
+    setIsOpenFilter(true)
+  }
+
+  const handleCloseFilter = () => {
+    hideScrollOnMobile(false)
+    setIsOpenFilter(false)
   }
 
   const handleRadio = (name: string, value: string | boolean) => {
@@ -75,11 +88,14 @@ const ExploreSidebar = ({
   }, [values]) //toda vez que values mudar vai chamar o onFilter passando os values
 
   return (
-    <S.Wrapper isOpen={isOpen}>
-      <S.Overlay aria-hidden={!isOpen} />
+    <S.Wrapper isOpen={isOpenFilter}>
+      <S.Overlay aria-hidden={!isOpenFilter} />
       <S.IconWrapper>
-        <FilterList aria-label="open filters" onClick={() => setIsOpen(true)} />
-        <Close aria-label="close filters" onClick={() => setIsOpen(false)} />
+        <FilterList
+          aria-label="open filters"
+          onClick={() => handleOpenFilter()}
+        />
+        <Close aria-label="close filters" onClick={() => handleCloseFilter()} />
       </S.IconWrapper>
       <S.Content>
         {items.map((item) => (

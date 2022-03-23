@@ -14,6 +14,7 @@ import theme from 'styles/theme'
 import { useApollo } from 'utils/apollo'
 import { CartProvider } from 'hooks/use-cart'
 import { WishlistProvider } from 'hooks/use-wishlist'
+import { HandleProvider } from 'hooks/handleScroll'
 
 function App({ Component, pageProps }: AppProps) {
   const client = useApollo(pageProps.initialApolloState)
@@ -24,27 +25,29 @@ function App({ Component, pageProps }: AppProps) {
         <ThemeProvider theme={theme}>
           <CartProvider>
             <WishlistProvider>
-              <Head>
-                <title>React Avançado - Boilerplate</title>
-                <link rel="shortcut icon" href="/img/icon-512.png" />
-                <link rel="apple-touch-icon" href="/img/icon-512.png" />
-                <link rel="manifest" href="/manifest.json" />
-                <meta name="theme-color" content="#06092B" />
-                <meta
-                  name="description"
-                  content="A simple project starter to work with TypeScript, React, NextJS and Styled Components"
+              <HandleProvider>
+                <Head>
+                  <title>React Avançado - Boilerplate</title>
+                  <link rel="shortcut icon" href="/img/icon-512.png" />
+                  <link rel="apple-touch-icon" href="/img/icon-512.png" />
+                  <link rel="manifest" href="/manifest.json" />
+                  <meta name="theme-color" content="#06092B" />
+                  <meta
+                    name="description"
+                    content="A simple project starter to work with TypeScript, React, NextJS and Styled Components"
+                  />
+                </Head>
+                <DefaultSeo {...SEO} />
+                <GlobalStyles />
+                <NextNprogress
+                  color="#F231A5"
+                  startPosition={0.3}
+                  stopDelayMs={200}
+                  height={3}
+                  showOnShallow={true}
                 />
-              </Head>
-              <DefaultSeo {...SEO} />
-              <GlobalStyles />
-              <NextNprogress
-                color="#F231A5"
-                startPosition={0.3}
-                stopDelayMs={200}
-                height={3}
-                showOnShallow={true}
-              />
-              <Component {...pageProps} />
+                <Component {...pageProps} />
+              </HandleProvider>
             </WishlistProvider>
           </CartProvider>
         </ThemeProvider>

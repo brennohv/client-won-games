@@ -74,7 +74,8 @@ const WishlistProvider = ({ children }: WishlistProviderProps) => {
     context: { session },
     variables: {
       identifier: session?.user?.email as string
-    }
+    },
+    fetchPolicy: 'network-only'
   })
   // console.log(data?.wishlists[0])
   useEffect(() => {
